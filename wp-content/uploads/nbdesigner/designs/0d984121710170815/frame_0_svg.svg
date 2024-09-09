@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1003.9370078859375" height="649.6062992203125" viewBox="0 0 480 310.5882352941" xml:space="preserve">
+<desc>Created with Fabric.js 3.4.0 and NBDesigner 2.7</desc>
+<defs>
+</defs>
+<g transform="matrix(0.2627650045 0 0 0.2627650045 241.2182741117 155.2941176471)"  >
+	<image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  xlink:href="https://transparentcard.de/wp-content/themes/astra-child/assets/img/transparent_glass_85x55-mm.png" x="-918" y="-591" width="1836" height="1182"></image>
+</g>
+<g transform="matrix(0.0915506389 0 0 0.0936326573 240 153.7470814628)"  >
+	<image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,0,0); fill-rule: nonzero; opacity: 1;"  xlink:href="https://transparentcard.de/wp-content/uploads/nbdesigner/temp/2024/03/11/171017083928b9f8aa.png" x="-2621.5" y="-1681.5" width="5243" height="3363"></image>
+</g>
+<g transform="matrix(0.5454526529 0 0 0.5454526529 155.676767682 221.5925599292)" style=""  >
+		<text xml:space="preserve" font-family="Abel" font-size="33.02" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-214.6666666667" y="-11.2684052" >Your adress Rosenstraße 123</tspan><tspan x="-214.6666666667" y="32.0142108" >Deutschland</tspan></text>
+</g>
+<g transform="matrix(0.5454526529 0 0 0.5454526529 124.6289173095 179.4321680297)" style=""  >
+		<text xml:space="preserve" font-family="Abel" font-size="33.02" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-157.7454101562" y="10.3729028" >info@yourwebsite.com</tspan></text>
+</g>
+<g transform="matrix(0.5454526529 0 0 0.5454526529 116.4041766701 149.0760849918)" style=""  >
+		<text xml:space="preserve" font-family="Abel" font-size="33.02" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-142.6666666667" y="10.3729028" >+49 169 1234567</tspan></text>
+</g>
+<g transform="matrix(0.5454526529 0 0 0.5454526529 112.040555445 79.6217805215)" style=""  >
+		<text xml:space="preserve" font-family="Abel" font-size="33.02" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,168,91); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-92" y="10.3729028" >TRAVEL AGENT</tspan></text>
+</g>
+<g transform="matrix(0.5454526529 0 0 0.5454526529 112.0405554457 56.499974929)" style=""  >
+		<text xml:space="preserve" font-family="Abel" font-size="55.88" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-114" y="17.5541432" >Your NAME</tspan></text>
+</g>
+</svg>

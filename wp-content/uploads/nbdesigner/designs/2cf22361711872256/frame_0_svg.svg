@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="767.7165354421876" height="767.7165354421876" viewBox="0 0 449.6470588235 449.6470588235" xml:space="preserve">
+<desc>Created with Fabric.js 3.4.0 and NBDesigner 2.7</desc>
+<defs>
+</defs>
+<g transform="matrix(0.3246549161 0 0 0.3246549161 226.6091314504 224.8235294118)"  >
+	<image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  xlink:href="https://transparentcard.de/wp-content/themes/astra-child/assets/img/transparent_glass_65x65-mm.png" x="-698" y="-692.5" width="1396" height="1385"></image>
+</g>
+<g transform="matrix(2.0605938945 0 0 2.0605938945 283.1254573969 260.9956715185)"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  x="-19.105" y="-0.5" rx="0" ry="0" width="38.21" height="1" />
+</g>
+<g transform="matrix(0.9726416497 0 0 0.9726416497 235.1841809679 140.5621558927)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="62.65653651584731" font-style="normal" font-weight="bold" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-118.3682323144" y="19.6829243811" >ORIGIN</tspan></text>
+</g>
+<g transform="matrix(1.1047437871 0 0 1.1047437871 250.2946305388 79.3911615566)"  >
+<g style=""   >
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 9.652378949 -0.646443577)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  transform=" translate(-72.7125978119, -39.4697890293)" d="M 77.08 43.83 c -4 4 -10.76 3.86 -12.2 3.79 a 20.26 20.26 0 0 0 8.25 -9.08 a 39.09 39.09 0 0 1 -8.57 8.4 c -0.06 -2 0.08 -8.11 3.78 -11.83 c 4.49 -4.49 12.49 -3.77 12.49 -3.77 S 81.56 39.34 77.08 43.83 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 -21.7740656728 6.9158361868)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  transform=" translate(-61.8238291419, -42.09)" d="M 58.59 43.77 c 1.52 3 5.35 4.1 6.17 4.32 a 12 12 0 0 1 -3 -6.58 a 23 23 0 0 0 3.3 6.26 c 0.4 -1.12 1.41 -4.58 0 -7.33 c -1.72 -3.32 -6.34 -4.35 -6.34 -4.35 S 56.88 40.45 58.59 43.77 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 307.8755249559 304.9597364589)"  >
+<g style=""   >
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 1e-10 1e-10)"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  x="-4.42" y="-4.42" rx="0" ry="0" width="8.84" height="8.84" />
+</g>
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 3.5824712442 -3.4649174002)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-245.8212699277, -96.8994606299)" d="M 245 95.82 h 0 a 2.14 2.14 0 0 1 1.86 1.86 a 0.24 0.24 0 0 1 -0.21 0.27 h 0 a 0.23 0.23 0 0 1 -0.23 -0.21 A 1.68 1.68 0 0 0 245 96.29 a 0.23 0.23 0 0 1 -0.21 -0.26 a 0.25 0.25 0 0 1 0.27 -0.21 Z M 244.79 97 a 0.23 0.23 0 0 1 0.29 -0.17 a 1.21 1.21 0 0 1 0.86 0.85 a 0.26 0.26 0 0 1 -0.18 0.3 h -0.06 a 0.24 0.24 0 0 1 -0.23 -0.18 a 0.71 0.71 0 0 0 -0.51 -0.51 a 0.23 0.23 0 0 1 -0.17 -0.29 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 -0.5487180599 0.5340850465)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-244.3898778245, -98.2850520665)" d="M 246.11 99 l -0.6 -0.06 a 0.46 0.46 0 0 0 -0.39 0.13 l -0.44 0.44 A 3.51 3.51 0 0 1 243.11 98 l 0.44 -0.44 a 0.47 0.47 0 0 0 0.13 -0.39 l -0.06 -0.6 a 0.49 0.49 0 0 0 -0.48 -0.43 h -0.41 a 0.48 0.48 0 0 0 -0.48 0.5 a 4.07 4.07 0 0 0 3.79 3.79 a 0.48 0.48 0 0 0 0.49 -0.48 v -0.41 a 0.47 0.47 0 0 0 -0.42 -0.48 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 307.8755249559 343.5791422472)"  >
+<g style=""   >
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 1e-10 1e-10)"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  x="-4.42" y="-4.42" rx="0" ry="0" width="8.84" height="8.84" />
+</g>
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 -0.0759903471 0.1154445421)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-244.5536705402, -109.7099997177)" d="M 246.91 109.55 a 1.83 1.83 0 0 1 -0.37 1.06 a 1.19 1.19 0 0 1 -1 0.44 a 0.59 0.59 0 0 1 -0.39 -0.13 a 0.74 0.74 0 0 1 -0.23 -0.35 a 0.91 0.91 0 0 1 -0.28 0.35 a 0.71 0.71 0 0 1 -0.41 0.12 a 0.69 0.69 0 0 1 -0.62 -0.33 a 1.26 1.26 0 0 1 -0.16 -0.87 a 2 2 0 0 1 0.4 -1.11 a 1 1 0 0 1 0.81 -0.41 a 1.54 1.54 0 0 1 0.53 0.07 a 2.31 2.31 0 0 1 0.45 0.22 h 0 l -0.15 1.56 a 0.85 0.85 0 0 0 0 0.33 a 0.14 0.14 0 0 0 0.12 0.09 a 0.55 0.55 0 0 0 0.49 -0.3 a 1.38 1.38 0 0 0 0.21 -0.74 a 2.15 2.15 0 0 0 -0.36 -1.46 a 1.53 1.53 0 0 0 -1.27 -0.53 a 1.67 1.67 0 0 0 -1.33 0.57 a 2.39 2.39 0 0 0 -0.53 1.53 a 2.14 2.14 0 0 0 0.4 1.5 a 1.56 1.56 0 0 0 1.28 0.55 a 2.8 2.8 0 0 0 0.48 0 a 3.17 3.17 0 0 0 0.43 -0.13 l 0.11 0.46 a 2.2 2.2 0 0 1 -0.48 0.18 a 2.64 2.64 0 0 1 -0.55 0.06 a 2.15 2.15 0 0 1 -1.72 -0.69 a 2.59 2.59 0 0 1 -0.56 -1.88 a 2.8 2.8 0 0 1 0.72 -1.88 a 2.31 2.31 0 0 1 1.76 -0.69 a 2.06 2.06 0 0 1 1.65 0.66 a 2.46 2.46 0 0 1 0.53 1.79 Z m -2.79 0.29 a 1 1 0 0 0 0 0.5 a 0.24 0.24 0 0 0 0.24 0.17 a 0.4 0.4 0 0 0 0.26 -0.08 a 0.64 0.64 0 0 0 0.21 -0.31 l 0.11 -1.24 l -0.12 0 h -0.12 a 0.48 0.48 0 0 0 -0.43 0.25 a 1.83 1.83 0 0 0 -0.2 0.75 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 307.8755249559 382.1985480354)"  >
+<g style=""   >
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 1e-10 1e-10)"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1;"  x="-4.42" y="-4.42" rx="0" ry="0" width="8.84" height="8.84" />
+</g>
+		<g transform="matrix(2.8861339215 0 0 2.8861339215 -0.0342087834 -0.1302213452)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-244.5681471947, -121.1948803525)" d="M 244.45 124 l -0.36 -0.5 a 12.09 12.09 0 0 1 -1.08 -1.8 a 4.17 4.17 0 0 1 -0.35 -1 a 2 2 0 0 1 2 -2.35 a 2 2 0 0 1 1.81 1.55 a 2 2 0 0 1 -0.06 1 a 8.14 8.14 0 0 1 -0.94 1.89 c -0.28 0.43 -0.58 0.84 -0.87 1.25 l 0 0 s -0.08 0 -0.15 -0.14 Z m 1.09 -3.63 a 1 1 0 0 0 -0.88 -1 a 1 1 0 0 0 -1 0.94 a 1 1 0 0 0 0.9 1 a 1 1 0 0 0 1 -0.93 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 191.0197745171 304.9597364592)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="17.64823770904762" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-73.2776780276" y="5.5440173939" >Your Number Here</tspan></text>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 201.4285168688 343.5791422475)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="17.64823770904762" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-64.2776780276" y="5.5440173939" >Your Gmail Here</tspan></text>
+</g>
+<g transform="matrix(1.1565269279 0 0 1.1565269279 187.5501937332 382.1985480357)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="17.64823770904762" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-76.2776780276" y="5.5440173939" >Your Location Here</tspan></text>
+</g>
+<g transform="matrix(1 0 0 1 220.4229484422 215.0320430095)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="35.893803484463916" font-style="normal" font-weight="bold" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(55,168,66); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-101.9891974711" y="11.2756794266" >YOUR NAME</tspan></text>
+</g>
+<g transform="matrix(1.0259856377 0 0 1.0259856377 262.4078678817 245.2915551607)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="17.64823770904762" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-58.4845204659" y="5.5440173939" >SLOGAN HERE</tspan></text>
+</g>
+</svg>

@@ -1,0 +1,550 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "e45e9f27ce40ba9837cc984076d98067",
+      "css": "search",
+      "code": 59392,
+      "src": "elusive"
+    },
+    {
+      "uid": "81385e5f1fe091f3d9a20d215d444622",
+      "css": "search-circled",
+      "code": 59393,
+      "src": "elusive"
+    },
+    {
+      "uid": "b6ef4443ecc502136135437837d9724b",
+      "css": "mail",
+      "code": 59394,
+      "src": "elusive"
+    },
+    {
+      "uid": "628e5fc59fc5965a6b91189467b037d5",
+      "css": "heart",
+      "code": 59395,
+      "src": "elusive"
+    },
+    {
+      "uid": "7eed700d710c276569f95be26326fa5b",
+      "css": "heart-empty",
+      "code": 59396,
+      "src": "elusive"
+    },
+    {
+      "uid": "2c576f7c6c3233c31abad0899fc9f4af",
+      "css": "user",
+      "code": 59397,
+      "src": "elusive"
+    },
+    {
+      "uid": "caed304a2bf6248f01e98c2aa30db1d7",
+      "css": "star-circled",
+      "code": 59398,
+      "src": "elusive"
+    },
+    {
+      "uid": "5b4b9a59f7acb6839fa7fefe0d433165",
+      "css": "heart-circled",
+      "code": 59399,
+      "src": "elusive"
+    },
+    {
+      "uid": "829c06a0a3b73b02a6224f4bbb73d99c",
+      "css": "home",
+      "code": 59400,
+      "src": "elusive"
+    },
+    {
+      "uid": "2355991b4045d64b08fb82988109c0ee",
+      "css": "info-circled",
+      "code": 59401,
+      "src": "elusive"
+    },
+    {
+      "uid": "2105aa6ffb4434ebf82a20d97ac1ed25",
+      "css": "help-circled",
+      "code": 59402,
+      "src": "elusive"
+    },
+    {
+      "uid": "f84e243b91683403debed23b950f7efb",
+      "css": "bell",
+      "code": 59403,
+      "src": "elusive"
+    },
+    {
+      "uid": "0be76e79cf83a68ecb961121c00b9f2d",
+      "css": "attach",
+      "code": 59404,
+      "src": "elusive"
+    },
+    {
+      "uid": "0e26e70b4aa537cc206f41b21dcf2fcc",
+      "css": "lock",
+      "code": 59405,
+      "src": "elusive"
+    },
+    {
+      "uid": "e45a3da2ebde8bc8e30a873f3bd51f30",
+      "css": "eye",
+      "code": 59406,
+      "src": "elusive"
+    },
+    {
+      "uid": "529244b2b39e0c5a145506ce02271068",
+      "css": "video-circled",
+      "code": 59407,
+      "src": "elusive"
+    },
+    {
+      "uid": "c64623255a4a7c72436b199b05296c4f",
+      "css": "emo-happy",
+      "code": 59408,
+      "src": "fontelico"
+    },
+    {
+      "uid": "1ba44825e5f10920b4e3f1d0c73f79a2",
+      "css": "emo-wink",
+      "code": 59409,
+      "src": "fontelico"
+    },
+    {
+      "uid": "4bb2045a2aca451705fe8a23c4a576ab",
+      "css": "emo-wink2",
+      "code": 59411,
+      "src": "fontelico"
+    },
+    {
+      "uid": "142263941b9f4cd4b2b84f1f4cd13b1d",
+      "css": "emo-thumbsup",
+      "code": 59410,
+      "src": "fontelico"
+    },
+    {
+      "uid": "39e2e6682c28e1e3b5f49825a19717c4",
+      "css": "note",
+      "code": 59412,
+      "src": "entypo"
+    },
+    {
+      "uid": "e335adbc2d898c7d85d40c507796e7b4",
+      "css": "mail-1",
+      "code": 59413,
+      "src": "entypo"
+    },
+    {
+      "uid": "ecf8edb95c3f45eb433b4cce7ba9f740",
+      "css": "users",
+      "code": 59414,
+      "src": "entypo"
+    },
+    {
+      "uid": "bbd66ef66bb8fa9edde54d9a90b89150",
+      "css": "user-1",
+      "code": 59415,
+      "src": "entypo"
+    },
+    {
+      "uid": "6274e0601f2feef7eced89146e708de0",
+      "css": "user-add",
+      "code": 59416,
+      "src": "entypo"
+    },
+    {
+      "uid": "c759418c008e9562944080fee617fc76",
+      "css": "cancel-circled",
+      "code": 59417,
+      "src": "entypo"
+    },
+    {
+      "uid": "bf45c39702763f1803b550c36a0ceb12",
+      "css": "cancel-squared",
+      "code": 59418,
+      "src": "entypo"
+    },
+    {
+      "uid": "3a230e539a4f3b904debd04c6c155034",
+      "css": "help",
+      "code": 59419,
+      "src": "entypo"
+    },
+    {
+      "uid": "63b86fedd4ee9ad2105f54f4888e7088",
+      "css": "info",
+      "code": 59420,
+      "src": "entypo"
+    },
+    {
+      "uid": "513ac180ff85bd275f2b736720cbbf5e",
+      "css": "home-1",
+      "code": 59421,
+      "src": "entypo"
+    },
+    {
+      "uid": "44b9e75612c5fad5505edd70d071651f",
+      "css": "attach-1",
+      "code": 59422,
+      "src": "entypo"
+    },
+    {
+      "uid": "25fc99a30fecc4021fdcae5fff5ba9ac",
+      "css": "eye-1",
+      "code": 59423,
+      "src": "entypo"
+    },
+    {
+      "uid": "1a7104205ea96e6f40ac716d0ca72f21",
+      "css": "lock-1",
+      "code": 59424,
+      "src": "entypo"
+    },
+    {
+      "uid": "e81fc3a0d39ace6ee735d7b24eedd56d",
+      "css": "lock-open",
+      "code": 59425,
+      "src": "entypo"
+    },
+    {
+      "uid": "875ab0f6d417223f6ec76ff7f0a4baed",
+      "css": "tag",
+      "code": 59426,
+      "src": "entypo"
+    },
+    {
+      "uid": "429fba993b729174468a9493613ad1ba",
+      "css": "thumbs-down",
+      "code": 59427,
+      "src": "entypo"
+    },
+    {
+      "uid": "7ad4d2306ebda8452e5e3eff3cd8241c",
+      "css": "thumbs-up",
+      "code": 59428,
+      "src": "entypo"
+    },
+    {
+      "uid": "b08cfe8039de2ce815686aced2caef06",
+      "css": "download",
+      "code": 59429,
+      "src": "entypo"
+    },
+    {
+      "uid": "44199a54057e6e264fde61a49b034171",
+      "css": "upload",
+      "code": 59430,
+      "src": "entypo"
+    },
+    {
+      "uid": "ec347024a3640deebeeab53fd0d5ad03",
+      "css": "forward",
+      "code": 59431,
+      "src": "entypo"
+    },
+    {
+      "uid": "b6fc2f656ef87275889422e19550680a",
+      "css": "reply",
+      "code": 59432,
+      "src": "entypo"
+    },
+    {
+      "uid": "1a4b54ba5618e5364fc47a3d26c1cf59",
+      "css": "reply-all",
+      "code": 59433,
+      "src": "entypo"
+    },
+    {
+      "uid": "c3e5dafba1739ef33cc574c7484febf7",
+      "css": "quote",
+      "code": 59434,
+      "src": "entypo"
+    },
+    {
+      "uid": "c77fd2fd065b5fe16d6f2b41e190b266",
+      "css": "pencil",
+      "code": 59435,
+      "src": "entypo"
+    },
+    {
+      "uid": "16890362e811b4cb8de36282b071fe30",
+      "css": "comment",
+      "code": 59436,
+      "src": "entypo"
+    },
+    {
+      "uid": "2c0b53280f82068f6bab4e2200025d9f",
+      "css": "chat",
+      "code": 59437,
+      "src": "entypo"
+    },
+    {
+      "uid": "97902f87200ce74d181044df02a0458d",
+      "css": "attention",
+      "code": 59438,
+      "src": "entypo"
+    },
+    {
+      "uid": "457c8e2b305e7af74c1be4f07a01ca92",
+      "css": "vcard",
+      "code": 59439,
+      "src": "entypo"
+    },
+    {
+      "uid": "2626e3a1bbcd90e45849af3b58a1d594",
+      "css": "trash",
+      "code": 59440,
+      "src": "entypo"
+    },
+    {
+      "uid": "1189604bf305b6b03a74685ce60e6632",
+      "css": "doc-text",
+      "code": 59441,
+      "src": "entypo"
+    },
+    {
+      "uid": "1d7c1d30ad49a988556273a238097c2a",
+      "css": "doc-text-inv",
+      "code": 59442,
+      "src": "entypo"
+    },
+    {
+      "uid": "da0fd38d651815e3a12f6c030ff1fe5b",
+      "css": "newspaper",
+      "code": 59443,
+      "src": "entypo"
+    },
+    {
+      "uid": "51727ca007aa35ceabcaffc28934faee",
+      "css": "book-open",
+      "code": 59444,
+      "src": "entypo"
+    },
+    {
+      "uid": "48b79f27e4798f23bafa07b55dbe5b73",
+      "css": "book",
+      "code": 59445,
+      "src": "entypo"
+    },
+    {
+      "uid": "0ccb084ddeeae372673793ed0b45bb4a",
+      "css": "folder",
+      "code": 59446,
+      "src": "entypo"
+    },
+    {
+      "uid": "5854855e963044f93b15738a5bb27a29",
+      "css": "phone",
+      "code": 59447,
+      "src": "entypo"
+    },
+    {
+      "uid": "6a7b9d4863bb7e6c79e9457a72d689b6",
+      "css": "tools",
+      "code": 59448,
+      "src": "entypo"
+    },
+    {
+      "uid": "91426c82d94428a33353e495418435e3",
+      "css": "share",
+      "code": 59449,
+      "src": "entypo"
+    },
+    {
+      "uid": "2d76f2c8d13be40694ecadfea7fb83c3",
+      "css": "logout",
+      "code": 59450,
+      "src": "entypo"
+    },
+    {
+      "uid": "a204f0fa972408eaae5a363c444991b2",
+      "css": "login",
+      "code": 59451,
+      "src": "entypo"
+    },
+    {
+      "uid": "f8e120c48c070f8afd2d072651b4fb9f",
+      "css": "light-up",
+      "code": 59452,
+      "src": "entypo"
+    },
+    {
+      "uid": "f6fa10cb3ffec7becb60834f50bb0182",
+      "css": "adjust",
+      "code": 59453,
+      "src": "entypo"
+    },
+    {
+      "uid": "9e67bfab0143d9511f8eef6897caeb88",
+      "css": "right",
+      "code": 59454,
+      "src": "entypo"
+    },
+    {
+      "uid": "43c4064ec1260d0e55c37e0467c75cbb",
+      "css": "up",
+      "code": 59455,
+      "src": "entypo"
+    },
+    {
+      "uid": "6acd5cf005d48f96787350e72bd45688",
+      "css": "left",
+      "code": 59456,
+      "src": "entypo"
+    },
+    {
+      "uid": "d5098cb09be5827a2911dbab5af49ad2",
+      "css": "down",
+      "code": 59457,
+      "src": "entypo"
+    },
+    {
+      "uid": "401b644723fb2f20b0df30cce7745c18",
+      "css": "up-dir",
+      "code": 59458,
+      "src": "entypo"
+    },
+    {
+      "uid": "ff9a85aa20950dcc0615a2707a2b3f8e",
+      "css": "right-dir",
+      "code": 59459,
+      "src": "entypo"
+    },
+    {
+      "uid": "9aeaf29161eb005a308bbd624d6e066a",
+      "css": "left-dir",
+      "code": 59460,
+      "src": "entypo"
+    },
+    {
+      "uid": "7e89c12b577c31bc91bfb61bb597f01f",
+      "css": "down-dir",
+      "code": 59461,
+      "src": "entypo"
+    },
+    {
+      "uid": "0222089fb4194cc714dcc1ffd2525c11",
+      "css": "left-bold",
+      "code": 59462,
+      "src": "entypo"
+    },
+    {
+      "uid": "1a90b06af8614b12d8c8a5b90cc19ab3",
+      "css": "right-bold",
+      "code": 59463,
+      "src": "entypo"
+    },
+    {
+      "uid": "8c8f768607b8fc4c92c0f85b488e87e8",
+      "css": "up-bold",
+      "code": 59464,
+      "src": "entypo"
+    },
+    {
+      "uid": "78944e4652d6f9b8b506eaef331308cd",
+      "css": "down-bold",
+      "code": 59465,
+      "src": "entypo"
+    },
+    {
+      "uid": "a30a32d49f80bb534c062ae1743ef433",
+      "css": "down-thin",
+      "code": 59466,
+      "src": "entypo"
+    },
+    {
+      "uid": "8d8f4722d16e95290858eaf294d9d830",
+      "css": "left-thin",
+      "code": 59467,
+      "src": "entypo"
+    },
+    {
+      "uid": "ef3eda51383ce050517892df3fc05ffc",
+      "css": "right-thin",
+      "code": 59468,
+      "src": "entypo"
+    },
+    {
+      "uid": "dbc97808cba7d0c135c7054e7a85fb86",
+      "css": "up-thin",
+      "code": 59469,
+      "src": "entypo"
+    },
+    {
+      "uid": "248db7c0563d8cee80b7041f7736dcad",
+      "css": "database",
+      "code": 59470,
+      "src": "entypo"
+    },
+    {
+      "uid": "wg849ixsobykxshs6efpc6fk4m0fq8bh",
+      "css": "mail-2",
+      "code": 59471,
+      "src": "typicons"
+    },
+    {
+      "uid": "3b00728aa97ad1a2581d414bd9d650bc",
+      "css": "heart-1",
+      "code": 59472,
+      "src": "typicons"
+    },
+    {
+      "uid": "05417ae0104ab18a0fe454358579a987",
+      "css": "art-gallery",
+      "code": 59473,
+      "src": "maki"
+    },
+    {
+      "uid": "630529f03c319c01101aa167181b650e",
+      "css": "tag-1",
+      "code": 59474,
+      "src": "elusive"
+    },
+    {
+      "uid": "937a0ad3f6e25611bff801445d6a4885",
+      "css": "tags",
+      "code": 59475,
+      "src": "elusive"
+    },
+    {
+      "uid": "55f7ab3f2bedec72e8400fa2798a7a1a",
+      "css": "align-justify",
+      "code": 59476,
+      "src": "elusive"
+    },
+    {
+      "uid": "4d622484db3311a1a7322aae6b253984",
+      "css": "align-right",
+      "code": 59477,
+      "src": "elusive"
+    },
+    {
+      "uid": "3c4b20e86f774f150402354b9cfeb95b",
+      "css": "align-center",
+      "code": 59478,
+      "src": "elusive"
+    },
+    {
+      "uid": "3a3b33acd5fe66d84ff303baf9d8efa8",
+      "css": "align-left",
+      "code": 59479,
+      "src": "elusive"
+    },
+    {
+      "uid": "cd9ad52ef0740bb86ff11af9646d4859",
+      "css": "list",
+      "code": 59480,
+      "src": "elusive"
+    },
+    {
+      "uid": "5e5a88921aa39b292bdd56c3b9c923d3",
+      "css": "gift",
+      "code": 59481,
+      "src": "elusive"
+    }
+  ]
+}

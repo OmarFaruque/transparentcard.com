@@ -1,0 +1,91 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Astra Child\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-13 10:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.9; wp-6.4.4\n"
+"X-Domain: transparentcard"
+
+#. Author of the theme
+msgid "<a href=\"https://cool.cards/\">netbaseteam</a>"
+msgstr ""
+
+#. Name of the theme
+msgid "Astra Child"
+msgstr ""
+
+#: inc-additional-functions/class-cool-backend.php:49
+msgid "Custom header layout"
+msgstr ""
+
+#: inc-additional-functions/class-cool-backend.php:51
+msgid "Default"
+msgstr ""
+
+#: woocommerce/cart/cart.php:196
+msgid "Delete"
+msgstr ""
+
+#: inc-additional-functions/class-cool-frontend.php:611
+msgid "Delivery Date"
+msgstr ""
+
+#: inc-additional-functions/class-cool-backend.php:52
+msgid "Dropdown"
+msgstr ""
+
+#: woocommerce/cart/cart-w.php:158
+msgid "Edit Design"
+msgstr ""
+
+#: woocommerce/cart/cart-w.php:83 woocommerce/cart/cart.php:172
+msgid "Product Details"
+msgstr ""
+
+#: woocommerce/cart/minicart-item-single.php:43
+#: woocommerce/cart/cart-item-single.php:41
+msgid "Quantity"
+msgstr ""
+
+#: woocommerce/cart/cart.php:195
+msgid "Remove"
+msgstr ""
+
+#: inc-additional-functions/helper.php:40
+msgid "Remove Item"
+msgstr ""
+
+#: inc-additional-functions/class-cool-singleproduct.php:44
+msgid "Schreiben Sie hier Ihre Notizen..."
+msgstr ""
+
+#: inc-additional-functions/class-cool-backend.php:48
+msgid "Select Qty Input Style"
+msgstr ""
+
+#. Description of the theme
+msgid "This is a child theme of Astra."
+msgstr ""
+
+#: woocommerce/cart/minicart-item-single.php:49
+#: woocommerce/cart/cart-item-single.php:47
+msgid "Total Price"
+msgstr ""
+
+#: web-to-print-online-designer/gallery/tag-list.php:33
+msgid "Visitenkarte Size"
+msgstr ""
+
+#: inc-additional-functions/class-cool-singleproduct.php:40
+msgid "Wählen Sie ein Logo"
+msgstr ""

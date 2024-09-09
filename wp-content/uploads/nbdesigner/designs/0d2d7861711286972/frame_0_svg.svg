@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="472.44094488750005" height="1003.9370078859375" viewBox="0 0 235.2 499.8" xml:space="preserve">
+<desc>Created with Fabric.js 3.4.0 and NBDesigner 2.7</desc>
+<defs>
+</defs>
+<g transform="matrix(0.2722222222 0 0 0.2722222222 117.7361111111 249.9)"  >
+	<image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  xlink:href="https://transparentcard.de/wp-content/themes/astra-child/assets/img/transparent_glass_40x85-mm.png" x="-432.5" y="-918" width="865" height="1836"></image>
+</g>
+<g transform="matrix(1.6336865723 0 0 1.6588796189 118.6476080244 277.3939263199)"  >
+<g style=""   >
+		<g transform="matrix(0.2807435689 0 0 -0.4123749279 0.3151465092 -22.2510055159)" clip-path="url(#CLIPPATH_3)"  >
+<clipPath id="CLIPPATH_3" >
+	<rect transform="matrix(1 0 0 1 382.015 -185.495)" x="-634.485" y="-366.76" rx="0" ry="0" width="1268.97" height="733.52" />
+</clipPath>
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  x="-253.62" y="-0.815" rx="0" ry="0" width="507.24" height="1.63" />
+</g>
+		<g transform="matrix(0.2807435689 0 0 -0.4123749279 -0.3151465159 22.2510055159)" clip-path="url(#CLIPPATH_4)"  >
+<clipPath id="CLIPPATH_4" >
+	<rect transform="matrix(1 0 0 1 382.015 -185.495)" x="-634.485" y="-366.76" rx="0" ry="0" width="1268.97" height="733.52" />
+</clipPath>
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  x="-253.62" y="-0.815" rx="0" ry="0" width="507.24" height="1.63" />
+</g>
+</g>
+</g>
+<g transform="matrix(0.8067929081 0 0 0.7175137924 149.8683824894 427.282056355)"  >
+<g style=""   >
+		<g transform="matrix(0.8751448249 0 0 1.0377675455 -1.3e-9 18.2499864912)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="16" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-62.3203125" y="5.02624" >COMPANY NAME</tspan></text>
+</g>
+		<g transform="matrix(0.8751448249 0 0 1.0377675455 1.9e-9 -22.2812066402)"  >
+<g style=""   >
+		<g transform="matrix(0.5618508261 0 0 0.5618508261 0.3276063631 0.049744461)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-1030.0196461261, -510.915)" d="M 1014.08 511 a 37.05 37.05 0 0 0 16 30.49 a 37.54 37.54 0 0 0 0.24 -61.15 A 37.06 37.06 0 0 0 1014.08 511 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5618508261 0 0 0.5618508261 -17.53817392 0)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-998.2215612018, -510.8264632237)" d="M 1008.91 511 a 42.18 42.18 0 0 1 16.66 -33.58 a 37.55 37.55 0 1 0 -0.27 66.95 A 42.18 42.18 0 0 1 1008.91 511 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5618508261 0 0 0.5618508261 12.1881744383 0.0915832591)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-1051.1294630457, -510.9894660259)" d="M 1051.15 547.86 A 36.87 36.87 0 1 1 1088 511 A 36.91 36.91 0 0 1 1051.15 547.86 Z m 0 -68.57 a 31.7 31.7 0 1 0 31.7 31.7 A 31.74 31.74 0 0 0 1051.15 479.29 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+		<g transform="matrix(0.8751448249 0 0 1.0377675455 1.5e-9 37.9675698585)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="11.087166152288228" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-36.290438624" y="3.4829223751" >SLOGAN HERE</tspan></text>
+</g>
+</g>
+</g>
+<g transform="matrix(0.5388435043 0 0 0.6389734419 43.3974700914 200.1332458603)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-91.8085440502, -416.1094594304)" d="M 75.27 401.63 l 0 -0.05 A 22.43 22.43 0 0 0 77 400 l 0.19 -0.19 c 0.3 -0.32 0.58 -0.61 0.9 -0.91 a 3.08 3.08 0 0 1 4.64 0.05 l 4.76 4.76 A 3 3 0 0 1 88.51 406 a 3.24 3.24 0 0 1 -1.05 2.29 l -3 2.95 a 0.51 0.51 0 0 0 -0.19 0.34 a 0.5 0.5 0 0 0 0 0.21 l 0 0.06 c 0.17 0.29 0.33 0.61 0.5 0.94 a 9.73 9.73 0 0 0 0.51 0.94 A 30.27 30.27 0 0 0 92.1 421 l 0 0 a 18 18 0 0 0 4.17 2.56 h 0 c 0.29 0.1 0.36 0.1 0.57 -0.1 v 0 c 0.67 -0.74 1.34 -1.42 2.14 -2.2 l 0.51 -0.51 l 0.24 -0.23 a 3 3 0 0 1 4.63 0 l 2.35 2.35 l 0.43 0.42 l 0.41 0.39 c 0.6 0.59 1.1 1.08 1.59 1.6 h 0 a 3.15 3.15 0 0 1 1 2.24 a 3.32 3.32 0 0 1 -1 2.26 l 0 0 l -3 2.95 a 5.43 5.43 0 0 1 -3.43 1.6 a 13.54 13.54 0 0 1 -6 -1.06 A 36.41 36.41 0 0 1 86 426.88 a 39.7 39.7 0 0 1 -10.36 -13.24 a 19.89 19.89 0 0 1 -2.16 -7.27 c 0 -0.15 0 -0.32 0 -0.48 A 5.54 5.54 0 0 1 75.27 401.63 Z m 32.16 25.93 a 1 1 0 0 0 -0.21 -0.3 l 0 0 s 0 0 0 0 c -0.46 -0.48 -0.93 -0.95 -1.5 -1.51 l -0.42 -0.41 l -0.44 -0.43 l -2.36 -2.36 a 2.66 2.66 0 0 0 -0.35 -0.29 a 1.28 1.28 0 0 0 -0.38 0.29 l -0.25 0.25 l -0.48 0.47 s 0 0 0 0 c -0.77 0.75 -1.41 1.4 -2 2.1 l -0.16 0.16 a 3.12 3.12 0 0 1 -3.32 0.72 l -0.07 0 l -0.09 0 a 20 20 0 0 1 -4.89 -3 l 0 -0.05 a 32.8 32.8 0 0 1 -7.27 -8 a 12.42 12.42 0 0 1 -0.65 -1.2 c -0.14 -0.28 -0.28 -0.54 -0.4 -0.74 l 0 -0.05 a 1.18 1.18 0 0 1 -0.08 -0.16 a 3.13 3.13 0 0 1 0.63 -3.77 l 3 -3 a 2.15 2.15 0 0 0 0.25 -0.31 a 0.68 0.68 0 0 0 -0.18 -0.24 l 0 0 l -4.79 -4.8 c -0.24 -0.24 -0.36 -0.26 -0.36 -0.26 a 1.16 1.16 0 0 0 -0.38 0.25 l -0.1 0.09 c -0.25 0.24 -0.5 0.49 -0.76 0.76 l -0.18 0.19 a 23.44 23.44 0 0 1 -1.81 1.75 a 2.8 2.8 0 0 0 -0.92 2.22 c 0 0.1 0 0.21 0 0.31 a 17.53 17.53 0 0 0 1.89 6.24 a 37 37 0 0 0 9.64 12.31 a 33.74 33.74 0 0 0 10 6 a 11.07 11.07 0 0 0 4.82 0.89 a 2.58 2.58 0 0 0 1.71 -0.79 l 2.93 -2.94 A 0.79 0.79 0 0 0 107.43 427.56 Z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.9590508358 0 0 1.1372652885 118.2207943122 200.1332458602)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="16" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-57.91015625" y="-5.46016" >+666 2555 2521</tspan><tspan x="-57.91015625" y="15.51264" >+252 5141 5511</tspan></text>
+</g>
+<g transform="matrix(0.5388435043 0 0 0.6389734419 43.9290154723 276.6736635572)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-92.795, -506.02)" d="M 109.88 504.85 a 17.13 17.13 0 0 0 -15.95 -15.94 v 0 H 91.65 v 0 a 17.11 17.11 0 0 0 -15.94 15.94 h 0 v 2.28 h 0 a 17.12 17.12 0 0 0 15.94 16 v 0 h 2.28 v 0 a 17.14 17.14 0 0 0 15.95 -16 h 0 v -2.28 Z M 86.39 492.6 A 18.07 18.07 0 0 0 83.7 498 H 80.28 A 15 15 0 0 1 86.39 492.6 Z m -7.3 7.68 h 4 a 27.72 27.72 0 0 0 -0.56 4.57 H 78 A 14.29 14.29 0 0 1 79.09 500.28 Z M 78 507.13 h 4.54 a 27.46 27.46 0 0 0 0.56 4.57 h -4 A 14.23 14.23 0 0 1 78 507.13 Z M 80.28 514 H 83.7 a 18.13 18.13 0 0 0 2.69 5.41 A 14.93 14.93 0 0 1 80.28 514 Z m 11.37 6.71 c -2.35 -0.63 -4.37 -3.15 -5.59 -6.71 h 5.59 Z m 0 -9 H 85.42 a 25.1 25.1 0 0 1 -0.6 -4.57 h 6.83 Z m 0 -6.85 H 84.82 a 25.22 25.22 0 0 1 0.6 -4.57 h 6.23 Z m 0 -6.85 H 86.06 c 1.22 -3.55 3.24 -6.08 5.59 -6.7 Z m 13.65 0 h -3.41 a 18.55 18.55 0 0 0 -2.69 -5.4 A 15 15 0 0 1 105.3 498 Z m -11.37 -6.7 c 2.35 0.62 4.37 3.15 5.6 6.7 h -5.6 Z m 0 9 h 6.24 a 26.15 26.15 0 0 1 0.59 4.57 H 93.93 Z m 0 6.85 h 6.83 a 26 26 0 0 1 -0.59 4.57 H 93.93 Z m 0 13.56 V 514 h 5.6 C 98.3 517.54 96.28 520.06 93.93 520.69 Z m 5.27 -1.3 a 18.62 18.62 0 0 0 2.69 -5.41 h 3.41 A 14.91 14.91 0 0 1 99.2 519.39 Z m 7.3 -7.69 h -4 a 26.44 26.44 0 0 0 0.56 -4.57 h 4.55 A 14.77 14.77 0 0 1 106.5 511.7 Z M 103 504.85 a 26.69 26.69 0 0 0 -0.56 -4.57 h 4 a 14.84 14.84 0 0 1 1.09 4.57 Z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.9590508358 0 0 1.1372652885 133.8802962408 276.6736635573)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="16" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-74.23828125" y="-5.46016" >www.websiteurl.com</tspan><tspan x="-74.23828125" y="15.51264" >info@website.com</tspan></text>
+</g>
+<g transform="matrix(0.9590508358 0 0 1.1372652885 40.7847272963 353.2140812542)"  >
+<g style=""   >
+		<g transform="matrix(0.5618508261 0 0 0.5618508261 -0.0477573014 -1.4242918441)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-92.1550000335, -597.6849814497)" d="M 92.18 580.32 A 12.15 12.15 0 0 0 80 592.48 c 0 8.68 12.16 22.57 12.16 22.57 s 12.15 -13.89 12.15 -22.57 A 12.15 12.15 0 0 0 92.18 580.32 Z m 0.08 18.55 a 6 6 0 1 1 6 -6 A 6 6 0 0 1 92.26 598.87 Z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(0.5618508261 0 0 0.5618508261 0 7.6158983703)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1;"  transform=" translate(-92.24, -613.775)" d="M 92.24 620.12 c -8.63 0 -17.36 -2.2 -17.36 -6.42 c 0 -3.85 7.27 -5.78 13.51 -6.27 l 0.15 2 c -8 0.62 -11.66 2.92 -11.66 4.27 c 0 1.8 6 4.42 15.36 4.42 s 15.36 -2.62 15.36 -4.42 c 0 -1.59 -4.39 -3.67 -11.48 -4.25 l 0.17 -2 c 6.14 0.5 13.31 2.44 13.31 6.25 C 109.6 617.92 100.87 620.12 92.24 620.12 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+<g transform="matrix(0.9590508358 0 0 1.1372652885 123.6317539906 353.2140812543)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="16" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(5,21,37); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-65.0703125" y="-5.46016" >Your Address here</tspan><tspan x="-65.0703125" y="15.51264" >00 14 111</tspan></text>
+</g>
+<g transform="matrix(0.3402311292 0 0 0.3559607969 97.2658454281 103.2083844075)" clip-path="url(#CLIPPATH_5)"  >
+<clipPath id="CLIPPATH_5" >
+	<rect transform="matrix(1 0 0 1 342.485 147.395)" x="-634.485" y="-366.76" rx="0" ry="0" width="1268.97" height="733.52" />
+</clipPath>
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(15,37,73); fill-rule: nonzero; opacity: 1;"  transform=" translate(-292, -219.365)" d="M 584 143.94 L 530 275.12 a 31.76 31.76 0 0 1 -29.35 19.67 H 0 V 143.94 Z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.6046264512 0 0 0.8131130774 64.7263010864 116.7199626997)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="10.305548417300416" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(238,245,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-33.7320526442" y="3.2373849798" >SLOGAN HERE</tspan></text>
+</g>
+<g transform="matrix(0.3397098712 0 0 0.4568482542 121.1370912514 116.0111921929)"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(238,245,255); fill-rule: nonzero; opacity: 1;"  x="-78.47" y="-0.665" rx="0" ry="0" width="156.94" height="1.33" />
+</g>
+<g transform="matrix(0.6046264512 0 0 0.8131130774 95.421944931 98.3629647973)" style=""  >
+		<text xml:space="preserve" font-family="Roboto" font-size="27.306998523518253" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(238,245,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-84.5" y="8.5782205162" >Y</tspan><tspan x="-66.5203681636" y="8.5782205162" >O</tspan><tspan x="-45.7807027849" y="8.5782205162" >U</tspan><tspan x="-26.1077170362" y="8.5782205162" >R</tspan><tspan x="-7.3280754774" y="8.5782205162" style="white-space: pre; "> </tspan><tspan x="1.3981105704" y="8.5782205162" >N</tspan><tspan x="23.0711206251" y="8.5782205162" >A</tspan><tspan x="42.8507743368" y="8.5782205162" >M</tspan><tspan x="68.6571679571" y="8.5782205162" >E</tspan></text>
+</g>
+</svg>

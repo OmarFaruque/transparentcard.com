@@ -31,18 +31,11 @@ $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                             
 
                             <hr class="step-bottom-devider" style="height:1px; background-color: #3996d1; margin: 20px 0px;">
-                            <p style="font-size:18px; font-weight:300;" class="mb-10"><?php _e('Make sure that you have completed the entire questionnaire. If essential elements to create your design are missing, the deadline for submitting the proposal will be delayed by one business day.', 'transparentcard'); ?></p>
-                            <p style="font-size:18px; font-weight:300;" class="mb-0"><?php _e('To avoid this situation, we ask that you complete all the fields of the questionnaire in order to make it as complete as possible. The more information you provide, the more elements we will have to create the design you want!', 'transparentcard'); ?></p>
+                            <p style="font-size:14px; font-weight:300;" class="mb-10"><?php _e('Make sure that you have completed the entire questionnaire. If essential elements to create your design are missing, the deadline for submitting the proposal will be delayed by one business day.', 'transparentcard'); ?></p>
+                            <p style="font-size:14px; font-weight:300; line-height:18px;" class="mb-0"><?php _e('To avoid this situation, we ask that you complete all the fields of the questionnaire in order to make it as complete as possible. The more information you provide, the more elements we will have to create the design you want!', 'transparentcard'); ?></p>
                             <hr class="step-bottom-devider" style="height:1px; background-color: #3996d1; margin: 20px 0px;">
-                            <div class="footer d-flex gap-20 justify-content-space-between">
-                                <div class="flex-1 fitem d-mobile-hidden">
-                                    <div class="d-flex" style="align-items:center;">
-                                        <div class="setisfectiontext"><?php _e('100% Satisfaction guaranteed', 'transparentcard'); ?></div>
-                                        <img style="height:70px; margin-left:-15px;" src="<?php echo esc_url( get_stylesheet_directory_uri(  ) . '/assets/img/Satisf100.webp'); ?>" alt="<?php _e('Step 4', 'transparentcard'); ?>">
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 fitem d-flex align-item-center gap-20" style="text-align:right; align-items:center; justify-content:end;">
+                            <div class="footer d-flex gap-20 justify-content-center">
+                                <div class="flex-1 fitem d-flex align-item-center gap-20" style="text-align:right; align-items:center; justify-content:center;">
                                     <a href="#" onclick="NBDPopup.hidePopup()" class="btn btn-success backtoform"><?php _e('Back', 'transparentcard'); ?></a>
                                     <a href="#" onclick="next_step(2)" class="btn btn-success continuebtn"><?php _e('Continue', 'transparentcard'); ?></a>
                                 </div>

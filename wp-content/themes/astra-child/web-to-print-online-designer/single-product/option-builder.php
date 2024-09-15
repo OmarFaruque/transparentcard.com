@@ -1500,6 +1500,8 @@ tr:not(.disabled) .nbo-delivery-date-selector:hover {
     color: #004D4D!important;
     font-size: 10px;
 }
+
+.single-product.woocommerce-js div.product form.cart .button#useTemplate:hover svg path:last-child,
 .single-product.woocommerce-js div.product form.cart .button:hover svg,
 .single-product.woocommerce-js div.product form.cart .button:hover svg path:first-child{
     fill: #000000 !important;
@@ -2804,7 +2806,7 @@ if( $cart_item_key != ''){ ?>
                 <a ng-class="printingOptionsAvailable ? '' : 'nbd-disabled'"  class="nbd-button nbo-apply" ng-click="applyOptions(); applyTransparentSettings();">{{settings.task2 == '' ? "<?php _e('Apply options','web-to-print-online-designer'); ?>" : "<?php _e('Start design','web-to-print-online-designer'); ?>" }}</a>
                 <?php endif; ?>
                 <?php if( $num_visible_field > 0 ): ?>
-                <a class="button nbd-button" ng-click="reset_options()"><?php _e('Auswahl löschen', 'web-to-print-online-designer'); ?></a>
+                <a class="button nbd-button" ng-click="reset_options()"><?php _e('Delete selection', 'web-to-print-online-designer'); ?></a>
                 <?php endif; ?>
             </div>
             <input type="hidden" value="<?php echo $product_id; ?>" name="nbo-add-to-cart"/>

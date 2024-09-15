@@ -185,7 +185,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 											</div>
 										<?php endif; ?>
 										<div class="flex-1">
-											<div class="transparent-product-remove">
+											<div class="transparent-product-remove h-full">
 												<?php
 													echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 														'woocommerce_cart_item_remove_link',

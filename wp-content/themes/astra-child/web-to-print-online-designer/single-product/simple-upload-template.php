@@ -8,9 +8,9 @@ $pheight = $settings[0]['real_height'];
 ?>
 
 <div class="nbd-upload-inner" style="flex:1; wdith:100%;">
-    <div class="header mb-20" style="padding-left:20px; padding-right:20px; border-bottom:1px solid #ddd;">
-        <h3 style="color:#003F3F;" class="text-capitalize"><?php _e('Design hochladen', 'web-to-print-online-designer'); ?></h3>
-        <p style="color:#6D6D6D;"><?php _e('Add your documents here, and you can upload up to 5 files max', 'transparentcard'); ?></p>
+    <div class="header mb-10" style="padding-left:20px; padding-right:20px; border-bottom:1px solid #ddd; text-align:center;">
+        <h3 style="color:#003F3F;" class="text-capitalize"><?php _e('Upload design', 'web-to-print-online-designer'); ?></h3>
+        <p style="color:#6D6D6D; margin-bottom:5px;" ><?php _e('Add your documents here, and you can upload up to 5 files max', 'transparentcard'); ?></p>
     </div>
     <?php
         $login_required = ( nbdesigner_get_option( 'nbdesigner_upload_file_php_logged_in', 'no' ) !== 'no' && !is_user_logged_in() ) ? 1 : 0;
@@ -48,7 +48,7 @@ $pheight = $settings[0]['real_height'];
 
         <label for="nbd-file-upload">
             
-            <span style="margin-bottom: 10px; margin-top: 10px;"><?php _e('Save or select file here', 'web-to-print-online-designer'); ?></span>
+            <span style="margin-bottom: 10px; margin-top: 10px;"><?php _e('Upload File', 'web-to-print-online-designer'); ?></span>
             
             <?php //if( $option['disallow_type'] != '' ): ?>
                 <!-- <span><small><?php //_e( 'Disallow extensions', 'web-to-print-online-designer' ); ?>: <?php //echo $option['disallow_type']; ?></small></span><?php //endif; ?> -->
@@ -56,23 +56,27 @@ $pheight = $settings[0]['real_height'];
             <span><small><?php //_e( 'Max size', 'web-to-print-online-designer' ); ?> <?php //echo $option['maxsize']; ?> MB</small></span> -->
         </label>
         <svg class="nbd-upload-loading" xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 50 50"><circle fill="none" opacity="0.05" stroke="#000000" stroke-width="3" cx="25" cy="25" r="20"/><g transform="translate(25,25) rotate(-90)"><circle  style="stroke:#48B0F7; fill:none; stroke-width: 3px; stroke-linecap: round" stroke-dasharray="110" stroke-dashoffset="0"  cx="0" cy="0" r="20"><animate attributeName="stroke-dashoffset" values="360;140" dur="2.2s" keyTimes="0;1" calcMode="spline" fill="freeze" keySplines="0.41,0.314,0.8,0.54" repeatCount="indefinite" begin="0"/><animateTransform attributeName="transform" type="rotate" values="0;274;360" keyTimes="0;0.74;1" calcMode="linear" dur="2.2s" repeatCount="indefinite" begin="0"/><animate attributeName="stroke" values="#10CFBD;#48B0F7;#ff0066;#48B0F7;#10CFBD" fill="freeze" dur="3s" begin="0" repeatCount="indefinite"/></circle></g></svg>
-    </div>
 
-    <?php if( $option['allow_type'] != '' ): ?>
-        <div class="allowedfiletypes" style="border-bottom:1px solid #ddd;">
-            <div class="column-inner">
-                <span><?php _e('Only support', 'web-to-print-online-designer' ); ?>: <?php echo $option['allow_type']; ?></span>
+        <?php if( $option['allow_type'] != '' ): 
+            $allowedtype = str_replace(',', ', ', $option['allow_type']);
+            ?>
+            <div class="allowedfiletypes">
+                <div class="type-inner">
+                    <span style="color:#999;"><?php _e('Only support', 'web-to-print-online-designer' ); ?>: <?php echo $allowedtype; ?></span>
+                </div>
             </div>
-        </div>
-    <?php endif; ?>
-
-    <div class="previewandbuttonarea">
-        <div class="upload-design-preview"></div>
-        <div class="submit-upload-design-preview text-right mb-40" style="max-width:96%;"><span><?php _e('Add', 'web-to-print-online-designer'); ?></span></div>
+        <?php endif; ?>
     </div>
 
 
-    <div class="dymention mb-10 mt-10" style="border-bottom:1px solid #ddd; color:#6D6D6D; padding-bottom:15px;">
+
+    <div class="previewandbuttonarea" style="max-width:unset;">
+        <div class="upload-design-preview custom d-flex justify-content-center" style="max-width:unset;"></div>
+        <div class="submit-upload-design-preview mb-30" style="max-width:96%; text-align:center; margin-left:auto; margin-right:auto;"><span><?php _e('Submit', 'web-to-print-online-designer'); ?></span></div>
+    </div>
+
+
+    <div class="dymention mb-5 mt-10" style="border-bottom:1px solid #ddd; color:#6D6D6D; padding-bottom:15px;">
         <div class="column-inner details d-flex">
             <div class="flex-1" style="color:#003F3F;">
                 <span><?php _e('Dimensions', 'transparentcard'); ?>:</span>
@@ -83,50 +87,47 @@ $pheight = $settings[0]['real_height'];
         </div>
     </div>
 
-    <div class="dymention mb-15" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
+    <div class="dymention mb-10" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
         <div class="column-inner details d-flex">
             <div class="flex-1" style="color:#003F3F;">
                 <span><?php _e('Recommended format', 'transparentcard'); ?>:</span>
             </div>
             <div class="flex-2">
                 <div class="inner-details">
-                        <p class="mb-0"><?php _e('PDF/X1a', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php echo sprintf(__('Upload with PDF?X1a: <span>%s</span>', 'transparentcard'), __('free', 'transparentcard')); ?></p>
-                        <p class="mb-15"><?php echo sprintf(__('UUpload with other formats: <span>%s%s</span>', 'transparentcard'), get_woocommerce_currency_symbol(), 2.56); ?></p>
-                        <p class="mb-0"><?php _e('Adobe illustrator (How to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Adobe In Design (how to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Adobe Photoshop (how to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('CorelDRAW (how to save)', 'transparentcard') ?></p>
+                        <p class="mb-0"><?php echo sprintf(__('Adobe illustrator <a href="%s" download>(How to save)</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Illustrator.zip'); ?></p>
+                        <p class="mb-0"><?php echo sprintf(__('Adobe In Design <a href="%s" download>(how to save)</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-inDesign.zip'); ?></p>
+                        <p class="mb-0"><?php echo sprintf(__('Adobe Photoshop <a href="%s" download>(how to save)</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Photoshop.zip'); ?></p>
+                        <p class="mb-0"><?php echo sprintf(__('CorelDRAW <a href="%s" download>(how to save)</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/CorelDRAW.zip'); ?></p>
+                        <p class="mb-0"><?php _e('PDF', 'transparentcard') ?></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="dymention mb-15" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
+    <div class="dymention mb-10" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
         <div class="column-inner details d-flex">
             <div class="flex-1" style="color:#003F3F;">
-                <span><?php _e('Other formats:', 'transparentcard'); ?>:</span>
+                <span><?php _e('Other formats', 'transparentcard'); ?>:</span>
             </div>
             <div class="flex-2">
                 <div class="inner-details">
-                        <p class="mb-15"><?php _e('PDF, PNG, TIFF, JPEG', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Microsoft PowerPoint (How to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Microsoft Publisher (How to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Microsoft Word (How to save)', 'transparentcard') ?></p>
-                        <p class="mb-0"><?php _e('Inkscape (How to save)', 'transparentcard') ?></p>
+                        <p class="mb-0"><?php echo sprintf(__('Microsoft PowerPoint <a href="%s" download>(How to save)</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Microsoft-Powerpoint.zip'); ?></p>
+                        <!-- <p class="mb-0"><?php //_e('Microsoft Publisher (How to save)', 'transparentcard') ?></p> -->
+                        <p class="mb-0"><?php echo sprintf(__('Microsoft Word <a download href="%s">(How to save)</a>', 'transparentcard'),  get_stylesheet_directory_uri(  ) . '/assets/img/Microsoft-Word.zip' ); ?></p>
+                        <!-- <p class="mb-0"><?php //_e('Inkscape (How to save)', 'transparentcard') ?></p> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="dymention mb-15" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
+    <div class="dymention mb-10" style="border-bottom:1px solid #ddd; padding-bottom:15px;">
         <div class="column-inner details d-flex">
             <div class="flex-1" style="color:#003F3F;">
                 <span><?php _e('Maximum size', 'transparentcard'); ?>:</span>
             </div>
             <div class="flex-2">
                 <div class="inner-details">
-                    <p class="mb-0"><?php echo esc_attr( $option['maxsize'] ); ?>&nbsp;MM</p>
+                    <p class="mb-0"><?php echo esc_attr( $option['maxsize'] ); ?>&nbsp;MB</p>
                 </div>
             </div>
         </div>
@@ -140,7 +141,7 @@ $pheight = $settings[0]['real_height'];
             </div>
             <div class="flex-2">
                 <div class="inner-details">
-                    <p class="mb-0"><?php _e('By adding a design, you accept our Terms and Conditions.', 'transparentcard'); ?></p>
+                    <p class="mb-0"><?php echo sprintf(__('By adding a design, you accept our <a href="%s" />Terms and Conditions.</a>', 'transparentcard'), '#'); ?></p>
                 </div>
             </div>
         </div>

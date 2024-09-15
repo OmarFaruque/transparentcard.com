@@ -24,20 +24,21 @@
             </div>
         </div>
         <div class="flex-2">
-            <h6 class="m-0"><?php _e('Select up to three colors you wish to have in your design', 'transparentcard'); ?></h6>
-            <p><?php _e('If you do not select one, it will be our design team to decide', ) ?></p>
-            <p style="color:red; line-height: 17px; font-size: 12px;"><?php echo sprintf('<strong>%s</strong>: %s', __('Warning Message', 'transparentcard'), __('If you select RGB colors or HEX, make sure you might get 20% dissimilarity from the original color. If you have CMYK color code please write down in below text field. Also CMYK color code can porduce 10% dissimilarity then the desired color. If you want exact color you should have pantone colors which we don\'t print.', 'transparentcard')); ?></p>
+            <h6 class="m-0"><?php _e('Choose up to three colors for your design.', 'transparentcard'); ?></h6>
+            <p><?php _e('If no colors are selected, our design team will choose for you.', 'transparentcard'); ?></p>
+            <p style="color:red; line-height: 17px; font-size: 12px;"><?php echo sprintf('<strong>%s</strong>: %s', __('Warning', 'transparentcard'), __('Selecting RGB or HEX colors may result in up to a 20% variation from the original color. If you have CMYK color codes, please enter them below, but note that they may still produce up to a 10% variation. For exact color matching, Pantone colors are required, which we do not print.', 'transparentcard')); ?></p>
             <div class="form-group colorselectarea">
 
                 <?php 
+                    $colors = array();
                     if(isset( $additionalMetas['colors'] ) && !empty($additionalMetas['colors'])): 
                         $colors = explode(', ', $additionalMetas['colors']);
                         foreach($colors as $k => $singleColor):
                 ?>
-                        <div><label for="colorPicker" class="position-relative add-new-colorplate colorplate-item" style="background-color: <?php echo esc_attr( $singleColor ); ?>; border-color: <?php echo esc_attr( $singleColor ); ?>;">
+                        <div><label for="colorPicker<?php echo esc_attr( $k ); ?>" class="position-relative add-new-colorplate colorplate-item" style="background-color: <?php echo esc_attr( $singleColor ); ?>; border-color: <?php echo esc_attr( $singleColor ); ?>;">
                             <div class="d-flex gap-10" style="align-items:center;flex-direction:column;">
                                 <div class="flex-1">
-                                    <input type="color" style="opacity:0; position:absolute; z-index:0;" id="colorPicker" name="colors[]" value="<?php echo esc_attr( $singleColor ); ?>" data-gtm-form-interact-field-id="1">
+                                    <input type="color" style="opacity:0; position:absolute; z-index:0;" id="colorPicker<?php echo esc_attr( $k ); ?>" name="colors[]" value="<?php echo esc_attr( $singleColor ); ?>" data-gtm-form-interact-field-id="1">
                                     <input type="text" class="form-control opencolor" readonly="" placeholder="Choose a color">
                                 </div>
                                 <div class="flex-2">
@@ -49,7 +50,9 @@
                         endforeach;
                     endif;
                 ?>
-                <div><label for="colorPicker" class="position-relative add-new-colorplate" onclick="addcolorplate();">
+
+
+                <div class="<?php echo isset( $additionalMetas['colors'] ) && count($colors) >= 3 ? 'd-hide' : ''; ?>"><label for="colorPicker" class="position-relative add-new-colorplate" onclick="addcolorplate();">
                     <div class="d-flex gap-10" style="align-items:center;">
                         <div class="flex-1">
                             <!-- <input type="color" style="opacity:0; position:absolute; z-index:0;" id="colorPicker" name="colors[]" >     -->
@@ -103,7 +106,7 @@
         <div class="flex-3">
             
             <div class="form-group">
-                <label for="shared_idea"><?php _e('What Logo do you want to include in your Product Design?', 'transparentcard'); ?><span>*</span></label>
+                <label><?php _e('What Logo do you want to include in your Business Card Design?', 'transparentcard'); ?></label>
                 <div class="d-grid gap-10 logo-wrap-group grid-tampleate-column-3">
                     <div class="flex-1">
                         
@@ -141,7 +144,7 @@
             <!-- Hidden section  -->
              <div class="request-logo-wrap d-hidden logo-wrapper-html mt-20 mb-20">
                 <div class="form-group">
-                    <label for="name_in_logo"><?php _e('Name in Logo', 'transparentcard'); ?></label>
+                    <label for="name_in_logo"><?php _e('Name in Logo', 'transparentcard'); ?><span>*</span></label>
                     <input type="text" name="name_in_logo" id="name_in_logo" value="<?php echo esc_attr( $additionalMetas['name_in_logo'] ?? '' ); ?>" class="form-control">
                 </div>
                 <div class="form-group">
@@ -149,8 +152,8 @@
                     <input type="text" name="logo_slogan" value="<?php echo esc_attr( $additionalMetas['logo_slogan'] ?? '' ); ?>" id="logo_slogan" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="logo_ideas"><?php _e('Do you have ideas for your logo or images of logos you like?', 'transparentcard'); ?></label>
-                    <div class="uploadbutton mt-15 mb-15">
+                    <label for="logo_ideas"><?php _e('If you want, Please upload some reference images that can insipre us to design your business card.', 'transparentcard'); ?></label>
+                    <div class="uploadbutton mt-0 mb-15">
                         <button onclick="clickuploader(this)" class="btn px-15 py-5 image_in_designbtn" type="button"><?php _e('Images Upload', 'transparentcard'); ?></button>
                         <input type="file" id="styleuploadinput" class="fileuploaderinput" name="logo_ideas[]" title="style" style="display:none;" accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf" data-operationid="DaMImages"  data-maxfilesize="15728640" data-hasallowedextensions="true" multiple>
                     </div>
@@ -182,6 +185,7 @@
                     <div class="uploadbutton">
                         <button onclick="clickuploader(this)" class="btn px-15 py-5 image_in_designbtn" type="button"><?php _e('Images Upload', 'transparentcard'); ?></button>
                         <input type="file" id="uploadedFiles" class="fileuploaderinput" name="uploaded_files[]" title="style" style="display:none;" accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf" data-operationid="DaMImages"  data-maxfilesize="15728640" data-hasallowedextensions="true" multiple>
+                        <p class="mt-5" style="line-height:14px; margin-top:5px;"><small style="color:red;"><?php _e('Your logo should be in high resulation. If you have the original design file (AI, PSD, PDF or CDR), it will ensure the best print quality. If not, you can send it in PNG or JPEG format. As long as these formates are high resulation, there wan\'t be any issues with the print. However, low-resulation PNG or JPEG files may result in poor print quality.', 'transparentcard'); ?></small></p>
                     </div>
                     <div class="uploadfilespreview">
                         <ul></ul>
@@ -208,8 +212,8 @@
         <div class="flex-3">
             
             <div class="form-group mb-20">
-                <label for="shared_idea"><?php _e('Do you want to keep the files or just want to print with us?', 'transparentcard'); ?><span>*</span></label>
-                <p class="mb-3"><?php _e('Note: You can get your logo any time as you need.', 'transparentcard'); ?></p>
+                <label><?php _e('Would you like to retain the files or simply proceed with printing?', 'transparentcard'); ?></label>
+                <p class="mb-3"><?php _e('Note: Your logo will be accessible anytime you need it.', 'transparentcard'); ?></p>
                 <div class="d-flex gap-10 logofileavailability flex-direction-column-mobile align-item-center">
 
                     <label class="flex-2 radio-label w-full" for="logo_file_availability_1">
@@ -231,7 +235,7 @@
             </div>
 
             <div class="form-group">
-                <label for="design_usefull_info"><?php _e('Do you want to add some more useful information for the design?', 'transparentcard'); ?></label>
+                <label for="design_usefull_info"><?php _e('Would you like to include any additional details for the design?', 'transparentcard'); ?></label>
                 <div class="d-flex gap-10 flex-direction-column-mobile">
                     <textarea name="design_usefull_info" id="design_usefull_info" class="form-control flex-2" row="5"><?php echo esc_attr( $additionalMetas['design_usefull_info'] ?? '' ); ?></textarea>
                     <div class="example flex-1" style="margin-top:auto;">
@@ -286,7 +290,12 @@
 
         <div class="flex-1 text-right gap-10">
             <button class="btn btn-continue px-5 py-10 border-rounded return-prev" onclick="next_step(0)" type="button"><?php _e('Return to previous step', 'transparentcard'); ?></button>
-            <button class="btn btn-continue px-5 py-10 border-rounded" type="submit"><?php _e('Add to basket', 'transparentcard'); ?></button>
+            <button class="btn btn-continue px-5 py-10 border-rounded position-relative" id="submit" type="submit">
+                <span class="loadericon bg-dark path-dark d-hide">
+                    <svg style="color:#999;" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+                </span>
+                <?php _e('Add to basket', 'transparentcard'); ?>
+            </button>
         </div>
     </div>
     <div class="d-flex justify-content-right">

@@ -55,13 +55,13 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
             <div class="flex-1">
                 <div class="sectiontitle position-relative d-flex align-item-center gap-10">
                     <span class="count">2</span>
-                    <h5><?php _e('Info to be included in your design', 'transparentcard'); ?></h5>
+                    <h5><?php _e('Provide us all info on your business card', 'transparentcard'); ?></h5>
                 </div>
             </div>
             <div class="flex-2">
                 <div class="form-group">
                     <label
-                        for="company_name"><?php _e('Company Name, or Person’s Name', 'transparentcard'); ?></label>
+                        for="company_name"><?php _e('Company or Individual Name', 'transparentcard'); ?></label>
                     <input type="text" name="company_name" id="company_name" class="form-control"
                         value="<?php echo $additionalMetas['company_name'] ?? ''; ?>">
                 </div>
@@ -87,7 +87,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 </div>
                 <div class="form-group">
                     <label
-                        for="other_information_to_include"><?php _e('Any other information you want to include', 'transparentcard'); ?></label>
+                        for="other_information_to_include"><?php _e('Additional details you\'d like to include', 'transparentcard'); ?></label>
                     <textarea name="other_information_to_include" id="other_information_to_include" class="form-control"
                         row="5"><?php echo esc_attr($additionalMetas['other_information_to_include'] ?? ''); ?></textarea>
                 </div>
@@ -98,7 +98,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <div class="header"><?php _e('Example', 'transparentcard'); ?>:</div>
                         <div class="body p-5">
                             <p class="mb-0">
-                                "<?php _e('I would like a QR code for www.example.com, and I would also like a Facebook icon.', 'transparentcard'); ?>"
+                                "<?php _e('Please add a QR code for www.example.com and include a Facebook icon.', 'transparentcard'); ?>"
                             </p>
                         </div>
                     </div>
@@ -116,8 +116,8 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
             <div class="flex-2">
                 <div class="form-group">
                     <label
-                        for="business_category"><?php _e('Select your business category', 'transparentcard'); ?><span>*</span></label>
-                    <select style="padding:3px 15px;" name="business_category" id="business_category" required
+                        for="business_category"><?php _e('Select your business category', 'transparentcard'); ?></label>
+                    <select style="padding:3px 15px;" name="business_category" id="business_category" 
                         class="form-control">
                         <option value=""><?php _e('Select a business category...', 'transparentcard'); ?></option>
                         <?php foreach ($business_categorys as $k => $cat): ?>
@@ -128,9 +128,9 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 </div>
                 <div class="form-group">
                     <label
-                        for="business_desc"><?php _e('Describe your business or any other information about design', 'transparentcard'); ?><span>*</span></label>
-                    <textarea name="business_desc" id="business_desc" required class="form-control"
-                        row="5"><?php echo $additionalMetas['business_desc'] ?? ''; ?></textarea>
+                        for="business_desc"><?php _e('Describe your business or design details', 'transparentcard'); ?><span>*</span></label>
+                    <textarea name="business_description" id="business_desc" required class="form-control"
+                        row="5"><?php echo $additionalMetas['business_description'] ?? ''; ?></textarea>
                 </div>
             </div>
             <div class="flex-1 d-flex">

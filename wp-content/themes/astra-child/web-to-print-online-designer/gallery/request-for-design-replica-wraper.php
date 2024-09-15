@@ -35,16 +35,12 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
 }
 
 
-// WC()->cart->get_cart()[$cart_item_key]['custom_meta_key'] = 'Custom Meta Value';
-
-//  echo 'additional meta <br/><pre>';
-//  print_r($additionalMetas);
-//  echo '</pre>';
-
-
 ?>
 
 <style>
+    .select-service-wrapper img {
+        box-shadow: 0 0 0.5em #aaa;
+    }
     .choose-design-template-header{
         align-items: center;
         justify-content: space-between;
@@ -170,7 +166,6 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
     .additional-fee{
         color: #333 !important;
         font-size: 13px !important;
-        position: absolute;
         top: 120%;
         left: calc(50% - 20px);
         transform: translateX(-50%);
@@ -467,7 +462,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         <div class="choose-design-template-header">
             <div class="desc">
                 <h3><?php _e('Questionnaire about your design', 'transparentcartd'); ?></h3>
-                <p><?php _e('Have a printed product that you’d like to reprint, but don’t have access to the editable files? Don’t worry, our team will replicate your design!', 'transparentcard'); ?>
+                <p><?php _e('Have a printed business card that you’d like to reprint, but don’t have access to the editable files? Don’t worry, our team will replicate your design!', 'transparentcard'); ?>
             </p>
         </div>
         <div class="back-to-left">
@@ -504,7 +499,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                 <?php _e('Replicate simple design', 'transparentcard'); ?>
                                 <?php echo sprintf('<span class="price">%s0.00</span>', get_woocommerce_currency_symbol()); ?>
                             </p>
-                            <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-1.png', __('Replicate simple design', 'transparentcard')); ?>
+                            <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-1.webp', __('Replicate simple design', 'transparentcard')); ?>
                             <p class="select-service-note"><?php _e('Suitable for those with a complete design, with no need for changes to information or design', 'transparentcard'); ?>
                             </p>
                         </label>
@@ -517,7 +512,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                 <?php echo sprintf('<span class="price">%s8.98</span>', get_woocommerce_currency_symbol()); ?>
                             </p>
 
-                            <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-2.png', __('Replicate simple design', 'transparentcard')); ?>
+                            <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-2.webp', __('Replicate simple design', 'transparentcard')); ?>
                             <p class="select-service-note"><?php _e('Suitable for changes to information and design', 'transparentcard'); ?></p>
                         </label>
                     </div>
@@ -531,7 +526,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                     </h4>
                     
                     <p class="selected-product">
-                        <?php echo sprintf(__('<span>Product:</span> %s', 'transparentcard'), get_the_title($product_id)); ?>
+                        <?php echo sprintf(__('<span>Business Card:</span> %s', 'transparentcard'), get_the_title($product_id)); ?>
                     </p>
                     <div class="d-flex form-group gap-30 align-item-start file-type-wrapper">
 
@@ -553,18 +548,21 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                             </label>
                         </div>
                         <!-- Item -->
-                        <div class="single-item flex-2 d-flex align-item-start gap-5">
-                            <label class="flex-2 radio-label"
+                        <div class="single-item flex-2">
+                            <label class="flex-2 radio-label d-flex align-item-start gap-5"
                             for="what_kind_of_file2">
                             <input <?php echo isset($additionalMetas['what_kind_of_file']) && in_array($additionalMetas['what_kind_of_file'], array("I don't have editable files", "I don\'t have editable files")) ? 'checked' : ''; ?>
                             type="radio" data-price="8.98" name="what_kind_of_file" id="what_kind_of_file2"
                             value="<?php _e("I don't have editable files", 'transparentcard'); ?>">
                             <span class="radio-type"></span>
-                            <span class="label-body">
+                            <span class="label-body w-full">
                                 <?php _e("I don't have editable files", 'transparentcard'); ?>
                             </span>
-                            <span class="additional-fee"><?php echo sprintf(__('Additional %s%s', 'transparentcard'), get_woocommerce_currency_symbol(), 8.98); ?></span>
                             </label>
+                            <div class="additional-infomation text-center">
+                                <small class="note text-center" style="color:red; text-decoration: underline;"><?php _e('If you choose it, you should upload logo from step 3.', 'transparentcard'); ?></small>
+                                <span class="additional-fee"><?php echo sprintf(__('Additional %s%s', 'transparentcard'), get_woocommerce_currency_symbol(), 8.98); ?></span>
+                            </div>
                         </div>
                         <!-- Item -->
                         <div class="single-item flex-3 note">
@@ -591,7 +589,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <?php _e('Logo', 'transparentcard'); ?>
                     </h4>
                     <p class="logo-type-subtitle">
-                        <?php _e('What logo do you want to include in the design replica of your product?', 'transparentcard'); ?>
+                        <?php _e('What logo do you want to include in the design replica of your Business Card?', 'transparentcard'); ?>
                     </p>
                     
                     <div class="d-flex form-group gap-30 align-item-top logo-design-replica-wrapper">
@@ -620,7 +618,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                 <div class="logo-uploader-wrapper">
                                     <p><?php _e('Upload Logo', 'transparentcard'); ?></p>
                                     <label for="logo_file" class="logouploader d-hide">
-                                        <input type="file" name="logo_file" id="logo_file" class="form-control"  accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf">
+                                        <input type="file" name="logo_file" id="logo_file" class="form-control"  accept=".jpg, .jpeg, .png, .tif, .ai, .bmp, .pdf, .eps, .psd, .cdr, .indd">
                                         <?php _e('Upload', 'transparentcard'); ?>
                                     </label>
                                 </div>
@@ -715,7 +713,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                         <?php _e('What should I send?', 'transparentcard'); ?>:
                                     </div>
                                     <div class="body">
-                                        <?php _e('For the finished product to be as accurate as possible, please send us all the files/images used to create it.', 'transparentcard'); ?>
+                                        <?php _e('For the finished business card to be as accurate as possible, please send us all the files/images used to create it.', 'transparentcard'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -1125,12 +1123,14 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         }
 
 
-        if(what_kind_of_file == "I don't have editable files"){
+        if(what_kind_of_file == "I don't have editable files"){            
+
             if(logoValue == 'Upload Logo'){
                 jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').addClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', false);
                 return false;
             }else{
+                jQuery(document.body).find('input[name="logo"][value="Upload Logo"]').trigger('click');
                 jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').removeClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', true);
                 return true;
@@ -1147,6 +1147,8 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
     jQuery(document.body).on('submit', '#hireadesignerForm', function (e) {
         e.preventDefault();
 
+        jQuery(document.body).find('button#submit').prop('disabled', true);
+        jQuery(document.body).find('.loadericon').removeClass('d-hide');
 
         // Create a new FormData object
         var formData = new FormData(this);
@@ -1171,23 +1173,23 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
 
         // Perform the AJAX request
         if(!validationErrors( )){
-            // jQuery.ajax({
-            //     url: window.nbds_frontend.url, // Replace with your server-side upload handler
-            //     type: 'POST',
-            //     data: formData,
-            //     contentType: false, // Prevent jQuery from setting the Content-Type header
-            //     processData: false, // Prevent jQuery from processing the data
-            //     dataType: 'json',
-            //     success: function (response) {
-            //         if (response.success)
-            //             window.location.replace(nbds_frontend.cart_url);
+            jQuery.ajax({
+                url: window.nbds_frontend.url, // Replace with your server-side upload handler
+                type: 'POST',
+                data: formData,
+                contentType: false, // Prevent jQuery from setting the Content-Type header
+                processData: false, // Prevent jQuery from processing the data
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success)
+                        window.location.replace(nbds_frontend.cart_url);
 
-            //     },
-            //     error: function (jqXHR, textStatus, errorThrown) {
-            //         // Handle errors here
-            //         alert('Form submission failed: ' + textStatus);
-            //     }
-            // });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle errors here
+                    alert('Form submission failed: ' + textStatus);
+                }
+            });
         }
     });
 

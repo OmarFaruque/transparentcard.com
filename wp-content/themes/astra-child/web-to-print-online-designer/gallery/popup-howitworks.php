@@ -40,29 +40,19 @@ $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             <div class="nbd-popup-content-inner nohover">
                 <div class="popupcontent">
                     <div class="iiner" style="text-align:center;">
-                        <h2 style="margin-bottom:0; color:#003F3F;"><?php _e('How does it work?', 'transparentcard'); ?></h2>
+                        <h2 style="margin-bottom:0; color:#003F3F;"><?php _e('How does the process work?', 'transparentcard'); ?></h2>
                         <p style="font-size:18px; font-weight:300;">
-                            <?php _e('Tell us what you want, and our team will create a design for you!', 'transparentcard'); ?>
+                            <?php _e('Share your idea with us, and our skilled team will make a design for you.', 'transparentcard'); ?>
                         </p>
 
                         <?php nbdesigner_get_template('gallery/hire-steps.php', array()); ?>
 
                         <hr class="step-bottom-devider"
                             style="height:1px; background-color: #333333; margin: 20px 0px;">
-                        <div class="footer d-flex gap-20 justify-content-space-between popupfooter-areea">
-                            <div class="flex-1 fitem ">
-                                <div class="d-flex" style="align-items:center;">
-                                    <div class="setisfectiontext">
-                                        <?php _e('100% Satisfaction guaranteed', 'transparentcard'); ?>
-                                    </div>
-                                    <img style="height:70px; margin-left:-15px;"
-                                        src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/Satisf100.webp'); ?>"
-                                        alt="<?php _e('Step 4', 'transparentcard'); ?>">
-                                </div>
-                            </div>
-
+                        <div class="footer d-flex gap-20 justify-content-center popupfooter-areea">
+                            
                             <div class="flex-1 fitem d-flex"
-                                style="text-align:right; align-items:center; justify-content:end;">
+                                style="text-align:right; align-items:center; justify-content:center;">
                                 <a href="<?php echo esc_url($currentUrl . '&action=hire-a-designer'); ?>"
                                     class="btn btn-success continuebtn"><?php _e('Continue', 'transparentcard'); ?></a>
                             </div>
@@ -122,7 +112,7 @@ $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                         <?php nbdesigner_get_template('gallery/design_replica_popup.php', array()); ?>
 
 
-                        <div class="footer d-flex gap-20 justify-content-space-between popup-button-container">
+                        <div class="footer d-flex gap-20 justify-content-center popup-button-container">
                             <!-- <div class="flex-1 fitem">
                                 <div class="d-flex" style="align-items:center;">
                                     <div class="setisfectiontext">
@@ -231,7 +221,6 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
     }
 
     .design-replica-popupitems .item p {
-        font-family: Playfair Display;
         font-size: 14px;
         font-weight: 500;
         line-height: 22px;
@@ -300,7 +289,6 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
     }
 
     .popup-title-container h2 {
-        font-family: Playfair Display;
         font-size: 27px;
         font-weight: 600;
         line-height: 26px;
@@ -311,7 +299,6 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
     }
 
     .elementor a.continuebtn {
-        font-family: Playfair Display;
         font-size: 18px;
         font-weight: 800;
         line-height: 20px;
@@ -336,7 +323,6 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
     .popup-button-container {
         display: flex !important;
         align-items: center;
-        justify-content: flex-end;
         padding: 0 20px;
     }
 

@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 <div class="transparentcard-checkout-toggle">
 	<div class="woocommerce-form-coupon-toggle">
 		<div class="woocommerce-info">
-			<?php  echo sprintf('%s <a href="#" onClick="toggleBillingDetails(this)" class="showdetails">%s</a>', __('Do you want to change Invoice Details?', 'transparentcards'), __('Click here to change Billing Details.', 'transparemtncards')); ?>
+			<?php  echo sprintf('%s <a href="#" style="color:red;" onClick="toggleBillingDetails(this)" class="showdetails">%s</a>', __('Do you want to change Invoice Details?', 'transparentcards'), __('Click here to change Billing Details.', 'transparemtncards')); ?>
 		</div>
 	</div>
 </div>

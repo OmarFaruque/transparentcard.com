@@ -73,7 +73,7 @@ if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
             </div>
         </div>
     </div>
-    <div class="nbd-m-upload-design-wrap template positon-relative" id="nbd-m-upload-design-wrap">
+    <div class="nbd-m-upload-design-wrap template positon-relative" id="nbd-m-upload-design-wrap" style="align-items:start; padding-top:25px;">
 
             <div class="closebtn">
                 <div class="closeinner">

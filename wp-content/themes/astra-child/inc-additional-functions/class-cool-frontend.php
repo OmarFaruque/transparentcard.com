@@ -284,9 +284,9 @@ class COOL_Frontend extends My_Design_Endpoint{
 
             foreach($values['nbo_cus_files'] as $k => $singleFiles):
                 $title = match ($k) {
-                     'design_images' => esc_attr( __('Other images in your design') ),
-                     'uploaded_files' => esc_attr( __('Uploaded Files') ), 
-                     'logo_ideas' => esc_attr( __('Images for use in Design') ), 
+                     'design_images' => esc_attr( __('Other images in your design', 'transparentcard') ),
+                     'uploaded_files' => esc_attr( __('Uploaded Logo', 'transparentcard') ), 
+                     'logo_ideas' => esc_attr( __('Images for the Logo Design', 'transparentcard') ), 
                      'logo_file' => esc_attr(__('Logo File')), 
                      default => ucwords( str_replace('_', ' ', $k) )
                 };
@@ -319,6 +319,7 @@ class COOL_Frontend extends My_Design_Endpoint{
                 $singlevalue = match ($s) {
                      'colors' => color_to_html($singleAdditional),
                      'business_category' => selected_business_category($singleAdditional),
+                     'company_name' => __('Person / Company Name', 'transparentcard'),
                      default  => $singleAdditional,
                 };
 
@@ -873,7 +874,7 @@ class COOL_Frontend extends My_Design_Endpoint{
             getUrlPageNBD('create'));
         $link_upload_design = apply_filters('nbu_cart_item_upload_link', $link_create_design, $cart_item, $cart_item_key, $redirect);
         $html .= '<div class="nbd-cart-upload-file nbd-cart-item-upload-file mt-0 h-100" style="margin-top:0; height: 100%;">';
-        $html .=    '<a class="button nbd-upload-design" href="' . $link_upload_design . '">' . esc_html__('Design hochladen', 'web-to-print-online-designer') . '</a>';
+        $html .=    '<a class="button nbd-upload-design" href="' . $link_upload_design . '">' . esc_html__('Upload design', 'web-to-print-online-designer') . '</a>';
         $html .= '</div>';
         echo $html;
     }
@@ -956,6 +957,11 @@ class COOL_Frontend extends My_Design_Endpoint{
             if( isset($cart_item['nbd_item_meta_ds']['nbu']) ) $nbu_session = $cart_item['nbd_item_meta_ds']['nbu'];
         }
 
+
+        // echo 'nbu session: ' . $nbu_session . '<br/>';
+        // echo 'cart items <br/><pre>';
+        // print_r($cart_item);
+        // echo '</pre>';
 
         $orientation = self::get_transparent_card_orientation_by_cart_item($cart_item);
         
@@ -1070,7 +1076,7 @@ class COOL_Frontend extends My_Design_Endpoint{
                 $html .=    '<a class="button nbd-create-design" href="' . $link_create_design . '">'. esc_html__('Add design', 'web-to-print-online-designer') .'</a>';
 
             }
-            if( isset( $nbu_session ) ){
+            if( isset( $nbu_session ) && !isset($cart_item['form_source']) && !isset($cart_item['nbo_meta'])){
                 // echo 'inside not isset nbu session <br/>';
                 $id             = 'nbu' . $cart_item_key; 
                 $redirect       = is_cart() ? 'cart' : 'checkout';
@@ -1131,7 +1137,7 @@ class COOL_Frontend extends My_Design_Endpoint{
                     getUrlPageNBD('create'));
                 $link_upload_design = apply_filters('nbu_cart_item_upload_link', $link_create_design, $cart_item, $cart_item_key, $redirect);
                 $html .= '<div class="nbd-cart-upload-file nbd-cart-item-upload-file mt-0">';
-                $html .=    '<a class="button nbd-upload-design" href="' . $link_upload_design . '">' . esc_html__('Design hochladen', 'web-to-print-online-designer') . '</a>';
+                $html .=    '<a class="button nbd-upload-design" href="' . $link_upload_design . '">' . esc_html__('Upload design', 'web-to-print-online-designer') . '</a>';
                 $html .= '</div>';
             }else if(isset($cart_item['form_source'])){
 

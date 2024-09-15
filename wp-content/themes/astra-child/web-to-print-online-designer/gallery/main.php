@@ -78,9 +78,15 @@
 
     .single-design-option-short-desc {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 20px;
         color: #333333;
+    }
+    .single-design-option-wrapper > *{
+        transition:all 0.3s ease;
+    }
+    .single-design-option-wrapper > *:hover {
+        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
     }
 
     .single-design-option .choosetemplate {
@@ -161,6 +167,7 @@
             margin-bottom: 0 !important;
         }
     }
+
 </style>
 
 
@@ -176,13 +183,16 @@
                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/choose_templates.svg'); ?>"
                             alt="<?php echo __('Choose Templates', 'transparentcard'); ?>">
                         <p class="single-design-option-title">
-                            <?php _e('More than 2000 templates available.', 'transparentcard'); ?>
+                            <?php _e('Choose From Prebuilt Design', 'transparentcard'); ?>
+                        </p>
+                        <p class="single-design-option-short-desc">
+                            <?php _e('Extensively Creative Prebuilt Business Card Templates.', 'transparentcard'); ?>
                         </p>
                         <p class="single-design-option-short-desc">
                             <?php _e('Pay for the design once, and use it whenever you like.', 'transparentcard'); ?>
                         </p>
                     </div>
-                    <div class="btnarea">
+                    <div class="btnarea btn-wrapper">
                         <a href="#nbd_design_con" class="choosetemplate">
                             <?php _e('Choose a Design', 'transparentcard'); ?>
                         </a>
@@ -196,10 +206,10 @@
                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/upload_galeria.svg'); ?>"
                             alt="<?php echo __('Upload your design', 'transparentcard'); ?>">
                         <p class="single-design-option-title">
-                            <?php _e('Already have your design?', 'transparentcard'); ?>
+                            <?php _e('Are You a Designer or an Artist?', 'transparentcard'); ?>
                         </p>
                         <p class="single-design-option-short-desc">
-                            <?php _e('Just upload the final artwork.', 'transparentcard'); ?>
+                            <?php _e('Upload your business card artwork, and let us bring it to life.', 'transparentcard'); ?>
                         </p>
                     </div>
                     <div class="btnarea">
@@ -215,7 +225,7 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
 // echo '</pre>';
 ?>
 
-                        <span><?php echo sprintf(__('Upload %s etc.', 'transparentcard'), $option['allow_type']); ?></span>
+                        <span style="font-weight:500; text-transform: uppercase;font-size:12px;"><?php echo sprintf(__('Upload:  %s etc.', 'transparentcard'), $option['allow_type']); ?></span>
                     </div>
                 </div>
             </div>
@@ -225,10 +235,10 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/Ana_design.svg'); ?>"
                             alt="<?php echo __('Custom Design', 'transparentcard'); ?>">
                         <p class="single-design-option-title">
-                            <?php _e('Want a custom Design', 'transparentcard'); ?>
+                            <?php _e('Seeking Custom Design?', 'transparentcard'); ?>
                         </p>
                         <p class="single-design-option-short-desc">
-                            <?php _e('Tell us your ideas and our design team will create your artwork.', 'transparentcard'); ?>
+                            <?php _e('Use our design expert’s eye for your brand.', 'transparentcard'); ?>
                         </p>
                     </div>
                     <div class="btnarea">
@@ -246,10 +256,10 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/Designer_P.svg'); ?>"
                             alt="<?php echo __('Digital Format', 'transparentcard'); ?>">
                         <p class="single-design-option-title">
-                            <?php _e('Your design not in digital format?', 'transparentcard'); ?>
+                            <?php _e('Do you need us to replicate a design?', 'transparentcard'); ?>
                         </p>
                         <p class="single-design-option-short-desc">
-                            <?php _e('Upload images or photos and our design team will replicate your artwork.', 'transparentcard'); ?>
+                            <?php _e('Upload a photo or an image of the business card; our expert designers will replicate that.', 'transparentcard'); ?>
                         </p>
                     </div>
                     <div class="btnarea">
@@ -288,10 +298,39 @@ endif;
         <div class="innersect ast-container ml-auto mr-auto">
             <div class="d-flex align-item-center justify-content-center">
                 <h3 class="text-center text-uppercase" style="color:#ECFF8C; padding:50px 0;">
-                    <?php echo esc_attr($title); ?>     <?php _e('designs', 'web-to-print-online-designer'); ?>
+                    <?php echo esc_attr($title); ?> <?php _e('Business Card Templates', 'web-to-print-online-designer'); ?>
                 </h3>
             </div>
         </div>
+    </section>
+    <style>
+        .info-section{
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: table;
+        }
+        .info-section P{
+            margin: 0;
+            font-size: 16px;
+            line-height: 26px;
+            font-weight: 400;
+        }
+        .info-section span{
+            font-size: 16px;
+            font-style: italic;
+            display: inline-block;
+            padding: 10px 0;
+            font-weight: 500;
+        }
+    </style>
+    <section class="info-section">
+        <p>Fast-track your business and select the best business cards by category and style that defines your brand. You can edit the prebuilt templates to the heart’s content. If you are a design expert yourself, feel free to use the exclusive design tool.</p>
+        <span>Do you need more ideas? You can easily contact us to request designs from our experts.</span>
+        <p>From textured business cards to gold and silver imprints and embossed effects, many distinct features can be added to your designs.</p>
     </section>
 <?php endif; ?>
 

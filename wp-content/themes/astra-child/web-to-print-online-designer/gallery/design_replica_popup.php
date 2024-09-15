@@ -18,7 +18,7 @@
             <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/attach-file.webp'); ?>"
                 alt="<?php _e('Step 2', 'transparentcard'); ?>">
         </div>
-        <p><?php _e("Attach all files/images you consider important for your design to be replicated", 'transparentcard'); ?>
+        <p><?php _e("Attach all relevant files/images necessary for accurately replicating your design.", 'transparentcard'); ?>
         </p>
     </div>
 

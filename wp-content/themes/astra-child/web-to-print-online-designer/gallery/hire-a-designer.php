@@ -29,7 +29,7 @@ $business_categorys = business_categorys();
 <section class="header fullscreen">
     <div class="hire-header ast-container">
         <div class="innter">
-            <h2 class="mb-1 text-uppercase" style="color:white;">
+            <h2 class="mb-1 text-uppercase" style="color:white; margin-bottom:1px;font-size:30px;">
                 <?php _e('Need a custom design? We\'ve got you covered!', 'transparentcard'); ?>
             </h2>
             <p style="margin-bottom:0; color:#ECFF8C; font-size:20px;">
@@ -231,7 +231,7 @@ $business_categorys = business_categorys();
 
 <style>
     section.header {
-        background-color: #004D4D;
+        background-color: #103f3fd9;
         text-align: center;
     }
 
@@ -363,7 +363,7 @@ $business_categorys = business_categorys();
     }
 
     .hire-header {
-        padding: 85px 0;
+        padding: 50px 0;
     }
 
     .uploadfilespreview ul {
@@ -500,6 +500,7 @@ $business_categorys = business_categorys();
     .innerwrapper .single {
         position: relative;
     }
+    .add-new-colorplate.d-hide{display:none;}
 
     .innerwrapper .single:not(.about-the-business):not(.others):before {
         content: '';
@@ -729,6 +730,9 @@ function rgbToCmyk(r, g, b) {
     jQuery(document.body).on('submit', '#hireadesignerForm', function (e) {
         e.preventDefault();
 
+        jQuery(document.body).find('button#submit').prop('disabled', true);
+        jQuery(document.body).find('.loadericon').removeClass('d-hide');
+
         // Create a new FormData object
         var formData = new FormData(this);
         var nonce = nbds_frontend.nonce;
@@ -753,22 +757,24 @@ function rgbToCmyk(r, g, b) {
 
 
         // Perform the AJAX request
-        jQuery.ajax({
-            url: window.nbds_frontend.url, // Replace with your server-side upload handler
-            type: 'POST',
-            data: formData,
-            contentType: false, // Prevent jQuery from setting the Content-Type header
-            processData: false, // Prevent jQuery from processing the data
-            success: function (response) {
-                // Handle the success response
-                if (response.success)
-                    window.location.replace(nbds_frontend.cart_url);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                // Handle errors here
-                alert('Form submission failed: ' + textStatus);
-            }
-        });
+        if (!validation2()) {
+            jQuery.ajax({
+                url: window.nbds_frontend.url, // Replace with your server-side upload handler
+                type: 'POST',
+                data: formData,
+                contentType: false, // Prevent jQuery from setting the Content-Type header
+                processData: false, // Prevent jQuery from processing the data
+                success: function (response) {
+                    // Handle the success response
+                    if (response.success)
+                        window.location.replace(nbds_frontend.cart_url);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle errors here
+                    alert('Form submission failed: ' + textStatus);
+                }
+            });
+        }
     });
 
     /** Form validation */
@@ -795,6 +801,27 @@ function rgbToCmyk(r, g, b) {
         return haverror;
     }
 
+
+    // validation for step 2
+    var validation2 = function () {
+        var haverror = false;
+
+        
+        jQuery('form .step-2').find('[required], [required="required"]').each(function () {
+            let fieldName = jQuery(this).attr('name');  // Get the field name
+            let type = jQuery(this).attr('type'); //get the field type
+            let value = jQuery(this).val();
+            switch (type) {
+                default:
+                    if (value == '') {
+                        jQuery(this).addClass('error');
+                        haverror = true;
+                    }
+            }
+        });
+        return haverror;
+    }
+
     /** Email validatation */
     var validateEmail = function (email) {
         var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -807,10 +834,10 @@ function rgbToCmyk(r, g, b) {
         if (length > 1)
             jQuery(document.body).find('.colorselectarea label:not(.colorplate-item)').remove();
 
-        var htmlelements = `<div class="d-flex"><label for="colorPicker" class="position-relative add-new-colorplate colorplate-item">
+        var htmlelements = `<div class="d-flex"><label for="colorPicker${length}" class="position-relative add-new-colorplate colorplate-item">
                     <div class="d-flex gap-10" style="align-items:center;flex-direction:column;">
                         <div class="flex-1">
-                            <input type="color" class="colorpicker" style="opacity:0; position:absolute; z-index:0;" id="colorPicker" name="colors[]" >
+                            <input type="color" class="colorpicker" style="opacity:0; position:absolute; z-index:0;" id="colorPicker${length}" name="colors[]" >
                             <input type="text" class="form-control opencolor" placeholder="<?php _e('Choose a color', 'transparentcard'); ?>"/>
                         </div>
                         <div class="flex-2">
@@ -905,12 +932,26 @@ function rgbToCmyk(r, g, b) {
     // Price Calculation
     var price = [];
     jQuery('input[type="radio"]').change(function () {
+
+        let thisval = jQuery(this).val();
+        let name = jQuery(this).attr('name');
+
+        console.log('name: ',name, 'val: ', thisval)
+
+        if(name == 'logo_type' && thisval == 'Request logo'){
+            jQuery(document.body).find('input#name_in_logo').attr('required', true);
+        }
+
+        if(name == 'logo_type' && thisval != 'Request logo'){
+            jQuery(document.body).find('input#name_in_logo').attr('required', false);
+        }
+
         calculatePrice();
     });
 
     var calculatePrice = function(){
 
-        console.log('inside calculate event')
+        
         var finalPrice = 0;
         jQuery('input[type="radio"][data-price]').each(function(v, element){
             if(jQuery(element).is(':checked')){

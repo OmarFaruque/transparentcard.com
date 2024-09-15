@@ -1,5 +1,5 @@
 <?php
-define( 'WP_CACHE', false /* Modified by NitroPack */ );
+define( 'WP_CACHE', true /* Modified by NitroPack */ );
 
 
 
@@ -26,13 +26,13 @@ define( 'WP_CACHE', false /* Modified by NitroPack */ );
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'transparentcard' );
+define( 'DB_NAME', 'u688141072_i2vkQ' );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'u688141072_S9P26' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'omar' );
+define( 'DB_PASSWORD', 'WESKv4RnNZ' );
 
 /** Database hostname */
 define( 'DB_HOST', '127.0.0.1' );
@@ -67,7 +67,7 @@ define( 'WP_CACHE_KEY_SALT', 'gqMM%<kX T>x%/L7_kYRGh42K<gtlz~]D$<r9Ml%JkIYw+vSgG
 
 /**#@-*/
 
-/**php
+/**
  * WordPress database table prefix.
  *
  * You can have multiple installations in one database if you give each
@@ -92,7 +92,6 @@ define( 'WP_DEBUG_LOG', true );
 define('WP_DEBUG_DISPLAY', false);
 define('WPLANG', 'en_US');
 
-define('DISABLE_WP_CRON', true);
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -103,7 +102,6 @@ define( 'WP_AUTO_UPDATE_CORE', 'minor' );
 /* That's all, stop editing! Happy publishing. */
 
 define('WP_MEMORY_LIMIT', '512M');
-
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {

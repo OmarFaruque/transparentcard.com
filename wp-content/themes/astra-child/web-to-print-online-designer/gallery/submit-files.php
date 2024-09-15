@@ -20,37 +20,33 @@ $percentage = ($lowerValue / $higherValue) * 100;
 $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
 
 
-nbdesigner_get_template('gallery/header.php', array());
+// nbdesigner_get_template('gallery/header.php', array());
 ?>
 <section id="body" class="cutting mt-50">
     <style>
+        p#uploaded_file_name {
+            max-width: 120px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .selectedImgWrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .selectedImgWrap img{
+            min-width:100%;
+            min-height:100%;
+        }
         .choose-design-template-header {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 50px;
         }
 
-        .back-to-template-gallery-btn {
-            border-radius: 5px;
-            display: inline-flex;
-            color: #fff !important;
-            background: #003F3F;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: 400;
-            letter-spacing: 1.2px;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s ease;
-            border: 1px solid transparent;
-        }
-
-        .back-to-template-gallery-btn:hover {
-            background: #ECFF8C;
-            color: #003F3F !important;
-            border-color: #003F3F;
-            box-shadow: 0 1px 0 #000;
-        }
 
         @media screen and (max-width:992px) {
             .designarea {
@@ -181,24 +177,26 @@ nbdesigner_get_template('gallery/header.php', array());
         <div class="d-flex justify-content-end topbradecamp">
             <ul class="list-style-none d-flex gap-15">
                 <li><a href="#"><?php _e('Help', 'transparentcard'); ?></a></li>
-                <li><a href="#"><?php _e('View product after cutting', 'transparentcard'); ?></a></li>
+                <li><a onclick="printingara_curring(this, event)" href="#"><?php _e('View product after cutting', 'transparentcard'); ?></a></li>
             </ul>
         </div>
 
         <div class="designarea d-flex gap-40">
             <div class="flex-1 item-align-center justify-content-center d-flex">
                 <div class="questionformate">
-                    <h4><?php _e('Questions about the format?', 'transparentcard'); ?></h4>
-                    <p class="mb-10">
+                    <h4><?php _e('Have questions regarding the format?', 'transparentcard'); ?></h4>
+                    <p class="mb-10 mt-5" style="line-height:18px;">
                         <?php _e('Download our templates to help you prepare your file before uploading it.', 'transparentcard') ?>
                     </p>
                     <div class="menulist p-10 border-rounded" style="background-color:#ECFF8C; margin-bottom:20px;">
                         <ul class="list-style-none m-0">
-                            <li><a href="#"><?php _e('Adobe Photoshop', 'transparentcard'); ?></a></li>
-                            <li><a href="#"><?php _e('Adobe Illustrator', 'transparentcard'); ?></a></li>
-                            <li><a href="#"><?php _e('Adobe In Design', 'transparentcard'); ?></a></li>
-                            <li><a href="#"><?php _e('Microsoft PowerPoint', 'transparentcard'); ?></a></li>
-                            <li><a href="#"><?php _e('Microsoft Word', 'transparentcard'); ?></a></li>
+                            <li><?php echo sprintf(__('<a download href="%s">Adobe Photoshop</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Photoshop.zip'); ?></li>
+                            <li><?php echo sprintf(__('<a download href="%s">Adobe Illustrator</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Illustrator.zip'); ?></li>
+                            <li><?php echo sprintf(__('<a download href="%s">Adobe In Design</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-inDesign.zip'); ?></li>
+                            <li><?php echo sprintf(__('<a download href="%s">Microsoft PowerPoint</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Microsoft-Powerpoint.zip'); ?></li>
+                            <li><?php echo sprintf(__('<a download href="%s">Microsoft Word</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Microsoft-Word.zip'); ?></li>
+                            <li><?php echo sprintf(__('<a download href="%s">CorelDRAW</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/CorelDRAW.zip'); ?></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -213,7 +211,7 @@ nbdesigner_get_template('gallery/header.php', array());
                             <div class="xy text-center d-flex">
                                 <div class="flex-10">
                                     <div class="width"><?php echo esc_attr($pwidth); ?>mm</div>
-                                    <div class="arrow d-flex justify-content-right"><img
+                                    <div class="arrow d-flex justify-content-center"><img style="width:calc(100% - 30px);"
                                             src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/arrow-left-right.svg'); ?>"
                                             alt="<?php _e('Arrow', 'transparentcard'); ?>"></div>
                                 </div>
@@ -241,7 +239,7 @@ nbdesigner_get_template('gallery/header.php', array());
                                     </div>
                                     <div class="uploadbutton d-flex mt-20">
                                         <button type="button" id="startUploadSubmitPopup"
-                                            class="w-full"><?php _e('Upload Now', 'transparentcard'); ?></button>
+                                            class="w-full justify-content-center"><?php _e('Upload Now', 'transparentcard'); ?></button>
                                     </div>
                                 </div>
                                 <div class="flex-1"></div>
@@ -249,7 +247,7 @@ nbdesigner_get_template('gallery/header.php', array());
                             <div class="yx text-center flex-1">
                                 <div>
                                     <div class="height"><?php echo esc_attr($pheight); ?>mm</div>
-                                    <div class="arrow"><img
+                                    <div class="arrow d-flex justify-content-right"><img style="width:calc(100% - 30px);"
                                             src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/arrow-left-right.svg'); ?>"
                                             alt="<?php _e('Arrow', 'transparentcard'); ?>"></div>
                                 </div>
@@ -298,7 +296,7 @@ nbdesigner_get_template('gallery/header.php', array());
     <div class="innersect ast-container ml-auto mr-auto">
         <div class="d-flex justify-content-between align-item-center">
             <div class="flex-1">
-                <h3><?php _e('If your design is ready and verified, simply click “Finalize”.', 'transparentcard'); ?>
+                <h3><?php _e('Once your design is ready and verified, click “Finalize”.', 'transparentcard'); ?>
                 </h3>
             </div>
             <div class="flex-1 text-right">
@@ -313,7 +311,38 @@ nbdesigner_get_template('gallery/header.php', array());
 
 
 <style>
-    .maincard,
+    .maincard
+    {
+        width: calc(100% - 30px);
+        height: calc(100% - 30px);
+    }
+    .selectedImgWrap > *:before {
+        content: '';
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        left: 0;
+        top: 0;
+        border: dashed 1px #aaa;
+        z-index: 1;
+        display: block;
+        position: absolute;
+        margin: 10px;
+    }
+    .selectedImgWrap.cutActive > *:after {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9999999;
+        display: block;
+        overflow: hidden;
+        content: '';
+        margin: 0;
+        background-color: transparent;
+        border: 10px solid #f4f4f4;
+    }
+    .selectedImgWrap .wrapinner{width: 100%; height:100%;}
     .maindesigncanvas .inner {
         width: calc(100% - 30px);
         height: calc(100% - 30px);
@@ -439,8 +468,18 @@ nbdesigner_get_template('gallery/header.php', array());
         left: -76px;
         top: 140px
     }
+    .elementor-shortcode section#footer.d-fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        margin: auto;
+    }
+    .elementor-shortcode section#footer{
+        transition: all 0.3s;
+    }
 
-    .topbradecamp ul li a {
+    /* .topbradecamp ul li a {
         background-color: #003F3F;
         color: #ECFF8C;
         padding: 7px 20px;
@@ -448,19 +487,25 @@ nbdesigner_get_template('gallery/header.php', array());
         border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s;
-    }
+    } */
     .filedisplayarea .icon span {
         width: 50px;
         display: block;
         margin: 0 auto;
     }
-    .topbradecamp ul li a:hover {
+    /* .topbradecamp ul li a:hover {
         color: #003F3F;
         background-color: #ECFF8C;
-    }
+    } */
 </style>
 
 <script>
+    let printingara_curring = function(thisitem, event){
+        event.preventDefault();
+        jQuery(document.body).find('.selectedImgWrap').toggleClass('cutActive');
+    }
+
+
     jQuery(document.body).on('click', '#startUploadSubmitPopup', function () {
 
         if (!jQuery(document.body).find('div#container-online-designer.template').hasClass('active')) {
@@ -484,26 +529,59 @@ nbdesigner_get_template('gallery/header.php', array());
     jQuery(document.body).on('click', '.submit-upload-design-preview', function () {
         var imgsrc = jQuery('.nbd-upload-items-inner').find('img').attr('src');
 
-        var imgval = jQuery('input[name="nbd-upload-files"]').val();
 
-        let extension = getFileExtension(imgval);
-        let imgTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']; 
-        
-        if(imgTypes.indexOf(extension) < 0){
-               jQuery(document.body).find('#uploadareadesign').removeClass('d-hide');
-               jQuery(document.body).find('.maindesigncanvas').addClass('d-hide');
-               jQuery(document.body).find('#uploaded_file_name').text(imgval);
-        }
+        if(imgsrc){
+            imgsrc = imgsrc.replace('_preview', '');
+            var imgval = jQuery('input[name="nbd-upload-files"]').val();
 
-        hidepopup();
-        if (typeof imgsrc != 'undefined') {
-            jQuery(document.body).find('.maincard').html('');
-            jQuery(document.body).find('.maincard').css("background-image", `url(${imgsrc})`);
+            let extension = getFileExtension(imgval);
+            let imgTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']; 
+            
+            if(imgTypes.indexOf(extension) < 0){
+                jQuery(document.body).find('#uploadareadesign').removeClass('d-hide');
+                jQuery(document.body).find('.maindesigncanvas').addClass('d-hide');
+                jQuery(document.body).find('#uploaded_file_name').text(imgval);
+            }
+
+            hidepopup();
+            if (typeof imgsrc != 'undefined') {
+                jQuery(document.body).find('.maincard').html('');
+                let htmlOutput = `<div class="selectedImgWrap">
+                    <div class="wrapinner">
+                        <img src="${imgsrc}" alt="" />
+                    </div>
+                </div>`;
+                jQuery(document.body).find('.innerdesignarea .outer').css("background-color", 'rgba(0,0,0,0,0)')
+                jQuery(document.body).find('.innerdesignarea .outer').append(htmlOutput);
+                // jQuery(document.body).find('.maincard').css("background-image", `url(${imgsrc})`);
+            }
+        }else{
+            jQuery(this).find('span').css({'border-color': 'red'});
         }
     });
 
     function getFileExtension(url) {
-    return url.split('.').pop().split(/\#|\?/)[0];
+        return url.split('.').pop().split(/\#|\?/)[0];
     }
+
+
+    jQuery(document).ready(function(){
+        var footerheight, footherElement, footerOffset, scrollTop, windowHeight, distanceFromFooterToViewportBottom;
+        footerheight = jQuery(document.body).find('.elementor-location-footer').height();
+        footherElement = jQuery(document.body).find('.elementor-location-footer');
+        jQuery(window).on('scroll', function() {
+            footerOffset = footherElement.offset().top + footherElement.outerHeight();
+            scrollTop = jQuery(window).scrollTop();
+            windowHeight = jQuery(window).height();
+            distanceFromFooterToViewportBottom = footerOffset - (scrollTop + windowHeight);
+            setTimeout(() => {
+                if(footerheight < distanceFromFooterToViewportBottom){
+                    jQuery(document.body).find('.elementor-shortcode section#footer').addClass('d-fixed');
+                }else{
+                    jQuery(document.body).find('.elementor-shortcode section#footer').removeClass('d-fixed');
+                }
+            }, 1000);
+        });
+    });
 
 </script>

@@ -3390,6 +3390,16 @@ if( $cart_item_key != ''){ ?>
         $scope.sticky_cart_collopse = function(){
             jQuery(document.body).find('#coolCardStickyCart').toggleClass('sticky-toggle');
             jQuery(document.body).find('.nb-back-to-top-wrap').toggleClass('sticky-cart-clopsed');
+
+            let windowWidth = jQuery(window).width();
+            if(windowWidth <= 480){
+                if(jQuery(document.body).find('#coolCardStickyCart').hasClass('sticky-toggle')){
+                    jQuery(document.body).find('#useTemplate').addClass('sticky-cart-clopsed-very-bottom');    
+                }else{
+                    jQuery(document.body).find('#useTemplate').removeClass('sticky-cart-clopsed-very-bottom');    
+                }
+                
+            }
         }
 
 
@@ -7904,7 +7914,7 @@ if( $cart_item_key != ''){ ?>
             url.searchParams.append('price', price);
             url.searchParams.append('source', 'single-product');
 
-            console.log('final_price: ', $scope.final_price);
+            // console.log('final_price: ', $scope.final_price);
 
             localStorage.setItem('nbd_selected_unit_price' + $scope.product_id, $scope.final_price);
             localStorage.setItem('nbd_fields_' + $scope.product_id, JSON.stringify($scope.nbd_fields));

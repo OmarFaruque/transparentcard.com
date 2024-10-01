@@ -22,18 +22,20 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
 }
 
 ?>
+
+<div class="login-form-wrap">
 <div class="note text-center mb-25">
-	<?php _e( 'Wenn Sie schon einmal bei uns eingekauft haben, geben Sie bitte Ihre Zugangsdaten in die Felder des Anmeldeformulars ein. Wenn Sie ein neuer Kunde sind, klicken Sie bitte auf den Registrierungsbutton und erstellen Sie Ihr Profil vor dem Checkout.', 'transparentcard' );  ?>
+	<?php _e( 'If you have shopped with us before, please enter your login details in the fields of the login form. If you are a new customer, please click the registration button and create your profile before checkout.', 'transparentcard' );  ?>
 </div>
-<div class="d-flex gap-20 mb-40">
+<div class="d-flex gap-20 mb-40" id="authbuttonacton">
 	<div class="flex-1">
 		<div class="woocommerce-form-login-toggle text-center">
-			<?php echo apply_filters( 'woocommerce_checkout_registration_button', ' <button type="button" class="secondary-color showRegistration">' . __( 'Hier geht\'s zur Anmeldung', 'transparentcard' ) . '</button>' ); ?>
+			<?php echo apply_filters( 'woocommerce_checkout_registration_button', ' <button type="button" class="secondary-color showRegistration justify-content-center p-20-imp">' . __( 'Click here to register', 'transparentcard' ) . '</button>' ); ?>
 		</div>
 	</div>
 	<div class="flex-1">
 		<div class="woocommerce-form-login-toggle text-center">
-			<?php echo apply_filters( 'woocommerce_checkout_login_button', ' <button type="button" class="secondary-color showlogin">' . __( 'Klicken Sie hier, um sich anzumelden', 'transparentcard' ) . '</button>' ); ?>
+			<?php echo apply_filters( 'woocommerce_checkout_login_button', ' <button type="button" class="secondary-color showlogin justify-content-center p-20-imp">' . __( 'Click here to login', 'transparentcard' ) . '</button>' ); ?>
 		</div>
 	</div>
 </div>
@@ -47,3 +49,22 @@ woocommerce_login_form(
 		'hidden'   => true,
 	)
 );
+
+?>
+</div>
+
+
+<style>
+	@media only screen and (max-width:639px) {
+		.login-form-wrap{
+			max-width:95%;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+	@media only screen and (max-width:480px) {
+		div#authbuttonacton {
+			flex-direction: column;
+		}
+	}
+</style>

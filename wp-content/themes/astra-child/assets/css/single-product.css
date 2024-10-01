@@ -368,3 +368,17 @@ div#overviewbtn span.nbo-float-summary-toggle svg path {
 .tooltipster-arrow {
     border-top-color: #222 Im !important; /* Adjust based on arrow position */
 }
+@media only screen and (max-width:480px) {
+    /* a#useTemplate {
+        position: fixed;
+        left: 0;
+        z-index: 9999999;
+        bottom: 50px;
+        max-width: 75%;
+        transition: all 0.3s;
+    }
+    a#useTemplate.sticky-cart-clopsed-very-bottom{
+        bottom:0px;
+        margin-bottom: 5px;
+    } */
+}

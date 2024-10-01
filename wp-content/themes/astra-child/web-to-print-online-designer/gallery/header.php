@@ -24,7 +24,7 @@
         <!-- Header -->
         <div class="choose-design-template-header mt-20">
             <div class="back-to-product">
-                <a href="<?php echo esc_url( get_the_permalink( $_GET['pid'] ) ); ?>" class="back-to-template-gallery-btn">
+                <a href="<?php echo esc_url( get_the_permalink( $_GET['pid'] ) ); ?>" class="back-to-template-gallery-btn color-white" style="padding:15px 30px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         class="bi bi-chevron-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"

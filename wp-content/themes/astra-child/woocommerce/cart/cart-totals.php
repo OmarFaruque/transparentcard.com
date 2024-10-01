@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-    <div class="transparent-title bg-white b-1 bs-solid mb-10" style="border-color: #DBDBDB; padding: 10px 30px;">
+    <div class="transparent-title bg-white b-1 bs-solid mb-10" style="border-color: #DBDBDB; padding: 10px 25px;">
 	    <h2 class="mb-5 mt-5" style="margin-bottom: 5px; font-size: 30px;"><?php esc_html_e( 'Cart totals', 'woocommerce' ); ?></h2>
     </div>
 

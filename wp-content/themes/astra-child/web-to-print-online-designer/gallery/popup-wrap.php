@@ -259,6 +259,7 @@
     });
     var isNBDLoading = false;
     jQuery(window).on('scroll', function () {
+        console.log('scroll omar 1')
         !isNBDLoading && (nbd_page.current_page < nbd_page.last_page) && isScrolledIntoView('#nbd-pagination') && loadMoreGallery( nbd_page );
     });  
     var renderNBDGallery = function( init, callback ){

@@ -120,16 +120,14 @@ class COOL_Frontend extends My_Design_Endpoint{
         add_action( 'wp_head', function(){
 
 
-                // $files = get_option( 'ajax_test', array() );
-                // $_nbd_item_key = WC()->session->get('nbd_item_key_2720');  
+            // $term_id = 60; // Replace with the actual term ID
+            // $taxonomy = 'template_tag'; // Replace with your custom taxonomy slug
+            
+            // $term_link = get_term_link( $term_id, $taxonomy );
 
-                // echo 'keyis: ' . $_nbd_item_key . '<br/>';
+            // echo 'term link: ' . $term_link . '<br/>';
 
-                // echo 'diris <br/><pre>';
-                // print_r($files);
-                // echo '</pre>';
-
-
+            // echo 'options: ' . get_option( 'testoption', '' ) . '<br/>';
 
             
         } );
@@ -817,7 +815,6 @@ class COOL_Frontend extends My_Design_Endpoint{
      * 
      * @return url
      */
-
     public static function copy_transparent_design($cart_item = array(), $cart_item_key = ""){
         
         $nbd_session = WC()->session->get($cart_item['key'] . '_nbd');
@@ -841,7 +838,29 @@ class COOL_Frontend extends My_Design_Endpoint{
 
         $html = '';
         $html .= '<div class="nbd-cart-copy-order-item nbd-cart-item-copy-Item mt-0" style="margin-top:0; height: 100%;">';
-        $html .=    '<a class="button nbd-copy-orderItem duplicate_cart_item" data-orientation="'.$orientation.'" data-design_folder="'.$nbd_session.'" data-item_key="'.$cart_item_key.'"  href="#"><span>' . __('Add new', 'transparentcard') . '</span></a>';
+        $html .=    '<a class="button nbd-copy-orderItem duplicate_cart_item_upload" data-orientation="'.$orientation.'" data-design_folder="'.$nbd_session.'" data-item_key="'.$cart_item_key.'"  href="#"><span>' . __('Add new', 'transparentcard') . '</span></a>';
+        $html .= '</div>';
+        echo $html;
+    }
+
+
+
+    
+    /**
+     * Item duplicate
+     * 
+     * @param array $cart_item
+     * @param string $cart_item_key
+     * 
+     * @return url
+     */
+    public static function copy_transparent_upload($cart_item = array(), $cart_item_key = ""){
+        
+        $nbd_session = $cart_item['tcu_folder'];
+
+        $html = '';
+        $html .= '<div class="nbd-cart-copy-order-item nbd-cart-item-copy-Item mt-0" style="margin-top:0; height: 100%;">';
+        $html .=    '<a class="button nbd-copy-orderItem duplicate_cart_item_upload" data-design_folder="'.$nbd_session.'" data-item_key="'.$cart_item_key.'"  href="#"><span>' . __('Add new', 'transparentcard') . '</span></a>';
         $html .= '</div>';
         echo $html;
     }
@@ -1181,6 +1200,8 @@ class COOL_Frontend extends My_Design_Endpoint{
         }
        
     }
+
+    // "/transparent-business-card-template/?pid=2720&size=53&options=f1707232480934-0%2Cf1707244356361-0%2Cf1709996604365-0%2Cf1707310490866-0&qty=250&price=49.5&source=single-product&action=request-for-design-replica"
 
     /**
      * GEt order delivery date after calculate delivery otion and order date
@@ -1582,6 +1603,7 @@ class COOL_Frontend extends My_Design_Endpoint{
             return;
         }
 
+        
 
         if(isset( $_GET['action']) && $_GET['action'] == 'hire-a-designer'){
             ob_start();
@@ -1608,7 +1630,10 @@ class COOL_Frontend extends My_Design_Endpoint{
         $favourite_templates    = parent::get_favourite_templates();
         $cat                    = (isset($_GET['cat']) && absint($_GET['cat'])) ? absint($_GET['cat']) : 0;
         $pid                    = (isset($_GET['pid']) && absint($_GET['pid'])) ? absint($_GET['pid']) : 0;
+
         $tag                    = isset( $_GET['tag'] ) ? wc_clean( $_GET['tag'] ) : '';
+        if(isset($atts['term_id'])) $tag = $atts['term_id'];
+
         $color                  = isset( $_GET['color'] ) ? wc_clean( $_GET['color'] ) : '';
         $size                   = isset( $_GET['size'] ) ? wc_clean( $_GET['size'] ) : '';
         $corners                = isset( $_GET['corners'] ) ? wc_clean( $_GET['corners'] ) : '';
@@ -1668,17 +1693,10 @@ class COOL_Frontend extends My_Design_Endpoint{
         $atts['templates']  = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], false, false, $cat, $tag, $color, '', $search, $search_type, false, $size, $corners, $orientations );
         $atts['total']      = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], true, false, $cat, $tag, $color, '', $search, $search_type, true, $size, $corners, $orientations );
 
-        
-
-
         ob_start();
-
 
        
         nbdesigner_get_template( 'gallery/main.php', $atts );
-        
-
-
 
         return ob_get_clean();
     }
@@ -1697,7 +1715,7 @@ class COOL_Frontend extends My_Design_Endpoint{
         global $wpdb;
         $limit  = $row * $per_row;
         $offset = $limit * ( $page - 1 );
-        $sql    = "SELECT p.ID, p.post_title, t.id AS tid, t.name, t.folder, t.product_id, t.variation_id, t.user_id, t.thumbnail, t.type FROM {$wpdb->prefix}nbdesigner_templates AS t";
+        $sql    = "SELECT p.ID, p.post_title, t.id AS tid, t.name, t.folder, t.product_id, t.variation_id, t.user_id, t.thumbnail, t.type, t.tags FROM {$wpdb->prefix}nbdesigner_templates AS t";
         $sql   .= " LEFT JOIN {$wpdb->prefix}posts AS p ON t.product_id = p.ID";
         $sql   .= " WHERE t.publish = 1 AND p.post_status = 'publish' AND publish = 1";
 
@@ -1885,7 +1903,7 @@ class COOL_Frontend extends My_Design_Endpoint{
                 }
             }
             $title = $p['name'] ?  $p['name'] : $p['post_title'];
-            $listTemplates[] = array('tid' => $p['tid'], 'id' => $p['ID'], 'title' => $title, 'type' => $p['type'], 'image' => $image, 'folder' => $p['folder'], 'product_id' => $p['product_id'], 'variation_id' => $p['variation_id'], 'user_id' => $p['user_id']);
+            $listTemplates[] = array('tid' => $p['tid'], 'id' => $p['ID'], 'title' => $title, 'type' => $p['type'], 'image' => $image, 'folder' => $p['folder'], 'product_id' => $p['product_id'], 'variation_id' => $p['variation_id'], 'user_id' => $p['user_id'], 'tags' => $p['tags']);
         }
         return $listTemplates;
     }
@@ -2182,7 +2200,7 @@ class COOL_Frontend extends My_Design_Endpoint{
             #coolCardStickyCart{
                 z-index: 10;
                 max-width: 100%; 
-                width: 550px;
+                width: 100%;
                 transition: all 0.3s;
             }
 
@@ -2469,6 +2487,10 @@ class COOL_Frontend extends My_Design_Endpoint{
         }
 
         //JS
+        
+        if(is_tax( 'template_tag' )){
+            wp_enqueue_script('masonry');      
+        }
         wp_register_script( 'tooltipster-js', 'https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js', array('jquery'), time(), true );
         wp_register_script( 'cool-child-js', get_stylesheet_directory_uri(  ) . '/assets/js/printcart-child.js', array('jquery', 'tooltipster-js'), time(), true );
         wp_enqueue_script( 'cool-child-js' );
@@ -2561,6 +2583,4 @@ class COOL_Frontend extends My_Design_Endpoint{
         <?php
         echo ob_get_clean();
     }
-
-     
 }

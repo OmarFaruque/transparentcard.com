@@ -5,7 +5,7 @@
         <div class="img"><img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/step-1.svg'); ?>"
                 alt="<?php _e('Step 1', 'transparentcard'); ?>"></div>
         <hr>
-        <p><?php _e('Tell us your ideas.', 'transparentcard'); ?></p>
+        <p><?php _e('Please provide us information that you want in your business card.', 'transparentcard'); ?></p>
     </div>
 
     <div class="item flex-1">

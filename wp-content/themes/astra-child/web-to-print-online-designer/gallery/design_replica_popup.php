@@ -10,7 +10,7 @@
             <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/take-photo-submit-file.webp'); ?>"
                 alt="<?php _e('Replicate modal', 'transparentcard'); ?>">
         </div>
-        <p><?php _e('Take a photo or submit your files', 'transparentcard'); ?></p>
+        <p><?php _e('Capture a photo or upload your files.', 'transparentcard'); ?></p>
     </div>
 
     <div class="item flex-1">
@@ -35,6 +35,6 @@
             <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/ready-to-print.webp'); ?>"
                 alt="<?php _e('Step 4', 'transparentcard'); ?>">
         </div>
-        <p><?php _e("Your design is ready to print", 'transparentcard'); ?></p>
+        <p><?php _e("Your design is prepared for printing.", 'transparentcard'); ?></p>
     </div>
 </div>

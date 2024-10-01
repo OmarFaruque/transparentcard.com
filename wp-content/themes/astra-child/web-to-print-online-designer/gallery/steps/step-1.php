@@ -22,39 +22,39 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
 <div class="wrapperstepform">
     <div class="innerwrapper mt-20 border-rounded">
         <!-- Product configuration -->
-        <div class="d-flex gap-20 single">
+        <!-- <div class="d-flex gap-20 single">
             <div class="flex-1">
                 <div
                     class="sectiontitle position-relative d-flex align-item-center gap-10 d-flex align-item-center gap-10">
                     <span class="count">1</span>
-                    <h5><?php _e('Product configuration', 'transparentcard'); ?></h5>
+                    <h5><?php //_e('Product configuration', 'transparentcard'); ?></h5>
                 </div>
             </div>
             <div class="flex-2">
-                <h6 class="m-0"><?php _e('Product', 'transparentcard'); ?></h6>
-                <p><?php echo esc_attr(isset($_GET['pid']) ? get_the_title($_GET['pid']) : ''); ?></p>
+                <h6 class="m-0"><?php //_e('Product', 'transparentcard'); ?></h6>
+                <p><?php //echo esc_attr(isset($_GET['pid']) ? get_the_title($_GET['pid']) : ''); ?></p>
                 <?php
-                foreach ($selectedOptions as $so):
-                    $_so = explode('-', $so);
-                    $_key = array_search($_so[0], array_column($options['fields'], 'id'));
-                    if ($options['fields'][$_key]['general']['published'] == 'n')
-                        continue;
-                    if (empty($options['fields'][$_key]['general']['attributes']['options'][$_so[1]]['name']))
-                        continue;
+                // foreach ($selectedOptions as $so):
+                //     $_so = explode('-', $so);
+                //     $_key = array_search($_so[0], array_column($options['fields'], 'id'));
+                //     if ($options['fields'][$_key]['general']['published'] == 'n')
+                //         continue;
+                //     if (empty($options['fields'][$_key]['general']['attributes']['options'][$_so[1]]['name']))
+                //         continue;
 
-                    echo sprintf('<h6 class="m-0">%s</h6>', $options['fields'][$_key]['general']['title']);
-                    echo sprintf('<p>%s</p>', $options['fields'][$_key]['general']['attributes']['options'][$_so[1]]['name']);
+                //     echo sprintf('<h6 class="m-0">%s</h6>', $options['fields'][$_key]['general']['title']);
+                //     echo sprintf('<p>%s</p>', $options['fields'][$_key]['general']['attributes']['options'][$_so[1]]['name']);
 
-                endforeach;
+                // endforeach;
                 ?>
             </div>
             <div class="flex-1"></div>
-        </div>
+        </div> -->
         <!-- Info to be included in your design -->
         <div class="d-flex gap-20 single">
             <div class="flex-1">
-                <div class="sectiontitle position-relative d-flex align-item-center gap-10">
-                    <span class="count">2</span>
+                <div class="sectiontitle position-relative d-flex align-item-center gap-10" style="align-items:start;">
+                    <span class="count">1</span>
                     <h5><?php _e('Provide us all info on your business card', 'transparentcard'); ?></h5>
                 </div>
             </div>
@@ -109,7 +109,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         <div class="about-the-business d-flex gap-20 single">
             <div class="flex-1">
                 <div class="sectiontitle position-relative d-flex align-item-center gap-10">
-                    <span class="count">3</span>
+                    <span class="count">2</span>
                     <h5><?php _e('About the business', 'transparentcard'); ?></h5>
                 </div>
             </div>

@@ -313,6 +313,16 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
         transition: all 0.2s ease;
     }
 
+    @media only screen and (max-width:480px) {
+        .elementor a.continuebtn{
+            margin-top:0;
+            margin-bottom:7px;
+        }
+        .footer.popup-button-container a.continuebtn {
+            margin-top: 20px;
+        }
+    }
+
     .elementor a.continuebtn:hover {
         background: #ECFF8C !important;
         color: #003F3F !important;
@@ -451,11 +461,18 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
         }
     }
 
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: 720px) and (min-width:601px) {
         .nbd-popup.step .nbd-popup-content-wrap {
             max-width: 600px !important;
         }
     }
+
+    @media screen and (max-width: 600px) {
+        .nbd-popup.step .nbd-popup-content-wrap {
+            max-width: 92% !important;
+        }
+    }
+    
 
     @media screen and (max-width: 700px) {
         .nbd-popup.step .nbd-popup-content-wrap {
@@ -465,7 +482,7 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
 
     @media screen and (max-width: 631px) {
         .design-replica-popupitems {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .nbd-backdrop.nbd-popup.step.nbd-popup-request-replica {
@@ -474,7 +491,6 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
 
         .design-replica-popupitems .item .img img {
             height: 75px;
-            width: 30%;
         }
     }
 
@@ -660,7 +676,7 @@ $gap = absint(get_option('nbdesigner_gallery_gutter', 8)) * 2;
     jQuery(window).on('resize', function () {
         NBDPopup.calcWidth();
     });
-    var isNBDLoading = false;
+    var isNBDLoading = true;
     jQuery(window).on('scroll', function () {
         !isNBDLoading && (nbd_page.current_page < nbd_page.last_page) && isScrolledIntoView('#nbd-pagination') && loadMoreGallery(nbd_page);
     });

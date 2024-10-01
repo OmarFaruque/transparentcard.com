@@ -8,10 +8,14 @@
 <?php 
 
 
-    $additionalMetas = $cart['nbo_additional_meta'] ?? array();
-    if ( isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_upload_nonce'], 'custom_upload_action') ) {
-        $additionalMetas = $_POST;
-    }
+$additionalMetas = $cart['nbo_additional_meta'] ?? array();
+$filesArray = $cart['nbo_cus_files'] ?? array();
+
+if ( isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_upload_nonce'], 'custom_upload_action') ) {
+    $additionalMetas = $_POST;
+}
+
+
 ?>
 <div class="wrapperstepform">
 <div class="innerwrapper mt-20 border-rounded">
@@ -19,7 +23,7 @@
     <div class="d-flex single pb-20">
         <div class="flex-1">
             <div class="sectiontitle position-relative d-flex align-item-center gap-10 d-flex align-item-center gap-10">
-                <span class="count">4</span>
+                <span class="count">3</span>
                 <h5><?php _e('Visual Style', 'transparentcard'); ?></h5>
             </div>
         </div>
@@ -85,7 +89,16 @@
                     <input type="file" id="styleuploadinput" class="fileuploaderinput" name="design_images[]" title="style" style="display:none;" accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf" data-operationid="DaMImages"  data-maxfilesize="15728640" data-hasallowedextensions="true" multiple>
                 </div>
                 <div class="uploadfilespreview">
-                    <ul></ul>
+                    <ul>
+                    <?php
+                        if(isset($filesArray['design_images']) && count($filesArray['design_images']) > 0):
+                            foreach($filesArray['design_images'] as $k => $single):
+                                $image_name = basename(parse_url($single['url'], PHP_URL_PATH));
+                                echo sprintf('<li>%s<span class="close" value="0" style="line-height: 17.5px;" onclick="CloseFilename(this, %s, %s, %s, %s)">×</span></li>', $image_name, "'design_images'", $k, "'".$single['file']."'", "'".$cart['key']."'");
+                            endforeach; 
+                        endif;
+                    ?>
+                    </ul>
                 </div>
 
             </div>
@@ -99,7 +112,7 @@
     <div class="d-flex single pb-25" style="gap:20px !important;">
         <div class="flex-1">
             <div class="sectiontitle position-relative d-flex align-item-center gap-10 d-flex align-item-center gap-10">
-                <span class="count">5</span>
+                <span class="count">4</span>
                 <h5><?php _e('Logo', 'transparentcard'); ?></h5>
             </div>
         </div>
@@ -114,7 +127,7 @@
                             <input <?php echo esc_attr(isset($additionalMetas['logo_type']) && $additionalMetas['logo_type'] == __('Request logo', 'transparentcard') ? 'checked' : ''); ?> data-price="8.98" type="radio" name="logo_type" id="logo_type_1" value="<?php _e('Request logo', 'transparentcard'); ?>">
                             <span class="radio-type"></span>
                             <span class="label-body">
-                                <?php echo sprintf(__('Request Logo (+%s)', 'transparentcard'), get_woocommerce_currency_symbol() . '8.98'); ?>
+                                <?php echo sprintf(__('Request logo (+%s)', 'transparentcard'), get_woocommerce_currency_symbol() . '8.98'); ?>
                             </span>
                         </label>
                     </div>
@@ -142,7 +155,17 @@
 
 
             <!-- Hidden section  -->
-             <div class="request-logo-wrap d-hidden logo-wrapper-html mt-20 mb-20">
+            <?php
+                $hiddenClass = 'd-hidden';
+                if(isset($additionalMetas['logo_type']) && $additionalMetas['logo_type'] == __('Request logo', 'transparentcard') ){
+                    $hiddenClass = '';
+                }
+
+                
+
+            ?>
+
+             <div class="request-logo-wrap logo-wrapper-html mt-20 mb-20 <?php echo esc_attr( $hiddenClass ); ?>">
                 <div class="form-group">
                     <label for="name_in_logo"><?php _e('Name in Logo', 'transparentcard'); ?><span>*</span></label>
                     <input type="text" name="name_in_logo" id="name_in_logo" value="<?php echo esc_attr( $additionalMetas['name_in_logo'] ?? '' ); ?>" class="form-control">
@@ -158,7 +181,16 @@
                         <input type="file" id="styleuploadinput" class="fileuploaderinput" name="logo_ideas[]" title="style" style="display:none;" accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf" data-operationid="DaMImages"  data-maxfilesize="15728640" data-hasallowedextensions="true" multiple>
                     </div>
                     <div class="uploadfilespreview">
-                        <ul></ul>
+                        <ul>
+                            <?php
+                                if(isset($filesArray['logo_ideas']) && count($filesArray['logo_ideas']) > 0):
+                                    foreach($filesArray['logo_ideas'] as $k => $single):
+                                        $image_name = basename(parse_url($single['url'], PHP_URL_PATH));
+                                        echo sprintf('<li>%s<span class="close" value="0" style="line-height: 17.5px;" onclick="CloseFilename(this, %s, %s, %s, %s)">×</span></li>', $image_name, "'logo_ideas'", $k, "'".$single['file']."'", "'".$cart['key']."'");
+                                    endforeach; 
+                                endif;
+                            ?>
+                        </ul>
                     </div>
                 </div>
                 <div class="form-group">
@@ -188,7 +220,16 @@
                         <p class="mt-5" style="line-height:14px; margin-top:5px;"><small style="color:red;"><?php _e('Your logo should be in high resulation. If you have the original design file (AI, PSD, PDF or CDR), it will ensure the best print quality. If not, you can send it in PNG or JPEG format. As long as these formates are high resulation, there wan\'t be any issues with the print. However, low-resulation PNG or JPEG files may result in poor print quality.', 'transparentcard'); ?></small></p>
                     </div>
                     <div class="uploadfilespreview">
-                        <ul></ul>
+                        <ul>
+                        <?php
+                            if(isset($filesArray['uploaded_files']) && count($filesArray['uploaded_files']) > 0):
+                                foreach($filesArray['uploaded_files'] as $k => $single):
+                                    $image_name = basename(parse_url($single['url'], PHP_URL_PATH));
+                                    echo sprintf('<li>%s<span class="close" value="0" style="line-height: 17.5px;" onclick="CloseFilename(this, %s, %s, %s, %s)">×</span></li>', $image_name, "'uploaded_files'", $k, "'".$single['file']."'", "'".$cart['key']."'");
+                                endforeach; 
+                            endif;
+                        ?>
+                        </ul>
                     </div>
                 </div>
              </div>
@@ -205,7 +246,7 @@
     <div class="d-flex single pb-20 others" style="gap:20px !important;">
         <div class="flex-1">
             <div class="sectiontitle position-relative d-flex align-item-center gap-10 d-flex align-item-center gap-10">
-                <span class="count">6</span>
+                <span class="count">5</span>
                 <h5><?php _e('Others', 'transparentcard'); ?></h5>
             </div>
         </div>
@@ -220,7 +261,7 @@
                         <input <?php echo esc_attr(isset($additionalMetas['logo_file_availability']) && $additionalMetas['logo_file_availability'] == 'available' ? 'checked' : ''); ?> data-price="0.00" type="radio" name="logo_file_availability" id="logo_file_availability_1" value="available">
                         <span class="radio-type"></span>
                         <span class="label-body">
-                            <?php _e('To be available on TRANSPARENTCARD', 'transparentcard'); ?>
+                            <?php _e('Currenty I don\'t need the file.', 'transparentcard'); ?>
                         </span>
                     </label>
 
@@ -242,7 +283,7 @@
                         <div class="card info">
                             <div class="header"><?php _e('Example', 'transparentcard'); ?>:</div>
                             <div class="body p-5">
-                                <p class="mb-0">"<?php _e('I have a list of competitors: www.example.com (I like the style)/www.example2.pt (I do not like the style).', 'transparentcard'); ?>"</p>
+                                <p class="mb-0">"<?php _e('I have a list of competitors: www.example.com (I like the style)/www.example2.com (I do not like the style).', 'transparentcard'); ?>"</p>
                             </div>
                         </div>
                     </div>
@@ -259,12 +300,7 @@
 
     <div class="d-flex justify-content-between mt-15 item-align-middle">
         <div class="flex-1 text-right d-mobile-hidden">
-            <div class="flex-1 fitem">
-                <div class="d-flex gap-10" style="align-items:center;">
-                    <div class="setisfectiontext text-center"><?php _e('100% Satisfaction guaranteed', 'transparentcard'); ?></div>
-                    <img style="height:70px; margin-left:-25px;" src="<?php echo esc_url( get_stylesheet_directory_uri(  ) . '/assets/img/Satisf100.webp'); ?>" alt="<?php _e('Step 4', 'transparentcard'); ?>">
-                </div>
-            </div>
+            
         </div>
         <?php wp_nonce_field('hire_a_designer_action', 'hire_a_designer_nonce'); ?>
 
@@ -288,13 +324,16 @@
 
          <input type="hidden" name="userid" value="<?php echo is_user_logged_in(  ) ? get_current_user_id(  ) : 0; ?>">
 
-        <div class="flex-1 text-right gap-10">
+        <div class="flex-1 text-right gap-10" id="prevsubmitbtn">
             <button class="btn btn-continue px-5 py-10 border-rounded return-prev" onclick="next_step(0)" type="button"><?php _e('Return to previous step', 'transparentcard'); ?></button>
             <button class="btn btn-continue px-5 py-10 border-rounded position-relative" id="submit" type="submit">
                 <span class="loadericon bg-dark path-dark d-hide">
                     <svg style="color:#999;" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
                 </span>
-                <?php _e('Add to basket', 'transparentcard'); ?>
+
+                <?php 
+                   echo isset($_GET['cik']) ? __('Update basket', 'transparentcard') : __('Add to basket', 'transparentcard'); 
+                ?>
             </button>
         </div>
     </div>

@@ -29,8 +29,10 @@ class COOL_Ajax{
         
         $ajax_events = array(
             'transparentcart_copy_item' => true, 
+            'transparentcart_copy_item_upload' => true,
             'transparentde_woocommerce_get_states' => true, 
-            'transparentcard_hire_a_designer_add_to_cart' => true
+            'transparentcard_hire_a_designer_add_to_cart' => true, 
+            'uploaded_file_remove_from_db' => true
         );
 
         foreach( $ajax_events as $ajax_event => $nopriv ) {
@@ -52,6 +54,51 @@ class COOL_Ajax{
                 // echo '</pre>';
             }
         });
+    }
+
+
+
+    /**
+     * Remove image from DB while edit uploaded cart item 
+     */
+    public function uploaded_file_remove_from_db(){
+        if (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'fileremovefdb')) {
+            
+            
+            $filepath = esc_attr( $_POST['filepath'] );
+            $cik = esc_attr( $_POST['cik'] );
+            $input_name = esc_attr($_POST['input_name']);
+            $index = esc_attr( $_POST['index'] );
+
+            $cart = WC()->cart;
+            // Get the cart item
+
+            $targetfiles = $cart->cart_contents[$cik]['nbo_cus_files'][$input_name];
+            unset($targetfiles[$index]);
+            $targetfiles =  array_values($targetfiles);
+
+            $cart->cart_contents[$cik]['nbo_cus_files'][$input_name] = $targetfiles;
+
+            
+
+            // // Update the cart item
+            // $cart->cart_contents[$cik] = $cart_item;
+                
+            // Save the cart
+            WC()->session->set('cart', $cart->cart_contents);
+
+
+            if (file_exists($filepath)) {
+                unlink($filepath);  // Delete the file
+                wp_send_json_success(['message' => 'success']);
+            }
+
+        }else{
+            wp_send_json_error(  );
+        }
+
+        wp_die( );
+
     }
 
 
@@ -341,6 +388,88 @@ class COOL_Ajax{
                 // $link_edit_design .= '&source=cart&orientation=' . $orientation . '&trns_nbd_design_id=' . $cart_item['nbd_design_id'];
     
             wp_send_json_success(['message' => 'item-duplicated', 'redirect_url' => $link_edit_design, 'copy' => $copy, 'newkey' => $new_cart_item_key]);
+        } else {
+            wp_send_json_error(['message' => 'Item not found']);
+        }
+        wp_die();
+    }
+
+
+
+
+    /**
+     * Copy uploaded cart item
+     * 
+     */
+    public function transparentcart_copy_item_upload(){
+
+        $cart_item_key = sanitize_text_field($_POST['item_key']);
+        $source_folder = sanitize_text_field( $_POST['item_source_folder']);
+
+
+        $cart = WC()->cart->get_cart();
+
+        $variation_id = 0;
+        $layout = 'm';
+        $redirect = 'cart';
+
+        if (isset($cart[$cart_item_key])) {
+            $item = $cart[$cart_item_key];
+
+            $unique_cart_item_key  = md5( microtime() . rand() );
+            $nbd_item_key = substr( md5( uniqid() ), 0, 5 ) . rand( 1, 100 ) . time();
+            $nbd_item_key = 'hire_a_designer_' . $nbd_item_key . '_' . get_current_user_id(); 
+
+            $metaArray = array( 
+                'unique_key' => $unique_cart_item_key, 
+                'tcu_folder' => $nbd_item_key
+            );
+
+            if(isset($item['nbo_cus_meta']))
+                $metaArray['nbo_cus_meta'] = $item['nbo_cus_meta'];
+
+            if(isset($item['nbo_cus_files']))
+                $metaArray['nbo_cus_files'] = $item['nbo_cus_files'];
+
+            if(isset($item['nbo_additional_meta']))
+                $metaArray['nbo_additional_meta'] = $item['nbo_additional_meta'];
+
+            if(isset($item['form_source']))
+                $metaArray['form_source'] = $item['form_source'];
+
+
+            $new_cart_item_key = WC()->cart->add_to_cart(
+                $item['product_id'], $item['quantity'], 
+                $item['variation_id'], 
+                $item['variation'], 
+                $metaArray
+            );
+
+
+            // New Item session key
+            $existing_design_path = NBDESIGNER_UPLOAD_DIR . '/' . $source_folder; 
+            $newfile = NBDESIGNER_UPLOAD_DIR . '/' . $nbd_item_key;
+
+            $copy = false;
+            if (copyDirectory($existing_design_path, $newfile)) {
+                $copy = array(
+                    'new_cart_item_key' => $new_cart_item_key, 
+                    'folder_key' => $nbd_item_key
+                );
+            }
+
+            
+
+            $link_edit_design = add_query_arg(
+                array(
+                    'product_id'    => $item['product_id'],
+                    'task'          => 'resubmit',
+                    'nbu_item_key'  => $nbd_item_key,
+                    'cik'           => $new_cart_item_key
+                ),
+                get_home_url( ) . $item['form_source'] );
+    
+            wp_send_json_success(['message' => 'item-duplicated', 'redirect_url' => $link_edit_design, 'copy' => $copy, 'newkey' => $new_cart_item_key, 'item' => $item, 'existing_design_path' => $existing_design_path, 'newfile' => $newfile]);
         } else {
             wp_send_json_error(['message' => 'Item not found']);
         }

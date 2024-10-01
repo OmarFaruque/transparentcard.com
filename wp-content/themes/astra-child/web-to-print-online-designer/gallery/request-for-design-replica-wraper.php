@@ -423,7 +423,18 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         .select-service-wrapper label.flex-1{
             flex: unset;
         }
-        .upload-files-wrapper, .file-type-wrapper {
+        .select-service-wrapper label.flex-1{
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 0.3em #ddd;
+            background-color:white;
+        }
+        .upload-files-wrapper{gap:0;}
+        div#describeweverything .gap-30 {
+            gap: 0;
+        }
+        .file-type-wrapper {
             gap: 30px;
         }
         .additional-fee {
@@ -457,12 +468,12 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
     }
     </style>
 <section class="step-form">
-    <div class="forminner">
+    <div class="forminner mt-40">
         <!-- Header -->
         <div class="choose-design-template-header">
             <div class="desc">
-                <h3><?php _e('Questionnaire about your design', 'transparentcartd'); ?></h3>
-                <p><?php _e('Have a printed business card that you’d like to reprint, but don’t have access to the editable files? Don’t worry, our team will replicate your design!', 'transparentcard'); ?>
+                <h3><?php _e('Design Questionnaire', 'transparentcartd'); ?></h3>
+                <p><?php _e('Do you need to reprint your business card but don’t have the original editable files? No problem! Our team can recreate your design for you.', 'transparentcard'); ?>
             </p>
         </div>
         <div class="back-to-left">
@@ -472,7 +483,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                     <path fill-rule="evenodd"
                         d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
                 </svg>
-                <?php _e('Back to Template Gallery', 'transparentcard'); ?>
+                <?php _e('Back to Design Options', 'transparentcard'); ?>
             </a>
         </div>
         </div><!-- /Header -->
@@ -485,6 +496,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <span class="title-counter">1</span>
                         <?php _e('Select a service', 'transparentcard'); ?>
                     </h4>
+                    <p class="mb-5"><?php _e('If you have more complex designs, please choose second option that is a paid service.', 'transparentcard'); ?></p>
                     <div class="d-flex form-group gap-30 select-service-wrapper">
                         <label class="flex-1">
                             <?php
@@ -500,7 +512,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                 <?php echo sprintf('<span class="price">%s0.00</span>', get_woocommerce_currency_symbol()); ?>
                             </p>
                             <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-1.webp', __('Replicate simple design', 'transparentcard')); ?>
-                            <p class="select-service-note"><?php _e('Suitable for those with a complete design, with no need for changes to information or design', 'transparentcard'); ?>
+                            <p class="select-service-note"><?php _e('Perfect for those with a finalized design, without any need for changes to the information or design.', 'transparentcard'); ?>
                             </p>
                         </label>
 
@@ -513,7 +525,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                             </p>
 
                             <?php echo sprintf('<img class="w-full" src="%s" alt="%s" />', get_stylesheet_directory_uri() . '/assets/img/service-2.webp', __('Replicate simple design', 'transparentcard')); ?>
-                            <p class="select-service-note"><?php _e('Suitable for changes to information and design', 'transparentcard'); ?></p>
+                            <p class="select-service-note"><?php _e('Ideal if updates to the information or design are required.', 'transparentcard'); ?></p>
                         </label>
                     </div>
                 </div>
@@ -522,7 +534,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 <div class="single-item bg-light border-rounded p-15">
                     <h4 class="mb-10 design-template-title">
                         <span class="title-counter">2</span>
-                        <?php _e('What kind of file do you have?', 'transparentcard'); ?>
+                        <?php _e('What type of file do you have?', 'transparentcard'); ?>
                     </h4>
                     
                     <p class="selected-product">
@@ -572,7 +584,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                         <?php _e('What\'s the difference?', 'transparentcard'); ?>:
                                     </div>
                                     <div class="body">
-                                        <?php _e('If you send us a photo, that calls for more effort on the part of our designers. The following formats are considered editable: .psd,.ai,.eps,.indd,.cdr,.pdf', 'transparentcard'); ?>
+                                        <?php _e('What is the difference? - If you send us a photo, We need to redesign again in illustrator, photoshop or something like this.', 'transparentcard'); ?>
                                     </div>
                                 </div>
                                 <!-- <div class="example flex-1">
@@ -589,16 +601,46 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <?php _e('Logo', 'transparentcard'); ?>
                     </h4>
                     <p class="logo-type-subtitle">
-                        <?php _e('What logo do you want to include in the design replica of your Business Card?', 'transparentcard'); ?>
+                        <?php _e('Which logo would you like us to use in the replica of your business card?', 'transparentcard'); ?>
                     </p>
                     
-                    <div class="d-flex form-group gap-30 align-item-top logo-design-replica-wrapper">
+                    <div class="d-flex form-group gap-30 logo-design-replica-wrapper align-item-center">
                         <?php
                         $checked3 = 'checked';
                         if (isset($additionalMetas['logo']) && $additionalMetas['logo'] != "I don't want logo on my business card")
                             $checked3 = '';
                         ?>
-                        <div class="single-item flex-2">
+                        
+                        
+                        <div class="single-item flex-1">
+                            <label class="flex-2 upload-logo-wrapper" for="logo1">
+                                <p class="radio-label">
+                                    <input type="radio" <?php echo isset($additionalMetas['logo']) && $additionalMetas['logo'] == "Upload Logo" ? 'checked' : ''; ?>  name="logo" id="logo1" value="<?php _e('Upload Logo', 'transparentcard'); ?>">
+                                    <span class="radio-type"></span>
+                                </p>
+                                <div>
+                                    <div class="logo-uploader-wrapper">
+                                        <p><?php _e('Upload Logo', 'transparentcard'); ?></p>
+                                        <label for="logo_file" class="logouploader d-hide">
+                                            <input type="file" name="logo_file" id="logo_file" class="form-control"  accept=".jpg, .jpeg, .png, .tif, .ai, .bmp, .pdf, .eps, .psd, .cdr, .indd">
+                                            <?php _e('Upload', 'transparentcard'); ?>
+                                        </label>
+                                        <div class="required-tag for-logo d-hide">
+                                            <?php _e('For uploading logo, attachment is required', 'transparentcard'); ?>
+                                        </div>
+                                    </div>
+                                    <div class="logouploader-note d-hide">
+                                        <small style="color:red;"><?php _e('For upload logo, attachment is required.', 'transparentccard') ?></small>
+                                    </div>
+                                </div>
+                                
+                            </label>
+                            
+                            <div class="uploadfilespreview logo-file" style="margin-left:20px;">
+                                <ul></ul>
+                            </div>
+                        </div>
+                        <div class="single-item flex-3">
                             <label class="flex-2 radio-label" style="display:block;" for="logo2">
                                 <input type="radio" <?php echo esc_attr($checked3); ?>  name="logo" id="logo2" value="<?php _e("I don't want logo on my business card", 'transparentcard'); ?>">
                                 <span class="radio-type"></span>
@@ -606,35 +648,6 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                     <?php _e("I don't want logo on my business card", 'transparentcard'); ?>
                                 </span>
                             </label>
-                        </div>
-                        
-                        <div class="single-item flex-2">
-                            <label class="flex-2 upload-logo-wrapper" for="logo1">
-                                <p class="radio-label">
-                                    <input type="radio" <?php echo isset($additionalMetas['logo']) && $additionalMetas['logo'] == "Upload Logo" ? 'checked' : ''; ?>  name="logo" id="logo1" value="<?php _e('Upload Logo', 'transparentcard'); ?>">
-                                    <span class="radio-type"></span>
-                                </p>
-                                <div>
-                                <div class="logo-uploader-wrapper">
-                                    <p><?php _e('Upload Logo', 'transparentcard'); ?></p>
-                                    <label for="logo_file" class="logouploader d-hide">
-                                        <input type="file" name="logo_file" id="logo_file" class="form-control"  accept=".jpg, .jpeg, .png, .tif, .ai, .bmp, .pdf, .eps, .psd, .cdr, .indd">
-                                        <?php _e('Upload', 'transparentcard'); ?>
-                                    </label>
-                                </div>
-                                <div class="logouploader-note d-hide">
-                                    <small style="color:red;"><?php _e('For upload logo, attachment is required.', 'transparentccard') ?></small>
-                                </div>
-                                </div>
-                                
-                            </label>
-
-
-                            
-                            <div class="uploadfilespreview">
-                                <ul></ul>
-                            </div>
-
                         </div>
                         
 
@@ -648,7 +661,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 <div class="single-item upload-your-files file-uploader-wrap bg-light border-rounded p-15">
                     <h4 class="mb-10 design-template-title">
                         <span class="title-counter">4</span>
-                        <?php _e('Upload your files', 'transparentcard'); ?>
+                        <?php _e('Please upload your files', 'transparentcard'); ?>
                     </h4>
                     <p class="logo-type-subtitle">
                         <?php _e('The more files you submit the better the quality of your replica will be', 'transparentcard'); ?>
@@ -689,19 +702,25 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         </div> -->
 
                         <!-- Item -->
-                        <div
-                            class="single-item flex-1 border-rounded d-flex flex-direction-column border-1 border-solid justify-content-center gap-10 singleuploader upload-file-item">
-                            <div class="upload-file-title">
-                                <?php _e('Upload more reference', 'transparentcard'); ?>
+                        <div class="single-item flex-1">
+                            <div class="upload-file-item border-rounded border-1 border-solid justify-content-center gap-10 singleuploader d-flex flex-direction-column">
+                                <div class="upload-file-title">
+                                    <?php _e('Upload more reference', 'transparentcard'); ?>
+                                </div>
+                                <div class="upload-file-body">
+                                    <button onclick="document.getElementById('other_files').click();"
+                                        type="button"><?php _e('Upload', 'transparentcard'); ?></button>
+                                    <input type="file"  name="other_files[]" id="other_files" multiple class="d-hide"
+                                        accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf">
+                                </div>
+                               
                             </div>
-                            <div class="upload-file-body">
-                                <button onclick="document.getElementById('other_files').click();"
-                                    type="button"><?php _e('Upload', 'transparentcard'); ?></button>
-                                <input type="file" name="other_files[]" id="other_files" multiple class="d-hide"
-                                    accept=".jpg, .jpeg, .png, .tif, .tiff, .bmp, .pdf">
-                            </div>
-                            <div class="required-tag">
-                                <?php _e('Optional', 'transparentcard'); ?>
+                            <div class="d-flex mt-20" style="display:none;">
+                                <div class="flex-1">
+                                    <div class="uploadfilespreview">
+                                        <ul></ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -720,14 +739,10 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         </div>
                     </div>
 
-                    <div class="d-flex mt-20">
-                        <div class="flex-1">
-                            <div class="uploadfilespreview">
-                                <ul></ul>
-                            </div>
-                        </div>
-                        <div class="flex-1"></div>
-                    </div>
+                    
+
+
+
                 </div>
 
                 <div class="termsnconditionwrap">
@@ -738,8 +753,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 </div>
 
                 <!-- Describe everything you’d like us to do -->
-                <div class="single-item describeweverything bg-light border-rounded p-15 <?php isset($additionalMetas['service']) && $additionalMetas['service'] == 'Replicate design changing text, backgrounds and colours' ? '' : 'd-hide'; ?>"
-                    id="describeweverything">
+                <div class="single-item describeweverything bg-light border-rounded p-15" id="describeweverything">
                     <h4 class="mb-10 design-template-title">
                         <span class="title-counter">5</span>
                         <?php _e('Describe everything you’d like us to do', 'transparentcard'); ?>
@@ -780,15 +794,6 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                 </div>
 
                 <div class="footer d-flex gap-20 justify-content-space-between">
-                    <div class="flex-1 fitem">
-                        <div class="d-flex" style="align-items:center;">
-                            <div class="setisfectiontext text-center">
-                                <?php _e('100% Satisfaction guaranteed', 'transparentcard'); ?></div>
-                            <img style="height:70px; margin-left:-15px;"
-                                src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/Satisf100.webp'); ?>"
-                                alt="<?php _e('Step 4', 'transparentcard'); ?>">
-                        </div>
-                    </div>
 
                     <style>
                         .total-amount .total-amount-title h5{
@@ -881,7 +886,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
 
                     </button>
                     <div class="btn-error d-hide">
-                        <small style="color:red;" ><?php _e('Please fix above error first', 'transparentcard'); ?></small>
+                        <small style="color:red;font-size:14px;" ><?php _e('Please fix above error first', 'transparentcard'); ?></small>
                     </div>
                 </div>
 
@@ -923,6 +928,16 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
     .tabitem:not(.active) {
         opacity: 0.5;
     }
+
+    @media only screen and (max-width:639px) {
+        .upload-logo-wrapper{
+            justify-content: space-between; width: 100%;
+        }
+        .upload-logo-wrapper div{
+            width:100%;
+        }
+    }
+    
 
     .tabitem {
         color: white;
@@ -1058,23 +1073,49 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
     .uploadfilespreview ul li {
         position: relative;
         padding: 2px 0px;
+        display:inline-flex;
+        align-items:center;
+        width:100%;
+        gap:10px;
     }
 
-    .uploadfilespreview ul li span:hover {
+    .uploadfilespreview ul li span.close:hover {
         color: red;
     }
 
-    .uploadfilespreview ul li span {
-        position: absolute;
+    .uploadfilespreview ul li span.close {
         right: 0;
         font-size: 30px;
         color: #999;
         cursor: pointer;
     }
 
+    .uploadfilespreview ul li span.filename {
+        max-width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .forminner form input.error {
         border-color: red !important;
         box-shadow: 1px 1px 0.1em #ff00008c;
+    }
+
+    @media only screen and (max-width:769px) {
+        .ast-container .forminner {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media only screen and (max-width:639px) {
+        .ast-container .forminner {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 </style>
 
@@ -1112,11 +1153,11 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         if(logoValue == 'Upload Logo'){
             var logofiles = jQuery(document.body).find('input#logo_file').val();
             if(logofiles == ''){
-                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').removeClass('d-hide');
+                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon, .required-tag.for-logo').removeClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', true);
                 return true;
             }else{
-                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').addClass('d-hide');
+                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon, .required-tag.for-logo').addClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', false);
                 return false;
             }   
@@ -1126,26 +1167,40 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         if(what_kind_of_file == "I don't have editable files"){            
 
             if(logoValue == 'Upload Logo'){
-                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').addClass('d-hide');
+                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon, .required-tag.for-logo').addClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', false);
                 return false;
             }else{
                 jQuery(document.body).find('input[name="logo"][value="Upload Logo"]').trigger('click');
-                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').removeClass('d-hide');
+                jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon, .required-tag.for-logo').removeClass('d-hide');
                 jQuery(document.body).find('button#submit').prop('disabled', true);
                 return true;
             }
         }else{
-            jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon').addClass('d-hide');
+            jQuery(document.body).find('.logouploader-note, .btn-error, button#submit span.loadericon, .required-tag.for-logo').addClass('d-hide');
             jQuery(document.body).find('button#submit').prop('disabled', false);
             return false;
         }
     }
 
 
+
+    jQuery(document.body).on('click', 'button#submit', function(){
+        let files;
+        files = jQuery(document.body).find('input[name="logo_file"]')[0].files;
+        if(files.length <= 0){
+            
+            jQuery(document.body).find('.logo-uploader-wrapper').css('border-color', 'red');
+        }else{
+            jQuery(document.body).find('.logo-uploader-wrapper').css('border-color', '#003F3F');
+        }
+    });
+
+
     /** Add to basket process */
     jQuery(document.body).on('submit', '#hireadesignerForm', function (e) {
         e.preventDefault();
+
 
         jQuery(document.body).find('button#submit').prop('disabled', true);
         jQuery(document.body).find('.loadericon').removeClass('d-hide');
@@ -1246,25 +1301,14 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         var htmlwrap = '';
 
         for (var item in lists) {
-            var title = '';
-            switch (item) {
-                case 'back_side':
-                    title = "<?php _e('Back Side', 'transparentcard'); ?>";
-                    break;
-                case 'front_side':
-                    title = "<?php _e('Front Side', 'transparentcard'); ?>";
-                    break;
-                default:
-                    title = "<?php _e('Others', 'transparentcard'); ?>";
-
-            }
             lists[item].forEach(function (v, k) {
-                htmlwrap += `<li><strong>${title}:&nbsp;</strong>${v.name}<span class="close" value="0" style="line-height: 17.5px;" onclick="CloseFilename(this,'${item}', ${k})">×</span></li>`;
+                htmlwrap += `<li><span class="filename">${v.name}</span><span class="close" value="0" style="line-height: 17.5px;" onclick="CloseFilename(this,'${item}', ${k})">×</span></li>`;
             });
         }
 
 
         jQuery(thiselement).closest('.file-uploader-wrap').find('.uploadfilespreview ul').html(htmlwrap);
+        jQuery(thiselement).closest('.file-uploader-wrap').find('.uploadfilespreview').closest('.d-flex').show();
     }
 
     jQuery(document.body).on('change', '.file-uploader-wrap input[type="file"]', function () {
@@ -1312,27 +1356,19 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
         selectedValue = selectedValue.toLowerCase();
         if (selectedValue == 'upload logo'){
             jQuery(document.body).find('.logouploader').removeClass('d-hide');
+            jQuery(document.body).find('input[name="logo_file"]').attr('required', true);
         }
 
-        if (selectedValue != 'upload logo')
+        if (selectedValue != 'upload logo'){
             jQuery(document.body).find('.logouploader').addClass('d-hide');
+            jQuery(document.body).find('input[name="logo_file"]').attr('required', false);
+        }
 
         validationErrors();
     });
 
 
-    //Service change and show dependenci element 
-    jQuery('input[type="radio"][name="service"]').change(function () {
-        let selectedValue = jQuery(this).val();
-        selectedValue = selectedValue.toLowerCase();
 
-        if (selectedValue == 'replicate design changing text, backgrounds and colours')
-            jQuery(document.body).find('#describeweverything').removeClass('d-hide');
-
-        if (selectedValue != 'replicate design changing text, backgrounds and colours')
-            jQuery(document.body).find('#describeweverything').addClass('d-hide');
-
-    });
 
     // Price Calculation
     var price = [];

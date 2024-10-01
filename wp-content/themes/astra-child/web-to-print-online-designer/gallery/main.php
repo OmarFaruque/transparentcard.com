@@ -1,6 +1,14 @@
 <?php if (!defined('ABSPATH'))
     exit; // Exit if accessed directly  ?>
 
+
+<?php
+    // echo 'args <br/><pre>';
+    // print_r($args);
+    // echo '</pre>';
+?>
+
+
 <style>
     .nbd-sidebar>div.wp-block-spacer {
         display: none;
@@ -28,7 +36,7 @@
     }
 
     .single-design-option {
-        border-width: 10px;
+        border-width: 6px;
         border-style: solid;
     }
 
@@ -97,6 +105,7 @@
         display: inline-block;
         transition: all 0.3s ease;
         box-shadow: 1px 1px 4px transparent;
+        min-width:70%;
     }
 
     .single-design-option .choosetemplate:hover {
@@ -151,6 +160,9 @@
         .single-design-option-wrapper {
             padding: 0 20px;
         }
+        section.backbtn > div {
+            padding: 0 20px;
+        }
     }
 
     @media screen and (max-width:581px) {
@@ -166,7 +178,7 @@
         .youarebuying{
             margin-bottom: 0 !important;
         }
-    }
+    }   
 
 </style>
 
@@ -194,7 +206,7 @@
                     </div>
                     <div class="btnarea btn-wrapper">
                         <a href="#nbd_design_con" class="choosetemplate">
-                            <?php _e('Choose a Design', 'transparentcard'); ?>
+                            <?php _e('Select Design', 'transparentcard'); ?>
                         </a>
                         <span><?php echo sprintf(__('From %s0.00', 'transparentcard'), get_woocommerce_currency_symbol()); ?></span>
                     </div>
@@ -209,13 +221,13 @@
                             <?php _e('Are You a Designer or an Artist?', 'transparentcard'); ?>
                         </p>
                         <p class="single-design-option-short-desc">
-                            <?php _e('Upload your business card artwork, and let us bring it to life.', 'transparentcard'); ?>
+                            <?php _e('Upload your business card artwork, and let us bring it in real.', 'transparentcard'); ?>
                         </p>
                     </div>
                     <div class="btnarea">
                         <!-- <a href="#nbd_design_con" id="startUpload" class="choosetemplate"><?php //_e('Submit File', 'transparentcard'); ?></a> -->
                         <a href="#nbd_design_con" id="startUploadLink" class="choosetemplate">
-                            <?php _e('Submit File', 'transparentcard'); ?>
+                            <?php _e('Upload File', 'transparentcard'); ?>
                         </a>
 
 <?php 
@@ -244,7 +256,7 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
                     <div class="btnarea">
                         <a href="#hire-a-designer" onclick="hire_a_designer_popup(this)"
                             class="hire-a-designer-btn choosetemplate">
-                            <?php _e('Hire a Designer', 'transparentcard'); ?>
+                            <?php _e('Hire Designer', 'transparentcard'); ?>
                         </a>
                         <span><?php echo sprintf(__('For just <span>$25.67</span>', 'transparentcard'), get_woocommerce_currency_symbol()); ?></span>
                     </div>
@@ -264,7 +276,7 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
                     </div>
                     <div class="btnarea">
                         <a href="#nbd_design_con" onclick="design_replica_popup(this)" class="choosetemplate">
-                            <?php _e('Request Design Replica  ', 'transparentcard'); ?>
+                            <?php _e('Request Replica', 'transparentcard'); ?>
                         </a>
                         <span><?php echo sprintf(__('For just <span>$0.00</span>', 'transparentcard'), get_woocommerce_currency_symbol()); ?></span>
                     </div>
@@ -328,9 +340,25 @@ endif;
         }
     </style>
     <section class="info-section">
-        <p>Fast-track your business and select the best business cards by category and style that defines your brand. You can edit the prebuilt templates to the heart’s content. If you are a design expert yourself, feel free to use the exclusive design tool.</p>
-        <span>Do you need more ideas? You can easily contact us to request designs from our experts.</span>
-        <p>From textured business cards to gold and silver imprints and embossed effects, many distinct features can be added to your designs.</p>
+        <?php 
+        $term_description = term_description($args['tag'], 'template_tag');  
+        if(!empty($term_description)){
+
+            $allowed_tags = array(
+                'p'      => array(), // Allow <p> without any attributes
+                'strong' => array(), // Allow <strong> without any attributes
+                'a'      => array(   // Allow <a> with 'href' attribute
+                    'href' => array()
+                ),
+            );
+            // Escape content and allow specific HTML
+            echo wp_kses($term_description, $allowed_tags);
+            
+        }else{
+            echo sprintf(__('<p>Fast-track your business and select the best business cards by category and style that defines your brand. You can edit the prebuilt templates to the heart’s content. If you are a design expert yourself, feel free to use the exclusive design tool.</p>
+            <span>Do you need more ideas? You can easily contact us to request designs from our experts.</span>
+            <p>From textured business cards to gold and silver imprints and embossed effects, many distinct features can be added to your designs.</p>', 'transparentcard'));
+        } ?>
     </section>
 <?php endif; ?>
 

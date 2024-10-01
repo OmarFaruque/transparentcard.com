@@ -98,8 +98,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 										</div>
 
 
-
-
 										<div class="item-right-shap flex-3">
 											<div class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
 												<?php
@@ -171,6 +169,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 									</div>
 									<hr>
 								</div> <!-- Right side -->
+
 								<div class="bottons-group">
 								<div class="transparent-action-buttons d-flex gap-15 mt-10">
 										<div class="flex-1">
@@ -184,6 +183,14 @@ do_action( 'woocommerce_before_cart' ); ?>
 												<?php echo COOL_Frontend::copy_transparent_design($cart_item, $cart_item_key); ?>
 											</div>
 										<?php endif; ?>
+
+										<?php if(isset($cart_item['nbo_cus_meta'])): ?>
+											<div  class="flex-1">
+												<?php echo COOL_Frontend::copy_transparent_upload($cart_item, $cart_item_key); ?>
+											</div>
+										<?php endif; ?>
+
+										
 										<div class="flex-1">
 											<div class="transparent-product-remove h-full">
 												<?php

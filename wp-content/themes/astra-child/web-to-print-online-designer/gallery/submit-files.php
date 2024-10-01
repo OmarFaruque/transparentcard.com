@@ -17,7 +17,12 @@ $lowerValue = min($pwidth, $pheight);
 $higherValue = max($pwidth, $pheight);
 $percentage = ($lowerValue / $higherValue) * 100;
 
+
 $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
+
+
+
+
 
 
 // nbdesigner_get_template('gallery/header.php', array());
@@ -27,8 +32,13 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         p#uploaded_file_name {
             max-width: 120px;
             overflow: hidden;
+            display:flex;
+            flex-direction:column;
+        }
+        p#uploaded_file_name span{
             white-space: nowrap;
             text-overflow: ellipsis;
+            overflow:hidden;
         }
         .selectedImgWrap {
             position: absolute;
@@ -37,6 +47,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
             width: 100%;
             height: 100%;
         }
+        .selectedImgWrap > *{overflow:hidden;}
         .selectedImgWrap img{
             min-width:100%;
             min-height:100%;
@@ -154,28 +165,39 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                 justify-content: center !important;
             }
 
+            .cutting .topbradecamp ul{
+                flex-direction:column;
+            }
+            .cutting .topbradecamp ul li a {
+                display: flex;
+                justify-content: center;
+            }
             .choose-design-template-header {
                 margin-bottom: 50px;
             }
         }
     </style>
     <!-- Header -->
-    <div class="choose-design-template-header">
+    <!-- <div class="choose-design-template-header">
         <div class="back-to-left">
-            <a href="#" class="back-to-template-gallery-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                    class="bi bi-chevron-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                </svg>
-                <?php _e('Back to Template Gallery', 'transparentcard'); ?>
-            </a>
+            
         </div>
-    </div><!-- /Header -->
+    </div> -->
+    <!-- /Header -->
 
     <div class="innersect">
         <div class="d-flex justify-content-end topbradecamp">
-            <ul class="list-style-none d-flex gap-15">
+            <ul class="list-style-none d-flex gap-15 mb-30">
+                <li>
+                    <a href="#" class="back-to-template-gallery-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                        </svg>
+                        <?php _e('Back to Design Options', 'transparentcard'); ?>
+                    </a>
+                </li>
                 <li><a href="#"><?php _e('Help', 'transparentcard'); ?></a></li>
                 <li><a onclick="printingara_curring(this, event)" href="#"><?php _e('View product after cutting', 'transparentcard'); ?></a></li>
             </ul>
@@ -217,10 +239,10 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                                 </div>
                                 <div class="flex-1"></div>
                             </div>
-                            <div class="designwrapinner d-flex" style="width: 80%; height: 700px; margin-left:auto;">
+                            <div class="designwrapinner d-flex" style="width: 80%; margin-left:auto;margin-bottom:50px;">
                                 <div class="innerdesignarea flex-11">
                                     <div class="outer border-rounded d-flex align-item-center justify-content-center  position-relative"
-                                        style="background-color:#003F3F; height:<?php echo $sheight; ?>%;width:<?php echo esc_attr($swidth); ?>%;">
+                                        style="background-color:#003F3F; height:100%;width:<?php echo esc_attr($swidth); ?>%;">
                                         <div class="blade-area positon-absulate">
                                             <?php _e('Bleed area', 'transparentcard'); ?>
                                         </div>
@@ -236,6 +258,17 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                                                 </h5>
                                             </div>
                                         </div>
+
+                                            <div class="yx text-center flex-1">
+                                                <div>
+                                                    <div class="height"><?php echo esc_attr($pheight); ?>mm</div>
+                                                    <div class="arrow d-flex justify-content-right"><img style="width:calc(100% - 30px);"
+                                                            src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/arrow-left-right.svg'); ?>"
+                                                            alt="<?php _e('Arrow', 'transparentcard'); ?>"></div>
+                                                </div>
+                                            </div>
+
+                                            
                                     </div>
                                     <div class="uploadbutton d-flex mt-20">
                                         <button type="button" id="startUploadSubmitPopup"
@@ -244,14 +277,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                                 </div>
                                 <div class="flex-1"></div>
                             </div>
-                            <div class="yx text-center flex-1">
-                                <div>
-                                    <div class="height"><?php echo esc_attr($pheight); ?>mm</div>
-                                    <div class="arrow d-flex justify-content-right"><img style="width:calc(100% - 30px);"
-                                            src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/arrow-left-right.svg'); ?>"
-                                            alt="<?php _e('Arrow', 'transparentcard'); ?>"></div>
-                                </div>
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -259,7 +285,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
 
                     <!-- Area for non image  -->
                      <div id="uploadareadesign" class="d-hide">
-                        <div class="d-flex align-item-center gap-30" style="width: 80%; margin-left:auto;">
+                        <div class="d-flex align-item-center gap-30" style="margin-left:auto;">
                             <div class="flex-1 d-flex justify-content-center">
                                 <div class="border-rounded filedisplayarea">
                                     <div class="icon">
@@ -282,7 +308,12 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                                 <p class="mb-0"><?php _e('Preview is not available for files in the format you submitted.', 'transparentcard'); ?></p>
                             </div>
                         </div>
+                        <div class="uploadbutton d-flex mt-20">
+                                <button type="button" id="startUploadSubmitPopup2"
+                                    class="w-full justify-content-center"><?php _e('Add or Remove Files', 'transparentcard'); ?></button>
+                        </div>
                      </div>
+
 
                 </div>
             </div>
@@ -322,7 +353,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         height: calc(100% - 20px);
         left: 0;
         top: 0;
-        border: dashed 1px #aaa;
+        border: dashed 1px red;
         z-index: 1;
         display: block;
         position: absolute;
@@ -334,7 +365,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         position: absolute;
         left: 0;
         top: 0;
-        z-index: 9999999;
+        z-index: 1;
         display: block;
         overflow: hidden;
         content: '';
@@ -395,25 +426,37 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
 
     .yx {
         position: absolute;
-        right: -24%;
+        right: -42%;
         height: 0;
-        top: 32%;
-        width: 50%;
+        top: 43%;
+        width: 71%;
     }
+
+
+    @media only screen and (min-width:481px) {
+        div#uploadareadesign > *{
+            width: 80%;
+            margin-left: auto;
+        }
+    }
+
+
+
 
     .yx>div {
         transform: rotate(90deg);
     }
-    div#uploadareadesign > * {
+    div#uploadareadesign > *:not(.uploadbutton) {
         box-shadow: 0 0 0.5em #aaa;
         padding: 20px;
         margin: 25px 0;
     }
+    
 
     .questionformate ul li a {
         text-decoration: underline;
-        font-size: 18px;
-        line-height: 40px;
+        font-size: 16px;
+        line-height: 36px;
         padding: 0px 15px;
     }
 
@@ -426,7 +469,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         width: 90px;
         height: 50px;
         position: absolute;
-        left: -82px;
+        left: -73px;
         top: 51px;
         background-image: url(<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/blade-arrow.svg'); ?>);
         background-size: contain;
@@ -439,7 +482,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         width: 70px;
         height: 50px;
         position: absolute;
-        left: -54px;
+        left: -39px;
         top: 168px;
         background-image: url(<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/trimline-arrow.svg'); ?>);
         background-size: contain;
@@ -472,11 +515,11 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         position: fixed;
         bottom: 0;
         left: 0;
-        z-index: 1;
+        z-index: 3;
         margin: auto;
     }
     .elementor-shortcode section#footer{
-        transition: all 0.3s;
+        /* transition: all 0.3s; */
     }
 
     /* .topbradecamp ul li a {
@@ -493,10 +536,47 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         display: block;
         margin: 0 auto;
     }
-    /* .topbradecamp ul li a:hover {
-        color: #003F3F;
-        background-color: #ECFF8C;
-    } */
+    @media only screen and (max-width:480px) {
+        div#uploadareadesign h4{
+            flex-direction:column;
+        }
+        .yx{
+            right: -46%;
+            top: 33%;8
+        }
+        .blade-area {
+            left: -74px;
+            top: 0;
+        }
+        .outer:before {
+            width: 66px;
+            height: 46px;
+            left: -50px;
+            top: 27px;
+        }
+        .trim-line{
+            top: 74px;
+            left: -60px;
+        }
+        .inner:before{
+            top: 95px;
+            height: 40px;
+            width: 60px;
+            left: -29px;
+        }
+        section#footer .d-flex {
+            gap: 20px;
+            padding-top: 0; 
+            padding-bottom:0;
+        }
+        section#footer .d-flex .flex-1.text-right {
+            width: 100%;
+        }
+        section#footer .d-flex .flex-1.text-right button{
+            width:100%;
+        }
+
+    }
 </style>
 
 <script>
@@ -506,7 +586,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
     }
 
 
-    jQuery(document.body).on('click', '#startUploadSubmitPopup', function () {
+    jQuery(document.body).on('click', '#startUploadSubmitPopup, #startUploadSubmitPopup2', function () {
 
         if (!jQuery(document.body).find('div#container-online-designer.template').hasClass('active')) {
             jQuery(document.body).find('div#container-online-designer.template').addClass('active');
@@ -538,9 +618,15 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
             let imgTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']; 
             
             if(imgTypes.indexOf(extension) < 0){
+                let imgWrap = '';
+                imgval = imgval.split('|');
+                imgval.forEach(function(v){
+                    imgWrap += `<span>${v}</span>`;
+                });
+                
                 jQuery(document.body).find('#uploadareadesign').removeClass('d-hide');
                 jQuery(document.body).find('.maindesigncanvas').addClass('d-hide');
-                jQuery(document.body).find('#uploaded_file_name').text(imgval);
+                jQuery(document.body).find('#uploaded_file_name').html(imgWrap);
             }
 
             hidepopup();
@@ -570,18 +656,23 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         footerheight = jQuery(document.body).find('.elementor-location-footer').height();
         footherElement = jQuery(document.body).find('.elementor-location-footer');
         jQuery(window).on('scroll', function() {
-            footerOffset = footherElement.offset().top + footherElement.outerHeight();
-            scrollTop = jQuery(window).scrollTop();
-            windowHeight = jQuery(window).height();
-            distanceFromFooterToViewportBottom = footerOffset - (scrollTop + windowHeight);
+            footerOffset = footherElement.offset().top;
+            scrollTop = jQuery(window).scrollTop() + jQuery(window).height();            
+            
             setTimeout(() => {
-                if(footerheight < distanceFromFooterToViewportBottom){
+                if(scrollTop <= footerOffset){
                     jQuery(document.body).find('.elementor-shortcode section#footer').addClass('d-fixed');
                 }else{
                     jQuery(document.body).find('.elementor-shortcode section#footer').removeClass('d-fixed');
                 }
             }, 1000);
         });
+
+
+        // Set img preview height
+        let imprevWidth = jQuery(document.body).find('.designwrapinner').width();
+        let imgHeight = <?php echo esc_attr( $sheight ); ?> / 100 * imprevWidth;
+        jQuery(document.body).find('.designwrapinner .outer').css('height', imgHeight +'px');
     });
 
 </script>

@@ -38,13 +38,27 @@ jQuery(document).ready(function(){
 
 
     jQuery(document.body).on('click', '.woocommerce-form-login-toggle button', function(){
-        if(!jQuery('form.woocommerce-form.woocommerce-form-register.register').is(":visible")){
-            jQuery('form.woocommerce-form.woocommerce-form-register.register').slideDown();
+        if(jQuery(this).hasClass('showRegistration')){
             jQuery('form.woocommerce-form.woocommerce-form-login.login').slideUp();
-        }else{
-            jQuery('form.woocommerce-form.woocommerce-form-register.register').slideUp();
-            jQuery('form.woocommerce-form.woocommerce-form-login.login').slideDown();
+            if(!jQuery('form.woocommerce-form.woocommerce-form-register.register').is(":visible")){
+                jQuery('form.woocommerce-form.woocommerce-form-register.register').slideDown();
+            }else{
+                jQuery('form.woocommerce-form.woocommerce-form-register.register').slideUp();
+                
+            }    
         }
+
+
+        if(jQuery(this).hasClass('showlogin')){
+            jQuery('form.woocommerce-form.woocommerce-form-register.register').slideUp();
+            if(!jQuery('form.woocommerce-form.woocommerce-form-login.login').is(":visible")){
+                jQuery('form.woocommerce-form.woocommerce-form-login.login').slideDown();
+            }else{
+                jQuery('form.woocommerce-form.woocommerce-form-login.login').slideUp();
+                
+            }    
+        }
+        
     });
     
 
@@ -63,6 +77,15 @@ jQuery(document).ready(function(){
         orientation = jQuery(this).data('orientation');
 
         duplicate_cart_item(item_key, item_source_folder, orientation);
+    });
+
+
+    jQuery(document.body).on('click', 'a.duplicate_cart_item_upload', function(e){
+        e.preventDefault();
+        var item_key = jQuery(this).data('item_key'), 
+        item_source_folder = jQuery(this).data('design_folder');
+
+        duplicate_cart_item(item_key, item_source_folder, '');
     });
 
 
@@ -113,10 +136,18 @@ var duplicate_cart_item = function($item_key = false, $item_source_folder = '', 
     
     var fd = new FormData();
     fd.append('nonce', nonce);
-    fd.append('action', 'transparentcart_copy_item');
+    
     fd.append('item_key', cart_item_key);
     fd.append('item_source_folder', $item_source_folder);
-    fd.append('orientation', $orientation);
+
+
+
+    if($orientation != ''){
+        fd.append('action', 'transparentcart_copy_item');
+        fd.append('orientation', $orientation);
+    }else{
+        fd.append('action', 'transparentcart_copy_item_upload');
+    }
 
     jQuery.ajax({
         url: window.nbds_frontend.url,
@@ -210,6 +241,10 @@ function removeURLParameter(param) {
 
     // Remove the specified parameter
     searchParams.delete('action');
+    searchParams.delete('cik');
+    searchParams.delete('nbu_item_key');
+    searchParams.delete('tasks');
+    searchParams.delete('task');
 
     // Update the URL with the modified parameters
     url.search = searchParams.toString();
@@ -220,6 +255,6 @@ function removeURLParameter(param) {
 }
 
 
-jQuery(document.body).on('click', '.back-to-left a', function () {
+jQuery(document.body).on('click', '.back-to-left a, a.back-to-template-gallery-btn', function () {
     removeURLParameter();
 });

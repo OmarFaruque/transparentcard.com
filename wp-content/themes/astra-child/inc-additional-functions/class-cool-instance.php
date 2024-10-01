@@ -26,8 +26,24 @@ final class COLFinal_Instance{
         // add_filter( 'parent_file', array( $this, 'set_current_menu' ) );
         // add_action( 'init', array($this, 'init_callback_function') );
         add_action('vc_before_init', array(__CLASS__, 'load_vc_elements'));
+        
+        add_filter( 'register_taxonomy_template_tag', array($this, 'transparentcard_tag_url_rewrite'), 50, 1 );
+        
+       
+     
+    }
 
 
+    /**
+     * Wrewrite default template_tag registerer
+     */
+    public function transparentcard_tag_url_rewrite($args){
+      $args['rewrite'] =  array(
+            'slug' => 'templates', // Customize this slug as per your needs
+            'with_front' => false,   // Avoids prefixing with '/blog' if used
+      );
+      $args['public'] = true;
+      return $args;
     }
 
 
@@ -157,6 +173,8 @@ final class COLFinal_Instance{
      * 
      */
     public function coolcard_init_taxonomy(){
+        
+
         register_taxonomy('paper_size', array('product'),
             apply_filters('register_taxonomy_paper_size', array(
                 'hierarchical'  => false,
@@ -248,6 +266,7 @@ final class COLFinal_Instance{
      * 
      */
     public function initCallback(){
+        flush_rewrite_rules();
         remove_shortcode( 'netbase_template_online_design' );
         COOL_CoolcardsTax::get_instance();
         if (is_admin()) {

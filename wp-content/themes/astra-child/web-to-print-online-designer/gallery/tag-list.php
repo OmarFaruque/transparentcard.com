@@ -131,7 +131,7 @@ ob_start();
                 <ul>
                     <?php foreach( $tags as $tag ): ?>
                     <li class="nbd-gallery-filter-item">
-                        <a data-type="tag" data-value="<?php echo( $tag['term_id'] ); ?>" href="#" class="trns-nbd-tag-list-item <?php if( in_array( $tag['term_id'], $filter_tags ) ) echo 'active'; ?>">
+                        <a data-type="tag" data-value="<?php echo( $tag['term_id'] ); ?>" href="<?php echo esc_url( get_term_link( $tag['term_id'], 'template_tag' ) ); ?>" class="trns-nbd-tag-list-item-es-js <?php if( in_array( $tag['term_id'], $filter_tags ) ) echo 'active'; ?>">
                             <svg class="before" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="none" d="M0 0h24v24H0z"/>
                                 <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/>

@@ -274,6 +274,10 @@ td.bg-light {
     .sticky-wrapper {
         display: none !important;
     }
+    .additional-infomation.text-center small {
+        font-size: 13px;
+        margin-top: 0;
+    }
 }
 
 .main-navigation .menu-main-menu-wrap #mega-menu-wrap-primary #mega-menu-primary>li.mega-menu-flyout ul.mega-sub-menu {
@@ -502,6 +506,7 @@ tr.disabled td {
 .p-20 {
     padding: 20px
 }
+.p-20-imp{padding: 20px !important;}
 
 .p-25 {
     padding: 25px
@@ -733,6 +738,12 @@ form.woocommerce-cart-form a.button.nbd-edit-design span {
     z-index: 1;
 }
 
+.woocommerce-js .transparent-action-buttons a.button:hover,
+.transparent-action-buttons a:hover,
+form.woocommerce-cart-form a.button.nbd-reup-design:hover,
+form.woocommerce-cart-form a.button.nbd-edit-design:hover{
+    border-color: #003D3C;
+}
 form.woocommerce-cart-form a.button.nbd-reup-design,
 form.woocommerce-cart-form a.button.nbd-edit-design {
     width: auto;
@@ -741,7 +752,7 @@ form.woocommerce-cart-form a.button.nbd-edit-design {
     align-items: center;
     height: 100%;
     position: relative;
-    border:none;
+    border:2px solid transparent;
 }
 
 .transparent-action-buttons .transparent-product-remove a:hover {
@@ -774,7 +785,9 @@ form.woocommerce-cart-form a.button.nbd-edit-design::before {
     position: absolute;
     background-color: #ecff8c;
     transition: all 0.4s;
+    border-radius: 5px;
 }
+
 
 .woocommerce-js .transparent-action-buttons a.button,
 .transparent-action-buttons a {
@@ -789,7 +802,7 @@ form.woocommerce-cart-form a.button.nbd-edit-design::before {
     font-weight: 700;
     justify-content: center;
     align-items: center;
-    border: none;
+    border: 2px solid transparent;
 }
 
 .font-thick * {
@@ -1109,7 +1122,7 @@ dl.variation {
 
 .list-style-none {
     list-style: none;
-    margin: 0;
+    margin-left: 0;
 }
 
 .woocommerce-js .quantity .qty {
@@ -1368,10 +1381,7 @@ button.transparent-product-details-btn:hover {
     text-align: right;
 }
 
-.nbd-sidebar .active button.accordion-button.collapsed {
-    background-color: var(--e-global-color-accent);
-    color: #051C1D;
-}
+
 
 button[name='update_cart'],
 input[name='update_cart'] {
@@ -2060,7 +2070,7 @@ button.jet-form-builder__submit.text-center,
     }
 
     .transparent-cart-total.flex-1 {
-        margin-top: 50px;
+        margin-top: 10px;
     }
 
     header.entry-header.ast-no-thumbnail {
@@ -2337,10 +2347,13 @@ td.transparentProduct-details p.colors span {
 #container-online-designer.template .conntainer-inline {
     width: 80vw;
     height: 1000px;
-    max-width: 1000px;
+    max-width: 550px;
     position: relative;
     margin: 0 auto;
     overflow: auto;
+}
+.nbd-upload-inner .column-inner {
+    max-width: 90%;
 }
 
 .maincard {
@@ -2355,6 +2368,7 @@ td.transparentProduct-details p.colors span {
     position: relative;
     z-index: 9999999;
     overflow: auto;
+    height:auto;
 }
 
 .submit-upload-design-preview span {
@@ -2516,6 +2530,10 @@ section.fullscreen {
 }
 
 @media only screen and (min-width:320px) and (max-width:580px) {
+    .woocommerce-cart .wc-proceed-to-checkout {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
     .grid-template-column-mobile-2 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2703,15 +2721,17 @@ button#submit span.loadericon {
 }
 .h-full{height:100%;}
 
+
+body.elementor-default button,
 button.submit-upload-design,
 .uploadbutton button,
 .topbradecamp ul li a,
 .back-to-template-gallery-btn {
     border-radius: 5px;
     display: inline-flex;
-    color: #fff !important;
+    color: #fff;
     background: #003F3F;
-    padding: 10px 20px;
+    text-align: center;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 1.2px;
@@ -2719,13 +2739,50 @@ button.submit-upload-design,
     gap: 5px;
     transition: all 0.2s ease;
     border: 1px solid transparent;
+    justify-content: center;
 }
+.nbd-sidebar .active button.accordion-button.collapsed,
+body.elementor-default button:focus,
+body.elementor-default button:hover,
 button.submit-upload-design:hover,
 .uploadbutton button:hover,
 .topbradecamp ul li a:hover,
 .back-to-template-gallery-btn:hover {
     background: #ECFF8C;
-    color: #003F3F !important;
+    color: #003F3F;
     border-color: #003F3F;
     box-shadow: 0 1px 0 #000;
 }
+.back-to-template-gallery-btn:hover {
+    color: #003F3F;
+}
+.back-to-template-gallery-btn{color:white;}
+
+.d-block{display:block;}
+
+.topbradecamp ul li a, .back-to-template-gallery-btn {
+    padding: 12px 20px;
+}
+#container-online-designer.template .conntainer-inline .nbd-m-upload-design-wrap > * {
+    text-align: left;
+}
+.woocommerce .woocommerce-Addresses address, .woocommerce .woocommerce-MyAccount-content address, .woocommerce .woocommerce-customer-details address, .woocommerce-account .woocommerce-Addresses address, .woocommerce-account .woocommerce-MyAccount-content address, .woocommerce-account .woocommerce-customer-details address
+{
+    padding: 1.5em;
+}
+.woocommerce-Address h3, .cart-collaterals h2
+{
+    padding: 0.7em 0.8em;
+}
+
+@media only screen and (max-width:480px) {
+    .woocommerce-MyAccount-content > p{
+        padding: 0.7em 1.5em;;
+    }
+}
+
+#useTemplate:hover {
+    border-color: #003F3F;
+    box-shadow: 0 2px 0 #003F3F;
+}
+

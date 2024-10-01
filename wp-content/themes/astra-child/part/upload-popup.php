@@ -145,7 +145,11 @@ if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
 
     jQuery(document).ready(function($){
         $(document.body).on('click', '.submit-upload-design', function(){
-            $('#add_to_cart').trigger('click');
+            if(jQuery(document.body).find('input#nbd-upload-files').val() != ''){
+                $('#add_to_cart').trigger('click');
+            }else{
+                alert("<?php _e('File is required, please upload required images or files.', 'transparentcard'); ?>");
+            }
         })
     });
 </script>

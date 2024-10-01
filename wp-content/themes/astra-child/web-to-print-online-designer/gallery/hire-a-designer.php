@@ -124,23 +124,32 @@ $business_categorys = business_categorys();
                 padding: 0 25px;
             }
 
-            .choose-design-template-header .back-to-template-gallery-btn span {
-                display: none;
-            }
 
-            .back-to-template-gallery-btn {
+            /* .back-to-template-gallery-btn {
                 padding: 10px;
             }
 
             .back-to-template-gallery-btn svg {
                 margin-left: -5px;
-            }
+            } */
         }
 
         @media screen and (max-width:560px) {
             .back-to-template-gallery-btn {
                 padding: 7px;
                 font-size: 14px;
+            }
+            div#prevsubmitbtn {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            div#prevsubmitbtn button{
+                text-align:center;
+                justify-content:center;
+            }
+            .logo-wrap-group.grid-tampleate-column-3 {
+                grid-template-columns: repeat(1, 1fr);
             }
 
             h4.design-template-title {
@@ -153,14 +162,14 @@ $business_categorys = business_categorys();
                 text-align: center;
             }
             .back-to-template-gallery-btn{
-                padding: 0;
-                background: transparent;
-                color: #003F3F !important;
                 margin-top: 10px;
-                text-decoration: underline !important;
-                text-underline-offset: 5px;
-                font-weight: 500;
             }
+        }
+
+        div#prevsubmitbtn button {
+            min-width: 200px;
+            text-align: center;
+            justify-content: center;
         }
     </style>
     <!-- Header -->
@@ -322,7 +331,7 @@ $business_categorys = business_categorys();
 
     .form-group.colorselectarea {
         display: flex;
-        align-items: center;
+        align-items: end;
         gap: 10px;
     }
 
@@ -374,6 +383,10 @@ $business_categorys = business_categorys();
     .uploadfilespreview ul li {
         position: relative;
         padding: 2px 0px;
+        display:inline-flex;
+        gap: 8px;
+        align-items:center;
+
     }
 
     .uploadfilespreview ul li span:hover {
@@ -381,7 +394,7 @@ $business_categorys = business_categorys();
     }
 
     .uploadfilespreview ul li span {
-        position: absolute;
+        position: relative;
         right: 0;
         font-size: 30px;
         color: #999;
@@ -898,9 +911,37 @@ function rgbToCmyk(r, g, b) {
     });
 
     let design_images = [];
-    let CloseFilename = function (e, name, index) {
-        design_images[name].splice(index, 1);
-        preview_imageshtml(design_images, name, e);
+    let CloseFilename = function (e, name, index, fromdb = false, cik = false) {
+        if(!fromdb){
+            design_images[name].splice(index, 1);
+            preview_imageshtml(design_images, name, e);
+        }
+        let thisitem = e;
+
+        if(fromdb){
+            let filepath = fromdb;
+            let nonce = "<?php echo wp_create_nonce('fileremovefdb'); ?>";
+            let formData = {
+                filepath: fromdb,
+                index: index,
+                cik: cik, 
+                input_name: name,
+                nonce:nonce, 
+                action: 'uploaded_file_remove_from_db'
+            }
+
+            jQuery.ajax({
+                url: window.nbds_frontend.url, // Replace with your server-side upload handler
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    jQuery(thisitem).closest('li').remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Form submission failed: ' + errorThrown, 'jqxhr: ', jqXHR);
+                }
+            });
+        }
     }
 
 

@@ -5,6 +5,8 @@ if( count( $templates ) ):  ?>
     $products   = array();
 
     foreach ( $templates as $key => $temp ):
+
+
         if( $temp['type'] == 'solid' ){
             if( !isset( $products[ $temp['product_id'] ] ) ){
                 $product    = wc_get_product( $temp['product_id'] );
@@ -33,8 +35,19 @@ if( count( $templates ) ):  ?>
             $link_template  = add_query_arg( $urlArgs, $UrlPageNBD );
         }
         $gallery_type = 1;
+
+        
+        if(isset($args['tag']) && $args['tag'] != ''){
+            $tag_id = $args['tag'];
+        }else{
+            $tags = explode(',', $temp['tags']);
+            $tag_id = $tags[0];
+        }
+
+        $term = get_term($tag_id, 'template_tag');
+        $tagtitle = $term->name ?? '';
 ?>
-    <div class="nbdesigner-item" data-id="<?php echo( $temp['tid'] ); ?>" data-img="<?php echo( $temp['image'] ); ?>" data-title="<?php echo( $temp['title'] ); ?>">
+    <div class="nbdesigner-item" data-id="<?php echo( $temp['tid'] ); ?>" data-img="<?php echo( $temp['image'] ); ?>" data-title="<?php echo( $tagtitle ); ?>">
         <div class="nbd-gallery-item">
             <div class="nbd-gallery-item-inner">
                 <a href="<?php echo esc_url( $link_template ); ?>">
@@ -52,7 +65,7 @@ if( count( $templates ) ):  ?>
                 </div>
             </div>
             <div class="nbd-gallery-item-acction">
-                <span class="nbd-gallery-item-name"><?php esc_html_e( $temp['title'] ); ?></span>
+                <span class="nbd-gallery-item-name"><?php esc_html_e( $tagtitle ); ?></span>
                 <div class="nbd-like-icons">
                     <span class="nbd-like-icon like <?php if( in_array( $temp['tid'], $favourite_templates ) ) echo 'active'; ?>" onclick="updateFavouriteTemplate(this, 'unlike', <?php echo( $temp['tid'] ); ?>)">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">

@@ -41,8 +41,8 @@ if( $option_id ){
 
 
 ?>
-<div class="regular-price start-from">
-	<?php echo sprintf('<span>%s: %s</span>', __('Price start from', 'transparent'), get_woocommerce_currency_symbol() . esc_attr( number_format($sell_price, 2) )); ?>
+<div class="regular-price start-from" style="display:none;">
+	<?php echo sprintf('<span>%s: <span class="amount_total">%s</span></span>', __('Price start from', 'transparent'), get_woocommerce_currency_symbol() . esc_attr( number_format($sell_price, 2) )); ?>
 </div>
 <div class="woocommerce-product-details__short-description">
 	<?php echo $short_description; // WPCS: XSS ok. ?>

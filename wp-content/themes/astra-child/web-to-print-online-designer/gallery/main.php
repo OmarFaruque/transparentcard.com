@@ -35,6 +35,15 @@
         gap: 20px;
     }
 
+    @media only screen and (max-width:380px) {
+        .popupcontent .iiner h2 {
+            font-size: 24px;
+        }
+        .popupcontent .iiner .setps.d-grid.gap-25.grid-template-column-4.grid-template-column-mobile-2 {
+            padding: 0 !important;
+        }
+    }
+
     .single-design-option {
         border-width: 6px;
         border-style: solid;
@@ -186,7 +195,7 @@
 
 
 <?php if (isset($_GET['source']) && $_GET['source'] == 'single-product'): ?>
-    <?php nbdesigner_get_template('gallery/header.php', array()); ?>
+    <?php nbdesigner_get_template('gallery/header.php', array('tag' => $args['tag'])); ?>
     <div id="transparentDesignOptions">
         <div class="single-design-option-wrapper">
             <div class="single-design-option">
@@ -199,9 +208,6 @@
                         </p>
                         <p class="single-design-option-short-desc">
                             <?php _e('Extensively Creative Prebuilt Business Card Templates.', 'transparentcard'); ?>
-                        </p>
-                        <p class="single-design-option-short-desc">
-                            <?php _e('Pay for the design once, and use it whenever you like.', 'transparentcard'); ?>
                         </p>
                     </div>
                     <div class="btnarea btn-wrapper">
@@ -230,12 +236,7 @@
                             <?php _e('Upload File', 'transparentcard'); ?>
                         </a>
 
-<?php 
-$option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true ) );
-// echo 'options <br/><pre>';
-// print_r($option);
-// echo '</pre>';
-?>
+                        <?php $option  = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true ) );?>
 
                         <span style="font-weight:500; text-transform: uppercase;font-size:12px;"><?php echo sprintf(__('Upload:  %s etc.', 'transparentcard'), $option['allow_type']); ?></span>
                     </div>
@@ -291,12 +292,14 @@ $option         = unserialize( get_post_meta( $pid, '_nbdesigner_upload', true )
 <!-- Title -->
 
 <?php
+
 $limit = $row * $per_row;
 $limit = $limit == 0 ? 1 : $limit;
 $current_user_id = get_current_user_id();
-if ($pid || $cat):
-    if ($cat) {
-        $product_cat = get_term($cat, 'product_cat');
+$title = __('Business Card Templates', 'transparentcard');
+if ($pid || $args['tag']):
+    if ($args['tag']) {
+        $product_cat = get_term($args['tag'], 'template_tag');
         $title = $product_cat->name;
     } else {
         $title = get_the_title($pid);
@@ -310,7 +313,7 @@ endif;
         <div class="innersect ast-container ml-auto mr-auto">
             <div class="d-flex align-item-center justify-content-center">
                 <h3 class="text-center text-uppercase" style="color:#ECFF8C; padding:50px 0;">
-                    <?php echo esc_attr($title); ?> <?php _e('Business Card Templates', 'web-to-print-online-designer'); ?>
+                    <?php echo esc_attr( $title ); ?>
                 </h3>
             </div>
         </div>
@@ -347,6 +350,8 @@ endif;
             $allowed_tags = array(
                 'p'      => array(), // Allow <p> without any attributes
                 'strong' => array(), // Allow <strong> without any attributes
+                'h2' => array(), 
+                'h3' => array(),
                 'a'      => array(   // Allow <a> with 'href' attribute
                     'href' => array()
                 ),
@@ -386,39 +391,11 @@ endif;
         <?php $column = absint(get_option('nbdesigner_gallery_column', 3)); ?>
         <div class="nbdesigner-gallery nbd-gallery-wrap <?php echo 'nbd-gallery-column-' . $column; ?>"
             id="nbdesigner-gallery">
-            <?php
-            if ($pid && count($templates)):
-                $link_start_design = add_query_arg(array('product_id' => $pid), getUrlPageNBD('create'));
-                ?>
-                <div class="nbdesigner-item">
-                    <div class="nbd-gallery-item nbd-gallery-item-upload">
-                        <div class="nbd-gallery-item-upload-inner">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="80" height="80"
-                                viewBox="0 0 80 80">
-                                <title>plus-circle</title>
-                                <path fill="#ddd"
-                                    d="M40 3.333c-20.333 0-36.667 16.333-36.667 36.667s16.333 36.667 36.667 36.667 36.667-16.333 36.667-36.667-16.333-36.667-36.667-36.667zM40 70c-16.667 0-30-13.333-30-30s13.333-30 30-30c16.667 0 30 13.333 30 30s-13.333 30-30 30z">
-                                </path>
-                                <path fill="#ddd"
-                                    d="M53.333 36.667h-10v-10c0-2-1.333-3.333-3.333-3.333s-3.333 1.333-3.333 3.333v10h-10c-2 0-3.333 1.333-3.333 3.333s1.333 3.333 3.333 3.333h10v10c0 2 1.333 3.333 3.333 3.333s3.333-1.333 3.333-3.333v-10h10c2 0 3.333-1.333 3.333-3.333s-1.333-3.333-3.333-3.333z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="nbd-gallery-item-upload-inner">
-                            <a href="<?php echo esc_url($link_start_design); ?>" class="" target="_blank"
-                                title="<?php esc_html_e('Start design', 'web-to-print-online-designer'); ?>">
-                                <?php esc_html_e('Design or', 'web-to-print-online-designer'); ?><br />
-                                <?php esc_html_e('Upload file', 'web-to-print-online-designer'); ?>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
             <?php include_once('gallery-item.php'); ?>
         </div>
         <div>
             <div class="nbd-load-more" id="nbd-load-more"></div>
-            <div id="nbd-pagination-wrap">
+            <div id="nbd-pagination-wrap" class="mb-30">
                 <?php if ($pagination)
                     include_once('pagination.php'); ?>
             </div>
@@ -458,7 +435,8 @@ endif;
     }
 
     var design_replica_popup = function (event) {
-        var selector = '.nbd-popup-request-replica';
+        console.log('design replica event');
+        var selector = '.nbd-popup-request-replica-top-choice';
         jQuery(document.body).find(selector).removeClass('hide');
         setTimeout(() => {
             jQuery(document.body).find(selector).find('.nbd-popup-content').slideDown();

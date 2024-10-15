@@ -30,3 +30,22 @@ do_action('nbo_quick_view_before_single_product');
         </div>
     </div>
 </div>
+
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let qty = urlParams.get('qty');
+    let options = urlParams.get('options');
+
+    setTimeout(() => {
+        if(qty){
+            document.querySelector('.defaultProductQty').value = qty;
+        }
+        // console.log('Options: ', options);
+    }, 1000);
+
+</script>
+
+<style>
+    
+</style>

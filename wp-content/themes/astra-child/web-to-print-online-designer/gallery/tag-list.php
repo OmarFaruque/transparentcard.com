@@ -30,7 +30,7 @@ ob_start();
     <div class="accordion-item active">
         <h2 class="accordion-header mb-0" id="paperTags">
         <button class="accordion-button collapsed w-full text-start" type="button" data-bs-toggle="collapse" data-bs-target="#transparentPaperSize" aria-expanded="false" aria-controls="transparentPaperSize">
-            <?php _e('Visitenkarte Size', 'transparentcard'); ?>
+            <?php _e('Business card Size', 'transparentcard'); ?>
         </button>
         </h2>
         <div id="transparentPaperSize" class="accordion-collapse collapse" aria-labelledby="paperTags" data-bs-parent="#coolcardstagsaccordion">
@@ -90,7 +90,7 @@ ob_start();
   <div class="accordion-item">
     <h2 class="accordion-header mb-0" id="transparentPaperOrientation">
       <button class="accordion-button collapsed w-full text-start" type="button" data-bs-toggle="collapse" data-bs-target="#transparentPaperrOrin" aria-expanded="false" aria-controls="transparentPaperrOrin">
-        <?php _e('Ausrichtungen', 'coolcards'); ?>
+        <?php _e('Alignments', 'coolcards'); ?>
       </button>
     </h2>
     <div id="transparentPaperrOrin" class="accordion-collapse collapse" aria-labelledby="transparentPaperOrientation" data-bs-parent="#coolcardstagsaccordion">
@@ -122,7 +122,7 @@ ob_start();
   <div class="accordion-item">
     <h2 class="accordion-header mb-0" id="transparentPaperIndustry">
       <button class="accordion-button collapsed w-full text-start" type="button" data-bs-toggle="collapse" data-bs-target="#transparentPaperrOrin" aria-expanded="false" aria-controls="transparentPaperrOrin">
-        <?php _e('Branche', 'coolcards'); ?>
+        <?php _e('Industry', 'coolcards'); ?>
       </button>
     </h2>
     <div id="transparentPaperrOrin" class="accordion-collapse collapse" aria-labelledby="transparentPaperIndustry" data-bs-parent="#coolcardstagsaccordion">

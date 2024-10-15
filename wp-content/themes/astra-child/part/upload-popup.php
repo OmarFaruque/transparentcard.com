@@ -73,7 +73,7 @@ if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
             </div>
         </div>
     </div>
-    <div class="nbd-m-upload-design-wrap template positon-relative" id="nbd-m-upload-design-wrap" style="align-items:start; padding-top:25px;">
+    <div class="nbd-m-upload-design-wrap template positon-relative" id="nbd-m-upload-design-wrap" style="align-items:start; padding-top:25px; max-height:90vh; overflow:auto;">
 
             <div class="closebtn">
                 <div class="closeinner">
@@ -97,7 +97,7 @@ if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
         ?>
     </div> 
     <?php if( ( $_enable_upload || $show_button_use_our_template || $show_button_hire_us ) && !$_enable_upload_without_design ): ?>
-    <div class="nbd-popup-wrap" id="nbd__content__overlay">
+    <div class="nbd-popup-wrap upload-popup-1" style="background-color:transparent; max-height:100vh; overflow:auto;" id="nbd__content__overlay">
         <div class="nbd__pop__content">
             <div class="nbd__pop__content_wrapper <?php if( ( $show_button_use_our_template || $show_button_hire_us ) && $_enable_upload ) echo 'nbd__pop_wide'; ?>">
                 <div class="__content_wrapper">
@@ -140,8 +140,8 @@ if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
 </div>
 
 <script>
-    var unitprice = localStorage.getItem('nbd_selected_unit_price' + <?php echo esc_attr( $pid ); ?>);
-    jQuery(document.body).find('form.customUploadForm').append(`<input type="hidden" name="unit_price" value="${unitprice}" />`);
+    // var unitprice = localStorage.getItem('nbd_selected_unit_price' + <?php echo esc_attr( $pid ); ?>);
+    // jQuery(document.body).find('form.customUploadForm').append(`<input type="hidden" name="unit_price" value="${unitprice}" />`);
 
     jQuery(document).ready(function($){
         $(document.body).on('click', '.submit-upload-design', function(){

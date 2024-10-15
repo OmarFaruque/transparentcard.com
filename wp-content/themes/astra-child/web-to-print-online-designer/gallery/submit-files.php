@@ -199,7 +199,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                     </a>
                 </li>
                 <li><a href="#"><?php _e('Help', 'transparentcard'); ?></a></li>
-                <li><a onclick="printingara_curring(this, event)" href="#"><?php _e('View product after cutting', 'transparentcard'); ?></a></li>
+                <li class="pringing_cutting" style="display:none;"><a onclick="printingara_curring(this, event)" href="#"><?php _e('View product after cutting', 'transparentcard'); ?></a></li>
             </ul>
         </div>
 
@@ -210,7 +210,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                     <p class="mb-10 mt-5" style="line-height:18px;">
                         <?php _e('Download our templates to help you prepare your file before uploading it.', 'transparentcard') ?>
                     </p>
-                    <div class="menulist p-10 border-rounded" style="background-color:#ECFF8C; margin-bottom:20px;">
+                    <div class="menulist p-10 border-rounded" style="background-color:#ECFF8C; margin-bottom:20px;margin-top:20px;">
                         <ul class="list-style-none m-0">
                             <li><?php echo sprintf(__('<a download href="%s">Adobe Photoshop</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Photoshop.zip'); ?></li>
                             <li><?php echo sprintf(__('<a download href="%s">Adobe Illustrator</a>', 'transparentcard'), get_stylesheet_directory_uri(  ) . '/assets/img/Adobe-Illustrator.zip'); ?></li>
@@ -244,12 +244,12 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                                     <div class="outer border-rounded d-flex align-item-center justify-content-center  position-relative"
                                         style="background-color:#003F3F; height:100%;width:<?php echo esc_attr($swidth); ?>%;">
                                         <div class="blade-area positon-absulate">
-                                            <?php _e('Bleed area', 'transparentcard'); ?>
+                                            <?php _e('Trim line', 'transparentcard'); ?>
                                         </div>
                                         <div
-                                            class="inner border-rounded d-flex align-item-center justify-content-center">
-                                            <div class="trim-line position-absulate">
-                                                <?php _e('Trim line', 'transparentcard'); ?>
+                                        class="inner border-rounded d-flex align-item-center justify-content-center">
+                                        <div class="trim-line position-absulate">
+                                                <?php _e('Bleed area', 'transparentcard'); ?>
                                             </div>
                                             <div
                                                 class="maincard w-full h-full border-rounded d-flex justify-content-center align-item-center">
@@ -453,11 +453,24 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
     }
     
 
+    .questionformate .menulist{
+        padding: 15px 30px;
+        display: flex;
+        align-items:center;
+    }
+    .questionformate .menulist ul{
+        margin-bottom: 0;
+    }
     .questionformate ul li a {
         text-decoration: underline;
         font-size: 16px;
         line-height: 36px;
-        padding: 0px 15px;
+        text-underline-offset:4px;
+        display: inline-block;
+    }
+    .questionformate ul li:hover a{
+        color: #003F3F;
+        transform: translateX(10px);
     }
 
     .questionformate .menulist {
@@ -496,7 +509,7 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         height: 90px;
         position: absolute;
         right: -34px;
-        top: -20px;
+        top: -45px;
         background-image: url(<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/down-cercal-arrow.svg'); ?>);
         background-size: contain;
         background-repeat: no-repeat;
@@ -535,6 +548,9 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
         width: 50px;
         display: block;
         margin: 0 auto;
+    }
+    .topbradecamp ul li a {
+        padding: 10px 30px;
     }
     @media only screen and (max-width:480px) {
         div#uploadareadesign h4{
@@ -592,6 +608,8 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
             jQuery(document.body).find('div#container-online-designer.template').addClass('active');
             jQuery(document.body).find('div#container-online-designer.template .conntainer-inline').slideDown();
             jQuery('html, body').animate({ scrollTop: 0 }, 'slow');
+            jQuery('body').addClass('open-nbd-popup');
+            jQuery('body').addClass('nbd-position-fixed');
         }
     });
 
@@ -604,6 +622,8 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
     }
     jQuery(document.body).on('click', '#container-online-designer .overley, .closebtn', function () {
         hidepopup();
+        jQuery('body').removeClass('open-nbd-popup');
+        jQuery('body').removeClass('nbd-position-fixed');
     });
 
     jQuery(document.body).on('click', '.submit-upload-design-preview', function () {
@@ -639,6 +659,10 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
                 </div>`;
                 jQuery(document.body).find('.innerdesignarea .outer').css("background-color", 'rgba(0,0,0,0,0)')
                 jQuery(document.body).find('.innerdesignarea .outer').append(htmlOutput);
+
+                jQuery('body').removeClass('open-nbd-popup');
+                jQuery('body').removeClass('nbd-position-fixed');
+                jQuery(document.body).find('.pringing_cutting').show();
                 // jQuery(document.body).find('.maincard').css("background-image", `url(${imgsrc})`);
             }
         }else{
@@ -652,20 +676,30 @@ $sheight = $pwidth >= $pheight ? $percentage : 100 + $percentage;
 
 
     jQuery(document).ready(function(){
-        var footerheight, footherElement, footerOffset, scrollTop, windowHeight, distanceFromFooterToViewportBottom;
-        footerheight = jQuery(document.body).find('.elementor-location-footer').height();
-        footherElement = jQuery(document.body).find('.elementor-location-footer');
+        var footerheight, footherElement, footerOffset, scrollTop, windowHeight, distanceFromFooterToViewportBottom, sectionHeight;
+       
+        let isFixed = false;
+        let debounceTimer;
+
         jQuery(window).on('scroll', function() {
-            footerOffset = footherElement.offset().top;
-            scrollTop = jQuery(window).scrollTop() + jQuery(window).height();            
-            
-            setTimeout(() => {
-                if(scrollTop <= footerOffset){
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                footerheight = jQuery(document.body).find('.elementor-location-footer').height();
+                sectionHeight = jQuery(document.body).find('section#footer').height();
+
+                footherElement = jQuery(document.body).find('.elementor-location-footer');
+
+                footerOffset = footherElement.offset().top - sectionHeight;
+                scrollTop = jQuery(window).scrollTop() + jQuery(window).height();            
+
+                if(scrollTop < footerOffset){
                     jQuery(document.body).find('.elementor-shortcode section#footer').addClass('d-fixed');
+                    isFixed = true;
                 }else{
                     jQuery(document.body).find('.elementor-shortcode section#footer').removeClass('d-fixed');
+                    isFixed = false;
                 }
-            }, 1000);
+            }, 100);
         });
 
 

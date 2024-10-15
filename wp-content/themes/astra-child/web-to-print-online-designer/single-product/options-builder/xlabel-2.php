@@ -22,6 +22,7 @@
                     $field['general']['attributes']["options"][$key]['show_subattr'] = $show_subattr;
             ?>
             <div class="nbd-xlabel-wrap">
+
                 <div class="nbd-xlabel-value">
                     <div class="nbd-xlabel-value-inner" title="<?php echo $attr['name']; ?>">
                         <input ng-change="check_valid();updateMapOptions('<?php echo $field['id']; ?>')" value="<?php echo $key; ?>" ng-model="nbd_fields['<?php echo $field['id']; ?>'].value" name="nbd-field[<?php echo $field['id']; ?>]<?php if($show_subattr) echo '[value]'; ?>" 

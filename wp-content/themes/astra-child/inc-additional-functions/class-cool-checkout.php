@@ -11,11 +11,23 @@ class COOL_Checkout{
         $this->wpdb = $wpdb;
 
         add_shortcode( 'transparent_registration_form', array($this, 'transparerent_woo_registration_form_callback') );
-        add_action( 'woocommerce_before_customer_login_form', array($this, 'transparentcard_woo_registration_form_save_process') );
+        add_action( 'woocommerce_before_customer_login_form', array($this, 'transparentcard_woo_registration_form_redirect') );
+        add_action( 'wp', array($this, 'transparentcard_woo_registration_form_save_process') );
         add_action( 'woocommerce_checkout_order_review', array($this, 'transparent_checkout_items'), 5 );
         add_action( 'transparentcard_woocommerce_order_item_meta_top', array($this, 'transparent_thankyou_order_item_metathumb'), 5, 3);
 
         add_filter( 'default_checkout_billing_country', array($this, 'transparent_change_default_checkout_country') );
+    }
+
+
+    /**
+     * Redirect to another page
+     */
+    public function transparentcard_woo_registration_form_redirect(){
+        global $validation;
+        if(!empty($validation)){
+            echo sprintf('<div class="validation-errors"><ul>%s</ul></div>', $validation);
+        }
     }
 
 
@@ -92,15 +104,11 @@ class COOL_Checkout{
      * 
      */
     public function transparentcard_woo_registration_form_save_process(){
-        
+        global $validation;
         
         if (isset($_POST['woocommerce-register-nonce']) && wp_verify_nonce( $_POST['woocommerce-register-nonce'], 'woocommerce-register' ) ) {
             $validation = $this->validateion();
-            ob_start();
-            
-            if(!empty($validation)){
-                echo sprintf('<div class="validation-errors"><ul>%s</ul></div>', $validation);
-            }else{
+            if(empty($validation)){
                 // Process save data
                 $username   = $_POST['reg_username'] ?? str_replace(' ', '', $_POST['billing_first_name']);
                 $password   = $_POST['password'];
@@ -147,33 +155,34 @@ class COOL_Checkout{
             
                     // Sign the user on
                     $userlogin = wp_signon($creds, false);
-            
+
                     // Check if login was successful
                     if (!is_wp_error($userlogin)) {
                         // Logini to current user 
                         wp_set_current_user($userlogin->ID); // Set the current user to the new user
-                        wp_set_auth_cookie($userlogin->ID); // Set the authentication cookies for the user
+                        wp_set_auth_cookie($userlogin->ID, true); // Set the authentication cookies for the user
                         do_action('wp_login', $username, $userlogin);
 
                         // Ensure WooCommerce sessions are set
                         if (class_exists('WooCommerce')) {
                             WC()->session->set_customer_session_cookie(true);
+
+                            // Trigger the WooCommerce 'new account' email notification
+                
+                            WC()->mailer()->get_emails()['WC_Email_Customer_New_Account']->trigger( $user_id, $user->get_user_login(), $password );
+
                         }
 
                         // Optionally, redirect to a specific page
                         $redirect_to = wc_get_checkout_url(); // Change this to your desired redirect location
                         
-                        ?>
-                            <script>
-                                window.location.replace("<?php echo esc_url( $redirect_to ); ?>");
-                            </script>
-                        <?php
+                        wp_safe_redirect( esc_url( $redirect_to ), 307 );
+                        
                         exit;
                     }
                 }
 
             }
-        echo ob_get_clean();
         }
     }
 

@@ -25,8 +25,7 @@
                     // echo 'Form values <br/><pre>';
                     // print_r($field);
                     // echo '</pre>';
-
-                    
+             
 
             ?>
             <div class="nbd-xlabel-wrap 
@@ -62,7 +61,7 @@
                                 </span>
                                 <?php endif; ?>
                             </label>
-                            <h5><?php echo $attr['name']; ?></h5>
+                            <p class="heading-5"><?php echo $attr['name']; ?></p>
                         </div>
                     </div>
                     

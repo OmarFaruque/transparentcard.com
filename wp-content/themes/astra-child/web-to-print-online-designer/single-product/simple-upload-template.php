@@ -141,7 +141,7 @@ $pheight = $settings[0]['real_height'];
             </div>
             <div class="flex-2">
                 <div class="inner-details">
-                    <p class="mb-0"><?php echo sprintf(__('By adding a design, you accept our <a href="%s" />Terms and Conditions.</a>', 'transparentcard'), '#'); ?></p>
+                    <p class="mb-0"><?php echo sprintf(__('By adding a design, you accept our <a href="%s" />Terms and Conditions.</a>', 'transparentcard'), 'https://transparentcard.com/terms-of-use/'); ?></p>
                 </div>
             </div>
         </div>

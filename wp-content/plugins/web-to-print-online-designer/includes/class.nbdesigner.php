@@ -558,6 +558,8 @@ class Nbdesigner_Plugin {
                 }
             }
 
+
+
             if( isset( $nbd_session ) || isset( $nbu_session ) ){
                 $option = unserialize( get_post_meta( $product_id, '_nbdesigner_option', true ) );
                 if( isset( $nbd_session ) ) {

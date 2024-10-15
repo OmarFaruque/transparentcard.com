@@ -32,7 +32,8 @@ class COOL_Ajax{
             'transparentcart_copy_item_upload' => true,
             'transparentde_woocommerce_get_states' => true, 
             'transparentcard_hire_a_designer_add_to_cart' => true, 
-            'uploaded_file_remove_from_db' => true
+            'uploaded_file_remove_from_db' => true, 
+            'transparentcard_transaint_matrix' => true
         );
 
         foreach( $ajax_events as $ajax_event => $nopriv ) {
@@ -54,6 +55,22 @@ class COOL_Ajax{
                 // echo '</pre>';
             }
         });
+    }
+
+
+
+    /**
+     * Set product metrix to db as cash
+     */
+    public function transparentcard_transaint_matrix(){
+        if(isset($_POST['product_id']) && isset($_POST['matrix']) ) {
+            $pid = sanitize_text_field( $_POST['product_id'] );
+            $metrix = $_POST['matrix'];
+
+            set_transient( 'turnaround_matrix_' . $pid, $metrix, 2592000 );
+            wp_send_json_success(['message' => 'success', 'posts' => $_POST]);
+        }
+        wp_die( );
     }
 
 
@@ -412,6 +429,8 @@ class COOL_Ajax{
         $variation_id = 0;
         $layout = 'm';
         $redirect = 'cart';
+
+        // wp_send_json_success(['cart_item_key' => $cart_item_key, 'source_folder' => $source_folder, 'cart' => $cart ]);
 
         if (isset($cart[$cart_item_key])) {
             $item = $cart[$cart_item_key];

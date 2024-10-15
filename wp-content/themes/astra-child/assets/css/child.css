@@ -2346,7 +2346,7 @@ td.transparentProduct-details p.colors span {
 
 #container-online-designer.template .conntainer-inline {
     width: 80vw;
-    height: 1000px;
+    height: 100vh;
     max-width: 550px;
     position: relative;
     margin: 0 auto;
@@ -2367,8 +2367,9 @@ td.transparentProduct-details p.colors span {
     opacity: 1;
     position: relative;
     z-index: 9999999;
-    overflow: auto;
+    overflow: hidden;
     height:auto;
+    border-radius: 7px;
 }
 
 .submit-upload-design-preview span {
@@ -2383,11 +2384,12 @@ td.transparentProduct-details p.colors span {
     color: white;
 }
 
-body.logged-in.admin-bar .nbd-m-custom-design-wrap.template,
-body.logged-in.admin-bar .nbd-m-upload-design-wrap.template {
-    top: 15px;
+body.nbd-gallery .nbd-m-custom-design-wrap.template,
+body.nbd-gallery .nbd-m-upload-design-wrap.template {
+    top: 50%;
     text-align: left;
-    max-height: calc(100% - 50px);
+    max-height: calc(100%);
+    transform: translateY(-50%);
 }
 
 div#container-online-designer.template:before {
@@ -2726,7 +2728,7 @@ body.elementor-default button,
 button.submit-upload-design,
 .uploadbutton button,
 .topbradecamp ul li a,
-.back-to-template-gallery-btn {
+.back-to-product .back-to-template-gallery-btn {
     border-radius: 5px;
     display: inline-flex;
     color: #fff;
@@ -2756,11 +2758,10 @@ button.submit-upload-design:hover,
 .back-to-template-gallery-btn:hover {
     color: #003F3F;
 }
-.back-to-template-gallery-btn{color:white;}
 
 .d-block{display:block;}
 
-.topbradecamp ul li a, .back-to-template-gallery-btn {
+.back-to-product .back-to-template-gallery-btn {
     padding: 12px 20px;
 }
 #container-online-designer.template .conntainer-inline .nbd-m-upload-design-wrap > * {
@@ -2779,10 +2780,27 @@ button.submit-upload-design:hover,
     .woocommerce-MyAccount-content > p{
         padding: 0.7em 1.5em;;
     }
+    textarea#order_comments {
+        min-height: 80px;
+    }
 }
 
 #useTemplate:hover {
     border-color: #003F3F;
     box-shadow: 0 2px 0 #003F3F;
 }
-
+.woocommerce form .show-password-input.display-password::before, 
+.woocommerce-page form .show-password-input.display-password::before
+{
+    content: '';
+    width: 20px;
+    height: 1px;
+    position: absolute;
+    background: black;
+    transform: rotate(-45deg);
+    top: 12px;
+    left: 6px;
+}
+body.nbd-position-fixed,
+body.open-nbd-popup.nbd-position-fixed,
+.nbd-position-fixed{position: fixed;}

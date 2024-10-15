@@ -51,7 +51,7 @@ $business_categorys = business_categorys();
                 <div class="d-flex gap-20 w-hulf w-mobile-full" style="align-items:center;">
                     <div class="stepcount flex-1">1</div>
                     <div class="stepdesc flex-6">
-                        <?php _e('Choose the product and the information you want to include in the design', 'transparentcard'); ?>
+                        <?php _e('Put pieces of information that you want to include in your business card', 'transparentcard'); ?>
                     </div>
                 </div>
             </div>
@@ -647,7 +647,7 @@ $business_categorys = business_categorys();
         }
 
         .wrapperstepform .innerwrapper {
-            margin: 20px;
+             /* margin: 20px; */
         }
     }
 
@@ -764,9 +764,9 @@ function rgbToCmyk(r, g, b) {
                 }
             }
         }
-        var product_id = jQuery('input[name="pid"]').val();
-        var unitprice = localStorage.getItem('nbd_selected_unit_price' + product_id);
-        formData.append('unit_price', unitprice);
+        // var product_id = jQuery('input[name="pid"]').val();
+        // var unitprice = localStorage.getItem('nbd_selected_unit_price' + product_id);
+        // formData.append('unit_price', unitprice);
 
 
         // Perform the AJAX request

@@ -98,7 +98,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <div class="header"><?php _e('Example', 'transparentcard'); ?>:</div>
                         <div class="body p-5">
                             <p class="mb-0">
-                                "<?php _e('Please add a QR code for www.example.com and include a Facebook icon.', 'transparentcard'); ?>"
+                                <?php _e('Please add a QR code for www.example.com and include a Facebook icon.', 'transparentcard'); ?>
                             </p>
                         </div>
                     </div>
@@ -116,10 +116,10 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
             <div class="flex-2">
                 <div class="form-group">
                     <label
-                        for="business_category"><?php _e('Select your business category', 'transparentcard'); ?></label>
+                        for="business_category"><?php _e('Select your business type', 'transparentcard'); ?></label>
                     <select style="padding:3px 15px;" name="business_category" id="business_category" 
                         class="form-control">
-                        <option value=""><?php _e('Select a business category...', 'transparentcard'); ?></option>
+                        <option value=""><?php _e('Select a business type...', 'transparentcard'); ?></option>
                         <?php foreach ($business_categorys as $k => $cat): ?>
                             <option <?php selected($additionalMetas['business_category'] ?? '', $k); ?>
                                 value="<?php echo intval($k); ?>"><?php echo esc_attr($cat); ?></option>
@@ -139,7 +139,7 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                         <div class="header"><?php _e('Example', 'transparentcard'); ?>:</div>
                         <div class="body p-5">
                             <p class="mb-0">
-                                "<?php _e('We are a company that delivers sweets in X. Our target audience are young people who like sweets.', 'transparentcard'); ?>"
+                                <?php _e('We are a software company based in X, focusing to provide innovative solutions for young tech enthusiasts who are passionate about cutting-edge technology.', 'transparentcard'); ?>
                             </p>
                         </div>
                     </div>

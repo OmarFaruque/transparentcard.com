@@ -76,7 +76,7 @@ if ( isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uplo
                         <div class="card info">
                             <div class="header"><?php _e('Example', 'transparentcard'); ?>:</div>
                             <div class="body p-5">
-                                <p class="mb-0">"<?php _e('I want a very modern design with lots of colors, but I do not like red or black.', 'transparentcard'); ?>"</p>
+                                <p class="mb-0"><?php _e('I am looking for a vibrant, modern design with plenty of colors, but I\'d prefer to avoid using red or black. ', 'transparentcard'); ?></p>
                             </div>
                         </div>
                     </div>

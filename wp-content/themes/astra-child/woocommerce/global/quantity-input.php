@@ -26,16 +26,18 @@ $_options = $nbd_fontend_printing_options->get_option( $option_id );
 $quantityBreaks = $_options ? unserialize($_options['fields']) : array();
 $quantityBreaks = $quantityBreaks['quantity_breaks'];
 
+extract($args);
 
 
 if(empty($max_value)){ $max_value = 9999; }
 $input_style = get_theme_mod('cart_qty_selection_style');
 
 
+
 ?>
 <div class="transparent-quantity <?php echo esc_attr($input_style); ?>">
 	<?php if('dropdown' != $input_style): ?>
-		<input type="number" class="input-text qty text" step="<?php echo esc_attr( $step ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>" name="<?php echo esc_attr( $input_name ); ?>" value="<?php echo esc_attr( $input_value ); ?>" title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'printcart' ) ?>" size="4" pattern="<?php echo esc_attr( $pattern ); ?>" inputmode="<?php echo esc_attr( $inputmode ); ?>" />
+		<input type="number" class="input-text qty text oma1" step="<?php echo esc_attr( $step ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>" name="<?php echo esc_attr( $input_name ); ?>" value="<?php echo esc_attr( $input_value ); ?>" title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'printcart' ) ?>" size="4" pattern="<?php echo esc_attr( $pattern ); ?>" inputmode="<?php echo esc_attr( $inputmode ); ?>" />
 		<div class="qty-buttons">
 			<span class="quantity-plus pt-icon-plus"></span>
 			<span class="quantity-minus pt-icon-minus"></span>
@@ -50,7 +52,7 @@ $input_style = get_theme_mod('cart_qty_selection_style');
 	<?php else: ?>
 		<div class="d-none" style="display:none;">
 			<span class="quantity-minus pt-icon-minus"></span>
-				<input type="number" class="input-text qty text" step="<?php echo esc_attr( $step ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>" name="<?php echo esc_attr( $input_name ); ?>" value="<?php  echo esc_attr( $input_value ); ?>" title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'printcart' ) ?>" size="4" pattern="<?php echo esc_attr( $pattern ); ?>" inputmode="<?php echo esc_attr( $inputmode ); ?>" />
+				<input type="number" class="input-text qty text defaultProductQty" step="<?php echo esc_attr( $step ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>" name="<?php echo esc_attr( $input_name ); ?>" value="<?php  echo esc_attr( $input_value ); ?>" title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'printcart' ) ?>" size="4" pattern="<?php echo esc_attr( $pattern ); ?>" inputmode="<?php echo esc_attr( $inputmode ); ?>" />
 			<span class="quantity-plus pt-icon-plus"></span>
 		</div>
 	<?php endif; ?>

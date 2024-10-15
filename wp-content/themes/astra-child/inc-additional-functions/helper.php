@@ -423,3 +423,19 @@ function selected_business_category($key = ''){
 	$categories = business_categorys();
 	return $categories[$key];
 }
+
+
+
+// Function to find the index using array_column and array_search
+function searchKeyValueInMultidimensionalArray($array, $searchKey, $searchValue) {
+    foreach ($array as $outerKey => $subArray) {
+        $column = array_column($subArray, $searchKey); // Get values by key
+        $index = array_search($searchValue, $column);  // Search for value in column
+        if ($index !== false) {
+            // return ['outerIndex' => $outerKey, 'innerIndex' => $index]; // Return outer and inner index
+            return $outerKey;
+        }
+
+    }
+    return false; // No match found
+}

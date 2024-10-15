@@ -3,7 +3,7 @@
 $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
 
-<div class="nbd-backdrop nbd-popup step hide" id="nbd-popup-continue">
+<div class="nbd-backdrop nbd-popup step hide" id="nbd-popup-continue" style="display: flex; align-items: center;">
     <div class="nbd-popup-content-wrap">
         <span class="nbd-popup-close" onclick="NBDPopup.hidePopup()">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -25,14 +25,14 @@ $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             <div class="nbd-popup-content-inner nohover">
                     <div class="popupcontent mt-15">
                         <div class="iiner" style="text-align:center;">
-                            <p style="font-size:22px; color:#003F3F; font-weight:500;" class="mb-5"><?php _e('Make sure you have filled out the questionnaire correctly.', 'transparentcard'); ?></p>
-                            <p style="font-size:18px; font-weight:300;" class="mb-0"><?php echo sprintf(__('By clicking <strong style="color:#003F3F;">%s</strong> , you ensure that you have submitted all the information you need to create your order.', 'transparentcard'), __('Continue', 'transparentcard')); ?></p>
+                            <p style="font-size:22px; color:#003F3F; font-weight:500;" class="mb-5"><?php _e('Ensure that the questionnaire is completed accurately.', 'transparentcard'); ?></p>
+                            <p style="font-size:18px; font-weight:300;" class="mb-0"><?php echo sprintf(__('By clicking <strong style="color:#003F3F;">%s</strong> , you confirm that all necessary information for your order has been provided.', 'transparentcard'), __('Continue', 'transparentcard')); ?></p>
                             
                             
 
                             <hr class="step-bottom-devider" style="height:1px; background-color: #3996d1; margin: 20px 0px;">
-                            <p style="font-size:14px; font-weight:300;" class="mb-10"><?php _e('Make sure that you have completed the entire questionnaire. If essential elements to create your design are missing, the deadline for submitting the proposal will be delayed by one business day.', 'transparentcard'); ?></p>
-                            <p style="font-size:14px; font-weight:300; line-height:18px;" class="mb-0"><?php _e('To avoid this situation, we ask that you complete all the fields of the questionnaire in order to make it as complete as possible. The more information you provide, the more elements we will have to create the design you want!', 'transparentcard'); ?></p>
+                            <p style="font-size:14px; font-weight:300;" class="mb-10"><?php _e('Please complete the entire questionnaire. Missing details may delay the proposal submission by one business day.', 'transparentcard'); ?></p>
+                            <p style="font-size:14px; font-weight:300; line-height:18px;" class="mb-0"><?php _e('To avoid this, fill in all the fields so we can gather everything needed to create your design!', 'transparentcard'); ?></p>
                             <hr class="step-bottom-devider" style="height:1px; background-color: #3996d1; margin: 20px 0px;">
                             <div class="footer d-flex gap-20 justify-content-center">
                                 <div class="flex-1 fitem d-flex align-item-center gap-20" style="text-align:right; align-items:center; justify-content:center;">
@@ -151,6 +151,13 @@ $currentUrl = $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         .nbd-gallery-wrap.nbd-gallery-column-4 .nbdesigner-item {
             width: calc(100% - <?php echo $gap; ?>px);
         }
+    }
+
+    @media only screen and (max-width:480px) {
+        .nbd-popup.nbd-backdrop.active{
+            display:flex;
+            align-items:center;
+        }    
     }
 </style>
 <script type="text/javascript">

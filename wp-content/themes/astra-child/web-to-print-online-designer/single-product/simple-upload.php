@@ -1,6 +1,6 @@
 <?php if (!defined('ABSPATH')) exit; ?>
 <div class="nbd-upload-inner">
-    <h2><?php _e('Upload design', 'web-to-print-online-designer'); ?></h2>
+    <p class="heading-2"><?php _e('Upload design', 'web-to-print-online-designer'); ?></p>
     <?php
         $login_required = ( nbdesigner_get_option( 'nbdesigner_upload_file_php_logged_in', 'no' ) !== 'no' && !is_user_logged_in() ) ? 1 : 0;
         if( $login_required ):

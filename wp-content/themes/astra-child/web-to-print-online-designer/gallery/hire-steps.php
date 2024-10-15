@@ -32,6 +32,7 @@
         <div class="img"><img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/step-4.svg'); ?>"
                 alt="<?php _e('Step 4', 'transparentcard'); ?>"></div>
         <hr>
-        <p><?php _e("Print your new design with our premium services.", 'transparentcard'); ?></p>
+        <p><?php _e("Your design will stay forever in our database, whenever you want to print the design, you don't need to pay again", 'transparentcard'); ?></p>
+        <!-- <p><?php //_e("Print your new design with our premium services.", 'transparentcard'); ?></p> -->
     </div>
 </div>

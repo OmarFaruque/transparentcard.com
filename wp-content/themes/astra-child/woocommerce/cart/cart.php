@@ -35,6 +35,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<?php
 					foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
+					
+						// echo 'meta array <br/><pre>';
+						// print_r($cart_item);
+						// echo '</pre>';
+	
+
+
 						// $meta_data = $cart_item->get_formatted_meta_data('_', true);
 						// echo 'meta data: <br/><pre>';
 						// print_r($cart_item);
@@ -150,7 +157,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 													'input_value'  => $cart_item['quantity'],
 													'max_value'    => $max_quantity,
 													'min_value'    => $min_quantity,
-													'product_name' => $product_name,
+													'product_name' => $product_name
 												),
 												$_product,
 												false
@@ -184,7 +191,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 											</div>
 										<?php endif; ?>
 
-										<?php if(isset($cart_item['nbo_cus_meta'])): ?>
+
+
+
+										<?php if(isset($cart_item['nbo_cus_meta']) && isset($cart_item['tcu_folder'])): ?>
 											<div  class="flex-1">
 												<?php echo COOL_Frontend::copy_transparent_upload($cart_item, $cart_item_key); ?>
 											</div>

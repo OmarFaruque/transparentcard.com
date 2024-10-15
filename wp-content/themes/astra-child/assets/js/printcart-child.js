@@ -131,9 +131,9 @@ var toggleBillingDetails = function(e){
 var duplicate_cart_item = function($item_key = false, $item_source_folder = '', $orientation = 'horizontal'){
 
     var nonce = nbds_frontend.nonce,    
-    cart_item_key = $item_key
+    cart_item_key = $item_key;
 
-    
+
     var fd = new FormData();
     fd.append('nonce', nonce);
     
@@ -149,23 +149,30 @@ var duplicate_cart_item = function($item_key = false, $item_source_folder = '', 
         fd.append('action', 'transparentcart_copy_item_upload');
     }
 
-    jQuery.ajax({
+
+
+     jQuery.ajax({
         url: window.nbds_frontend.url,
         method: "POST",
         processData: false,
         contentType: false,
-        data: fd
-    }).done(function( data ){
-        // console.log('return data: ', data.data)
-        if(data.data.message == 'item-duplicated'){
-            window.location.replace(data.data.redirect_url);
-        }else{
-            console.log('Something wrong: ', data.data.message)
+        data: fd,
+        success: function (data) {
+            // Handle the success response
+            if(data.data.message == 'item-duplicated'){
+                window.location.replace(data.data.redirect_url);
+            }else{
+                console.log('Something wrong: ', data.data.message)
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Handle errors here
+            alert('Form submission failed: ' + textStatus);
         }
-    })
-    .fail(function(data){
-        alert("Try again champ!");
-     });
+    });
+
+
+
 }
 
 

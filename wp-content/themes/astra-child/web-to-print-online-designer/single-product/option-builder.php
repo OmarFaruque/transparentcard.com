@@ -435,6 +435,7 @@ $currentDir = realpath(dirname(__FILE__));
         font-size: 16px;
         margin-bottom: 8px;
     }
+    .main-popup .nbd-xlabel-value-inner .heading-5,
     .main-popup .nbd-xlabel-value-inner h5{padding: 9px 0;}
     .nbd-option-wrapper label {
         cursor: pointer;
@@ -446,7 +447,11 @@ $currentDir = realpath(dirname(__FILE__));
     }
     @media (max-width: 767px) and (min-width: 320px){
     
-        .main-popup .nbd-xlabel-value-inner h5{padding: 9px 0;}
+    .main-popup .nbd-xlabel-value-inner .heading-5,
+    .main-popup .nbd-xlabel-value-inner h5
+        {
+            padding: 9px 0;
+        }
     .nbd-option-wrapper label {
         cursor: pointer;
         text-transform: capitalize;
@@ -1525,6 +1530,7 @@ tr:not(.disabled) .nbo-delivery-date-selector:hover {
 }
 
 @media (max-width: 3200px) and (min-width: 1500px) {
+.nbd-xlabel-value-inner .heading-5
 .nbd-xlabel-value-inner h5 {
     font-size: 16px!important;
     line-height: 22px;
@@ -1732,6 +1738,7 @@ span.nbo-delivery-total.ng-binding.ng-scope {
             .nbd-option-field.nbd-field-xlabel-wrap.two.nbo_artwork_action_in_child .nbd-xlabel-value{
                 /* margin-bottom: 0 !important; */
             }
+            .nbd-xlabel-value-inner .heading-5,
             .nbd-xlabel-value-inner h5{
                 font-size: 14px;
             }
@@ -1753,9 +1760,10 @@ span.nbo-delivery-total.ng-binding.ng-scope {
     .nbd-xlabel-wrap.active label.nbd-xlabel{
         transition: all 0.3s;
     }
+    .nbd-xlabel-wrap.active .nbd-xlabel-value-inner .heading-5,
     .nbd-xlabel-wrap.active .nbd-xlabel-value-inner h5{
-    background-color: #ECFF8C;
-    color: #000000;
+        background-color: #ECFF8C;
+        color: #000000;
     }
     .nbd-xlabel-wrap.active label.nbd-xlabel h5{
        
@@ -1764,6 +1772,7 @@ span.nbo-delivery-total.ng-binding.ng-scope {
         left: -2px;
         width: calc(100% + 4px);
     }
+    .nbd-xlabel-value-inner .heading-5,
     .nbd-xlabel-value-inner h5{
         border-width: 2px;
         padding: 5px 0;
@@ -2521,6 +2530,7 @@ span.nbo-delivery-total.ng-binding.ng-scope {
         background: transparent;
         box-shadow: none;
     }
+    .nbd-xlabel-value-inner .heading-5,
     .nbd-xlabel-value-inner h5 {
         font-size: 12px;
         line-height: 22px;
@@ -3390,7 +3400,7 @@ if( $cart_item_key != ''){ ?>
         $scope.sticky_cart_collopse = function(){
             jQuery(document.body).find('#coolCardStickyCart').toggleClass('sticky-toggle');
             jQuery(document.body).find('.nb-back-to-top-wrap').toggleClass('sticky-cart-clopsed');
-
+            jQuery(document.body).toggleClass('sticky-cart-active');
             let windowWidth = jQuery(window).width();
             if(windowWidth <= 480){
                 if(jQuery(document.body).find('#coolCardStickyCart').hasClass('sticky-toggle')){
@@ -3410,8 +3420,6 @@ if( $cart_item_key != ''){ ?>
                 var check = {}, total_check = true, show_popup_trigger = false;
                 
                 $scope.row_delivery = [];
-
-                // console.log('scope value: ', $scope.nbd_fields);
                 
                 if(typeof $scope.turnaround_quantity_break != 'undefined'){
                     $scope.turnaround_quantity_breaks.forEach((sd, sk) => {
@@ -3419,6 +3427,7 @@ if( $cart_item_key != ''){ ?>
                     });
                 }
                 angular.forEach($scope.nbd_fields, function(field, field_id){
+
 
 
                     
@@ -4171,24 +4180,6 @@ if( $cart_item_key != ''){ ?>
                     $scope.checktemplate_url();
                 }, 500);
             <?php endif; ?>
-
-            setTimeout(() => {
-                
-                let activeItem = false;
-                if(typeof $scope.turnaround_quantity_breaks != 'undefined'){
-                    $scope.turnaround_quantity_breaks.forEach((v, i) => {
-                        if(!v.desabled){
-                            $scope.turnaround_matrix[i].forEach((k, n) => {
-                                if(k.active) activeItem = true;
-                            })
-                        }
-                    });
-                    if(!activeItem){
-                        jQuery(document.body).find('div.nbo-delivery-wrapper tbody tr.ng-scope.tr-active').first().find('td:nth-child(2)').trigger('click');
-                    }
-                    if ($scope.$root.$$phase !== "$apply" && $scope.$root.$$phase !== "$digest") $scope.$apply(); 
-                }
-            }, 1000);
             
         };
         $scope.change_gallery_image = function( gallery_images, folder ){
@@ -7897,40 +7888,57 @@ if( $cart_item_key != ''){ ?>
         });
 
 
+        var store_turnaround_matrix_to_db = function(){
+            var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
+            var data = {
+                product_id: $scope.product_id,
+                matrix: $scope.turnaround_matrix,
+                action: 'transparentcard_transaint_matrix'
+            };
+
+            jQuery.ajax({
+                url: $scope.ajax_url,
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    let thisheref = jQuery('a#useTemplate').attr('href');
+                    let url = new URL(thisheref);
+                    let price = $scope.total_cart_item_price_num;
+                    let turnaroundposition = $scope.current_turnaround_position;
+                    
+                    let options = [];
+                    angular.forEach($scope.nbd_fields, function(field, field_id){
+                        options.push(`${field_id}-${field.value}`)
+                    })
+                    url.searchParams.append('options', options.toString())
+                    url.searchParams.append('qty', $scope.quantity)
+                    url.searchParams.append('price', price);
+                    url.searchParams.append('source', 'single-product');
+                    url.searchParams.append('turnaroundposition', turnaroundposition.join('-'));
+
+                    localStorage.setItem('nbd_fields_' + $scope.product_id, JSON.stringify($scope.nbd_fields));
+
+
+                    window.location.replace(url.href);  
+                }
+            });
+        }
+ 
+
         // Save data to localstorage
         jQuery(document.body).on('click', 'a#useTemplate', function(e){
             e.preventDefault();
-            var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
-            let thisheref = jQuery(this).attr('href');
-            let url = new URL(thisheref);
-            let price = $scope.total_cart_item_price_num;
-            
-            let options = [];
-            angular.forEach($scope.nbd_fields, function(field, field_id){
-                options.push(`${field_id}-${field.value}`)
-            })
-            url.searchParams.append('options', options.toString())
-            url.searchParams.append('qty', $scope.quantity)
-            url.searchParams.append('price', price);
-            url.searchParams.append('source', 'single-product');
-
-            // console.log('final_price: ', $scope.final_price);
-
-            localStorage.setItem('nbd_selected_unit_price' + $scope.product_id, $scope.final_price);
-            localStorage.setItem('nbd_fields_' + $scope.product_id, JSON.stringify($scope.nbd_fields));
-
-
-            window.location.replace(url.href);                
-            
+            store_turnaround_matrix_to_db();
+            // var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
         });
 
-        
+
         // get url
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const transparent_source = urlParams.get('source');
-
+        
         if(transparent_source == 'single-product'){
             jQuery(document.body).find('.nbd-popup.popup-nbo-options').removeClass('nb-show');
         }
@@ -7947,11 +7955,20 @@ if( $cart_item_key != ''){ ?>
 
             if(urlParams.has('options')){
                 let options = urlParams.get('options');
+                let turnaroundposition = urlParams.get('turnaroundposition');
+                if(turnaroundposition){
+                    turnaroundposition = turnaroundposition.split('-');
+                    let targettd = parseInt(turnaroundposition[1]) + 2;
+                    let targetrow = parseInt(turnaroundposition[0]) + 1;
+                    jQuery(document.body).find('.nbo-delivery-wrapper tbody tr:nth-child('+targetrow+') td:nth-child('+targettd+')').trigger('click');
+                }
+
+
                 options = options.split(',');
                 options.forEach(function(v, k){
                     let singleItem = v.split('-');
                     if(singleItem[1] == '1'){
-                        jQuery(document.body).find('div[data-id="'+singleItem[0]+'"]').find('.nbd-xlabel-wrapper > div:last-child label').trigger('click');
+                        jQuery(document.body).find('div[data-id="'+singleItem[0]+'"]').find('.nbd-xlabel-wrapper .nbd-xlabel-wrap > label').trigger('click');
                     }
                 });
             }
@@ -7959,14 +7976,23 @@ if( $cart_item_key != ''){ ?>
             if(transparent_source && transparent_source == 'single-product'){
                 jQuery(document.body).find('a.nbd-button.nbo-apply.ng-binding').trigger('click');
             }
+        }, 2000);
+
+
+        setTimeout(() => {
+            var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
+            let activeItem = false;
+            if(typeof $scope.turnaround_quantity_breaks != 'undefined'){
+                $scope.turnaround_quantity_breaks.forEach((v, i) => {
+                    if(!v.desabled){
+                        $scope.turnaround_matrix[0][0].active = true;
+                        jQuery(document.body).find('.regular-price.start-from span > span.amount_total').text($scope.turnaround_matrix[0][0].total_cart_price);
+                        jQuery(document.body).find('.regular-price.start-from').show();
+                    }
+                });
+                if($scope.$root.$$phase !== "$apply" && $scope.$root.$$phase !== "$digest") $scope.$apply(); 
+            }
         }, 1000);
-        
-
-
-
-        
-        
-
 
     });
     

@@ -29,7 +29,12 @@ if( count( $templates ) ):  ?>
             }
             if(isset($_GET['options'])){
                 $urlArgs['options'] = $_GET['options'];
-                
+            }
+            if(isset($_GET['qty'])){
+                $urlArgs['qty'] = $_GET['qty'];
+            }
+            if(isset($_GET['turnaroundposition'])){
+                $urlArgs['turnaroundposition'] = $_GET['turnaroundposition'];
             }
             
             $link_template  = add_query_arg( $urlArgs, $UrlPageNBD );
@@ -59,7 +64,7 @@ if( count( $templates ) ):  ?>
                     </div> -->
                     <?php if( $temp['type'] != 'solid' ): ?>
                     <div class="nbd-gallery-item-more-acction customize">
-                        <a href="<?php echo esc_url( $link_template ); ?>"><?php esc_html_e('Jetzt Gestalten', 'web-to-print-online-designer'); ?></a>
+                        <a href="<?php echo esc_url( $link_template ); ?>"><?php esc_html_e('Design now', 'web-to-print-online-designer'); ?></a>
                     </div>
                     <?php endif; ?>
                 </div>

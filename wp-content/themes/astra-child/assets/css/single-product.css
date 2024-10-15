@@ -240,8 +240,12 @@ div#expert_designer_meterials {
 
 div#overviewbtn {
     position: absolute;
-    bottom: 1px;
-    right: 3px;
+    bottom: 12px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 div#overviewbtn a {
     background-color: #ECFF8C;
@@ -251,7 +255,11 @@ div#overviewbtn a {
     overflow: hidden;
     position: relative;
     text-decoration: none;;
-    display: block;
+    display: flex;
+    margin: 0;
+    gap: 5px;
+    align-items: center;
+    height:40px;
 }
 div#overviewbtn a:after {
     content: '';
@@ -287,13 +295,6 @@ div#overviewbtn a:hover:before{
 }
 
 
-
-
-
-
-
-
-
 div#coolCardStickyCart div.sticky-cart-price p {
     font-size: 23px;
     color: #ffffff!important;
@@ -313,7 +314,6 @@ font-size: 16px;}
     padding-right: 10px;
     padding-bottom: 15px;
     padding-left: 10px;
-    background: #4234A8!important;
 }
 body .elementor-button {
     padding-top: 15px;
@@ -321,9 +321,7 @@ body .elementor-button {
     padding-bottom: 15px;
     padding-left: 10px!important; 
 }
-.elementor-menu-cart__footer-buttons .elementor-button--checkout {
-	    background: #4234A8!important;
-}
+
 .elementor-menu-cart__product-price{
 	    color: #000000!important;
 }
@@ -350,17 +348,7 @@ div#overviewbtn span.nbo-float-summary-toggle svg path {
     fill: #10153E;
 }
 .regular-price.start-from{}
-.regular-price.start-from span{
-    display: inline-block;
-    padding: 5px 21px;
-    border: 1px solid indianred;
-    border-radius: 3px;
-    background-color: indianred;
-    color: white;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-    font-size: 17px;
-}
+
 .tooltipster-box {
     background-color: #333 !important; /* Replace with your desired color */
     border-color: #222 !important;
@@ -381,4 +369,22 @@ div#overviewbtn span.nbo-float-summary-toggle svg path {
         bottom:0px;
         margin-bottom: 5px;
     } */
+}
+
+.regular-price.start-from > span {
+    padding: 5px 21px;
+    border: 1px solid #ecff8c;
+    background-color: #ecff8c;
+	color: #003f3f;
+	box-shadow: 0 0 10px rgba(0,0,0,0.15);
+	margin-bottom: 30px;
+	display: inline-block;
+	letter-spacing: unset;
+	border-radius: 5px;
+	font-weight: 600;
+}
+
+body.single-product:not(.sticky-cart-active){
+    padding-bottom: 60px;
+    transition: all 0.5s;
 }

@@ -159,29 +159,8 @@
             jQuery('.nbd-sidebar-con-inner.wishlist').prepend(wish_html);
         }
     };
-    var nbd_preview_html = [];
-    var previewTempalte = function(e, tid){
-        e.preventDefault();
-        NBDPopup.initPopup();
-        if( nbd_preview_html[tid] != undefined ){
-            jQuery('.nbd-popup-content-inner').html(nbd_preview_html[tid]);
-        }else{
-            jQuery('#nbd-popup-loading').removeClass('hide');
-            jQuery('.nbd-popup-content-inner').addClass('hide');
-            jQuery.ajax({
-                url: nbds_frontend.url,
-                method: "POST",
-                data: 'action=nbd_get_template_preview&template_id='  +  tid  + '&nonce=' + nonce
-            }).done(function(data){
-                if( data.flag == 1 ){
-                    jQuery('.nbd-popup-content-inner').html(data.html);
-                    nbd_preview_html[tid] = data.html;
-                }
-                jQuery('#nbd-popup-loading').addClass('hide');
-                jQuery('.nbd-popup-content-inner').removeClass('hide');
-            });
-        }
-    };
+
+
     var nbd_list_product_html = '';
     var showPopupCreateTemplate = function(){
         NBDPopup.initPopup();

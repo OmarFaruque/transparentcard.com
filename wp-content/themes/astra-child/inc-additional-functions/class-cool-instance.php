@@ -269,6 +269,7 @@ final class COLFinal_Instance{
         flush_rewrite_rules();
         remove_shortcode( 'netbase_template_online_design' );
         COOL_CoolcardsTax::get_instance();
+        COOL_User::get_instance();
         if (is_admin()) {
             new COOL_Backend();
         }

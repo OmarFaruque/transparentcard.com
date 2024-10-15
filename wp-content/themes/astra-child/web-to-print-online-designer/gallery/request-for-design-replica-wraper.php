@@ -621,15 +621,15 @@ if (isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_uploa
                                 <div>
                                     <div class="logo-uploader-wrapper">
                                         <p><?php _e('Upload Logo', 'transparentcard'); ?></p>
-                                        <label for="logo_file" class="logouploader d-hide">
+                                        <label for="logo_file" class="logouploader <?php echo isset($additionalMetas['logo']) && $additionalMetas['logo'] == "Upload Logo" ? '' : ' d-hide'; ?>">
                                             <input type="file" name="logo_file" id="logo_file" class="form-control"  accept=".jpg, .jpeg, .png, .tif, .ai, .bmp, .pdf, .eps, .psd, .cdr, .indd">
                                             <?php _e('Upload', 'transparentcard'); ?>
                                         </label>
-                                        <div class="required-tag for-logo d-hide">
+                                        <div class="required-tag for-logo <?php echo isset($additionalMetas['logo']) && $additionalMetas['logo'] == "Upload Logo" ? '' : ' d-hide'; ?>">
                                             <?php _e('For uploading logo, attachment is required', 'transparentcard'); ?>
                                         </div>
                                     </div>
-                                    <div class="logouploader-note d-hide">
+                                    <div class="logouploader-note <?php echo isset($additionalMetas['logo']) && $additionalMetas['logo'] == "Upload Logo" ? '' : ' d-hide'; ?>">
                                         <small style="color:red;"><?php _e('For upload logo, attachment is required.', 'transparentccard') ?></small>
                                     </div>
                                 </div>

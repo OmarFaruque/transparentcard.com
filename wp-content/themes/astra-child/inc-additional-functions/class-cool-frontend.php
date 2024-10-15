@@ -1,14 +1,18 @@
 <?php
+
+
 // use NBD_Template_Tag;
 class COOL_Frontend extends My_Design_Endpoint{
     protected $selected_sizes;
     protected $wpdb;
+    
 
     public static $designendpoint = 'my-designs';
 
     public function __construct(){
         global $wpdb;
         $this->wpdb = $wpdb;
+    
 
         add_action( 'wp_enqueue_scripts', array($this, 'registerCSS') );
         add_action( 'nbd_extra_css', array($this, 'nbd_extra_css'), 5, 1 );
@@ -111,7 +115,7 @@ class COOL_Frontend extends My_Design_Endpoint{
 
         add_action( 'woocommerce_cart_calculate_fees', array( $this, 'add_cart_fee' ), 1, 1 );
 
-        add_action('woocommerce_before_calculate_totals', array($this, 'transparentcard_set_price_in_cart'), 5, 1);
+        add_action('woocommerce_before_calculate_totals', array($this, 'transparentcard_set_price_in_cart'), 15, 1);
 
         
       
@@ -120,19 +124,90 @@ class COOL_Frontend extends My_Design_Endpoint{
         add_action( 'wp_head', function(){
 
 
-            // $term_id = 60; // Replace with the actual term ID
-            // $taxonomy = 'template_tag'; // Replace with your custom taxonomy slug
-            
-            // $term_link = get_term_link( $term_id, $taxonomy );
+            // echo 'test option <br/><pre>';
+            // print_r(get_option( 'testO', array()));
+            // echo '</pre>';
 
-            // echo 'term link: ' . $term_link . '<br/>';
-
-            // echo 'options: ' . get_option( 'testoption', '' ) . '<br/>';
 
             
         } );
     }
 
+
+
+    /**
+     * Return js variable for live chat 
+     * 
+     * @copy from wp-nb-designer plugin class-live-chat.php
+     */
+    public function live_chat_js_options($is_admin = false, $in_editor = false){
+        return array(
+            'is_admin'              => $is_admin,
+            'in_editor'             => $in_editor,
+            'ajax_url'              => admin_url( 'admin-ajax.php' ),
+            'nonce'                 => wp_create_nonce('nbd_live_chat'),
+            'project_id'            => nbdesigner_get_option( 'nbdesigner_live_chat_firebase_project_id', '' ),
+            'api_key'               => nbdesigner_get_option( 'nbdesigner_live_chat_firebase_api_key', '' ),
+            'enable_giphy'          => nbdesigner_get_option( 'nbdesigner_live_chat_enable_giphy', 'yes' ),
+            'enable_emoji'          => nbdesigner_get_option( 'nbdesigner_live_chat_enable_emoji', 'yes' ),
+            'giphy_app_key'         => nbdesigner_get_option( 'nbdesigner_live_chat_giphy_app_key', 'fEm1RvxSzG7IGQcw5XUZKcjSY6zzl8Ir' ),
+            'max_guest'             => nbdesigner_get_option( 'nbdesigner_live_chat_max_guest', '' ),
+            'assets_url'            => NBDESIGNER_ASSETS_URL,
+            'font_url'              => NBDESIGNER_FONT_URL,
+            'default_avatar'        => $this->get_default_avatar(),
+            'langs'                 => $this->get_i18n_javascript(),
+            'user'                  => $this->get_user_data()
+        );
+    }
+
+    public function get_default_avatar(){
+        $default_avatar         = nbdesigner_get_option( 'nbdesigner_live_chat_default_avatar', '' );
+
+        if( $default_avatar ){
+            return wp_get_attachment_url( $default_avatar );
+        }
+
+        return NBDESIGNER_ASSETS_URL . 'images/avatar.png';
+    }
+
+    public function get_i18n_javascript(){
+        $lang = array(
+            'chat'                          => esc_html__( 'chat', 'web-to-print-online-designer' ),
+            'new_message_from'              => esc_html__( 'New message from:', 'web-to-print-online-designer' ),
+            'apply_macro'                   => esc_html__( 'Apply macro', 'web-to-print-online-designer' ),
+            'customer_stop_share_desgin'    => esc_html__( 'Customer stop share the desgin!', 'web-to-print-online-designer' ),
+            'frequently_used'               => esc_html__( 'Frequently used', 'web-to-print-online-designer' ),
+            'greeting'                      => stripslashes( nbdesigner_get_option( 'nbdesigner_live_chat_greeting', 'Hi 👋👋. How can we help you?' ) ),
+            'confirm_delete_macro'          => esc_html__( 'Are you sure you want to delete selected macros.', 'web-to-print-online-designer' )
+        );
+        return $lang;
+    }
+
+    public function get_user_data(){
+        $display_name   = '';
+        $user_email     = '';
+        $logged         = false;
+        $user_id        = '';
+
+        if( is_user_logged_in() ){
+            $current_user = wp_get_current_user();
+            $display_name = $current_user->display_name;
+            $user_email   = $current_user->user_email;
+            $logged       = true;
+            $user_id      = $current_user->ID;
+        }
+
+        return array(
+            'id'            => $user_id,
+            'name'          => $display_name,
+            'email'         => $user_email,
+            'is_mod'        => ( current_user_can( 'shop_manager' ) || current_user_can( 'manage_options' ) ) ? 1 : 0,
+            'logged'        => $logged,
+            'avatar'        => $logged ? get_avatar_url( $user_email, 96 ) : '',
+            'ip'            => nbd_get_client_ip(),
+            'current_page'  => nbd_get_current_page()
+        );
+    }
 
     /**
      * Set custom price to product unit price for template custom items 
@@ -142,11 +217,51 @@ class COOL_Frontend extends My_Design_Endpoint{
      * @return object
      */
     public function transparentcard_set_price_in_cart($cart){
-        foreach ($cart->get_cart() as $cart_item) {
-            if (isset($cart_item['nbo_unit_price'])) {
-                $cart_item['data']->set_price($cart_item['nbo_unit_price']);
+
+    
+        foreach ($cart->get_cart() as $k => $cart_item) {
+            $forAdditionalFeaturePrice = false;
+
+            if(isset($cart_item['nbo_cus_meta'])) $forAdditionalFeaturePrice = true;
+            if($forAdditionalFeaturePrice ){
+
+                $source = $cart_item['form_source'] ?? '';
+
+                $quantity = $cart_item['quantity'] ?? 0;
+                
+                $delivery_index = 0;
+                if(!empty( $source )){
+                    $parsed_url = parse_url($source, PHP_URL_QUERY);
+
+                    parse_str($parsed_url, $query_params);
+
+                    $delivery_index = $query_params['turnaroundposition'] ?? 0;
+                    $delivery_index = explode('-', $delivery_index);
+                    $delivery_index = $delivery_index[1];
+                }
+    
+                $product_id = $cart_item['product_id'];
+
+                $price_metrix = get_transient( 'turnaround_matrix_' . $product_id );
+                
+                $qtybreakIndex = searchKeyValueInMultidimensionalArray($price_metrix, 'qty', $quantity);
+
+
+
+                $totalPrice = $price_metrix[$qtybreakIndex][$delivery_index]['total_cart_price'];
+                $totalPrice = preg_replace('/[^0-9.,]/', '', $totalPrice);
+                $totalPrice = (float) $totalPrice;
+
+                $unitPrice = $totalPrice / $quantity;
+
+                $cart_item['data']->set_price($unitPrice);
             }
+
+            // if (isset($cart_item['nbo_unit_price'])) {
+            //     $cart_item['data']->set_price($cart_item['nbo_unit_price']);
+            // }
         }
+
     }
 
 
@@ -311,13 +426,17 @@ class COOL_Frontend extends My_Design_Endpoint{
             foreach($values['nbo_additional_meta'] as $s => $singleAdditional){
                 if(in_array($s, array('service_total', 'pid') ) ) continue;
 
+                $s = match (expression) {
+                     'company_name'=> __('Person / Company Name', 'transparentcard'),
+                     default => $s
+                };
+
                 $title = str_replace('_', ' ', $s);
                 $title = ucwords($title);
 
                 $singlevalue = match ($s) {
                      'colors' => color_to_html($singleAdditional),
                      'business_category' => selected_business_category($singleAdditional),
-                     'company_name' => __('Person / Company Name', 'transparentcard'),
                      default  => $singleAdditional,
                 };
 
@@ -415,9 +534,9 @@ class COOL_Frontend extends My_Design_Endpoint{
                 );
             endforeach;
 
-            if(isset($_POST['unit_price'])){
-                $cart_item_data['nbo_unit_price'] = $_POST['unit_price'];    
-            }
+            // if(isset($_POST['unit_price'])){
+            //     $cart_item_data['nbo_unit_price'] = $_POST['unit_price'];    
+            // }
 
 
             $cart_item_data['nbo_cus_meta'] = $nbo_meta;
@@ -444,9 +563,9 @@ class COOL_Frontend extends My_Design_Endpoint{
             $options = unserialize( $_options['fields'] );
 
             
-            if(isset($_POST['unit_price'])){
-                $cart_item_data['nbo_unit_price'] = $_POST['unit_price'];    
-            }
+            // if(isset($_POST['unit_price'])){
+            //     $cart_item_data['nbo_unit_price'] = $_POST['unit_price'];    
+            // }
 
             $user_id = $_POST['userid'];
 
@@ -784,9 +903,15 @@ class COOL_Frontend extends My_Design_Endpoint{
                jQuery('div.woocommerce').on('change', 'select#qty_transparentcard_selection', function(){
                   jQuery('[name=\'update_cart\']').trigger('click');
                });
+               jQuery(document.body).on('updated_cart_totals', function() {
+                location.reload();
+               }); 
+                            
             " );
          }
     }
+
+
 
     /**
      * JS script after cart page 
@@ -838,7 +963,7 @@ class COOL_Frontend extends My_Design_Endpoint{
 
         $html = '';
         $html .= '<div class="nbd-cart-copy-order-item nbd-cart-item-copy-Item mt-0" style="margin-top:0; height: 100%;">';
-        $html .=    '<a class="button nbd-copy-orderItem duplicate_cart_item_upload" data-orientation="'.$orientation.'" data-design_folder="'.$nbd_session.'" data-item_key="'.$cart_item_key.'"  href="#"><span>' . __('Add new', 'transparentcard') . '</span></a>';
+        $html .=    '<a class="button nbd-copy-orderItem duplicate_cart_item" data-orientation="'.$orientation.'" data-design_folder="'.$nbd_session.'" data-item_key="'.$cart_item_key.'"  href="#"><span>' . __('Add new', 'transparentcard') . '</span></a>';
         $html .= '</div>';
         echo $html;
     }
@@ -856,7 +981,7 @@ class COOL_Frontend extends My_Design_Endpoint{
      */
     public static function copy_transparent_upload($cart_item = array(), $cart_item_key = ""){
         
-        $nbd_session = $cart_item['tcu_folder'];
+        $nbd_session = $cart_item['tcu_folder'] ?? $cart_item['nbd_item_meta_ds']['nbu'];
 
         $html = '';
         $html .= '<div class="nbd-cart-copy-order-item nbd-cart-item-copy-Item mt-0" style="margin-top:0; height: 100%;">';
@@ -1411,7 +1536,7 @@ class COOL_Frontend extends My_Design_Endpoint{
         ?>
             NBDESIGNCONFIG.child_assets_url = "<?php echo get_stylesheet_directory_uri(  ); ?>/assets/img";
             NBDESIGNCONFIG.is_backend = "<?php echo (isset($_GET['rd']) && $_GET['rd'] == 'admin_templates') ? true : false; ?>";
-            NBDESIGNCONFIG.nbd_process_text = "<?php esc_attr_e( 'Bestellung fortsetzen', 'transparantcards' ); ?>";
+            NBDESIGNCONFIG.nbd_process_text = "<?php esc_attr_e( 'Continue order', 'transparantcards' ); ?>";
         <?php
         
         
@@ -1461,7 +1586,7 @@ class COOL_Frontend extends My_Design_Endpoint{
             $orientations = get_term_by( 'id', $query->orientation, 'orientation');
         }
         
-        return $orientations->slug;
+        return $orientations->slug ?? '';
     }
 
 
@@ -2149,7 +2274,39 @@ class COOL_Frontend extends My_Design_Endpoint{
         global $product;
         $product_images = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'thumbnail' );
         $product_images = $product_images[0] ?? wc_placeholder_img_src('thumbnail');
+
+        $show_button_use_our_template = 0;
+        if( nbdesigner_get_option('nbdesigner_button_link_product_template', 'no') == 'yes' ){
+            $templates = nbd_get_templates( $product->get_id(), 0, '', false, false, false, 'all' );
+            if( count( $templates ) > 0 ) $show_button_use_our_template = 1;
+        }
         
+        if( nbdesigner_get_option('nbdesigner_button_hire_designer', 'no') == 'yes' ){
+            $artwork_action = get_transient( 'nbo_action_' . $product->get_id() );
+            if( false !== $artwork_action ){
+                $show_button_use_our_template   = nbdesigner_get_option( 'nbdesigner_separate_design_buttons', 'no' ) == 'yes' ? $show_button_use_our_template : 0;
+            }
+        }
+        
+
+        $urlArgs = array(
+            'pid'    => $product->get_id()
+        );
+        
+        $nbd_settings = get_post_meta( $product->get_id(), '_designer_setting', true );
+        if($nbd_settings){
+            $nbd_settings = unserialize($nbd_settings);
+            $real_width = $nbd_settings[0]['real_width'] ?? 0;
+            $real_height = $nbd_settings[0]['real_height'] ?? 0;
+            $size_slug = $real_width . 'x' . $real_height . '-mm';
+            $sizedetails = get_term_by('slug', $size_slug, 'paper_size' );
+        
+            if($sizedetails)
+                $urlArgs['size'] = $sizedetails->term_id;
+        }
+        
+        
+        $template_gallery_url   = add_query_arg( $urlArgs, getUrlPageNBD( 'gallery' ) );
 
         ?>
         <style>
@@ -2164,8 +2321,8 @@ class COOL_Frontend extends My_Design_Endpoint{
             
             div#collopse_sticky {
                 position: absolute;
-                top: 7px;
-                left: 7px;
+                top: 20px;
+                left: 10px;
                 transition: all 0.5s;
             }
             @media only screen and (max-width: 480px) {
@@ -2173,7 +2330,16 @@ class COOL_Frontend extends My_Design_Endpoint{
                     top: 19px;
                 }
                 div#overviewbtn a{
-                    padding: 19px 22px;
+                    padding: 8px 15px;
+                }
+                #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn){
+                    justify-content:start;
+                }
+                div#overviewbtn{
+                    bottom:10px;
+                }
+                div#overviewbtn a svg {
+                    margin: 0;
                 }
             }
             div#coolCardStickyCart.sticky-toggle div#collopse_sticky{
@@ -2198,7 +2364,7 @@ class COOL_Frontend extends My_Design_Endpoint{
                 fill: var(--ast-global-color-hover-0);
             }
             #coolCardStickyCart{
-                z-index: 10;
+                z-index: 99;
                 max-width: 100%; 
                 width: 100%;
                 transition: all 0.3s;
@@ -2207,23 +2373,28 @@ class COOL_Frontend extends My_Design_Endpoint{
             
             @media only screen and (min-width: 481px) {
                 #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn){
-                    padding: 10px 115px 10px 0;    
+                    padding: 20px 115px 20px 0;    
                 }    
             }
             @media only screen and (max-width: 480px) {
                 #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn){
-                    padding: 20px 0px 20px 0;    
+                    padding: 20px 0px 20px 60px;    
                 }    
+            }
+
+            @media only screen and (min-width: 481px) {
+                #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn){
+                    justify-content: space-around;
+                }
             }
 
             #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn){
                 display: grid;
-                justify-content: space-around;
                 align-content: stretch;
                 align-items: start;
                 justify-items: stretch;
                 box-shadow: -1px -1px 0.5em;
-                border-radius: 7px 0 0 0;
+                /* border-radius: 7px 0 0 0; */
             }
             #coolCardStickyCart > div > div:not(#collopse_sticky):not(#overviewbtn) > div:last-child{
                 display: grid;
@@ -2283,6 +2454,19 @@ class COOL_Frontend extends My_Design_Endpoint{
                 </div>
                 <div id="overviewbtn">
                     <div>
+                    <?php if( $show_button_use_our_template ): ?>
+            
+                        <a class="button alt nbdesign-button start-design" id="useTemplate" href="<?php echo $template_gallery_url;?>">
+                            <span class="overviewText"><?php esc_html_e( 'Process Next', 'web-to-print-online-designer' ); ?></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                            </svg>
+                        </a>
+                    
+                    <?php endif; ?>
+                    </div>
+
+                    <div>
                         <a href="#" class="btn btn-primary" ng-click="toggle_float_summary()">
                             <span class="nbo-float-summary-toggle">
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -2297,12 +2481,12 @@ class COOL_Frontend extends My_Design_Endpoint{
                     
                     <div class="cool-row">
                         <div class="sticky-cart-price mb-0 d-flex align-item-center gap-10">
-                            <span><?php _e('Preis', 'web-to-print-online-designer'); ?>:</span>
+                            <span><?php _e('Price', 'web-to-print-online-designer'); ?>:</span>
                             <p class="cart-price mb-0 text-bold"><?php echo get_woocommerce_currency_symbol(); ?>{{total_cart_item_price_num | number:2}}</p>
                         </div>
                         <div class="d-flex gap-20 justify-content-end align-item-center">
                             <div class="d-flex gap-5 qty justify-content-left align-item-center">
-                                <span><?php _e('Menge', 'web-to-print-online-designer'); ?>:</span>
+                                <span><?php _e('Quantiy', 'web-to-print-online-designer'); ?>:</span>
                                 <p class="qty mb-0 text-bold">{{quantity}}</p>
                             </div>
                             <div>
@@ -2486,8 +2670,8 @@ class COOL_Frontend extends My_Design_Endpoint{
             wp_enqueue_style( 'tooltip-css' );    
         }
 
+
         //JS
-        
         if(is_tax( 'template_tag' )){
             wp_enqueue_script('masonry');      
         }
@@ -2501,6 +2685,20 @@ class COOL_Frontend extends My_Design_Endpoint{
         if(is_product()){
             wp_enqueue_script( 'tooltipster-js' );
         }
+
+
+
+        // De-register live change js 
+        if (wp_script_is('nbd_live_chat', 'enqueued')) {
+            wp_dequeue_script('nbd_live_chat');
+            wp_deregister_script('nbd_live_chat');
+        }
+
+        // REgister live chat js again.
+        $depend_arr = array( 'jquery', 'angularjs', 'firebase-app', 'firebase-auth', 'firebase-database', 'nbd-perfect_scrollbar' );
+        wp_register_script( 'nbd_live_chat-cus', get_stylesheet_directory_uri() . '/assets/js/live-chat.js', $depend_arr, NBDESIGNER_VERSION );
+        wp_enqueue_script( array( 'nbd_live_chat-cus' ) );
+        wp_localize_script( 'nbd_live_chat-cus', 'nbd_live_chat', $this->live_chat_js_options( false, false ) );
     }
 
      /**

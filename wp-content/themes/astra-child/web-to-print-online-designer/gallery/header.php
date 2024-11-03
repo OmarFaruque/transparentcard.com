@@ -1,3 +1,6 @@
+
+
+
 <section id="header" class="header-fileupload fullscreen box-shadow" style="background-color:#ECFF8C;">
     <div class="innersect ast-container ml-auto mr-auto">
         <div class="d-flex align-item-start">
@@ -22,6 +25,9 @@
 </section>
 <section class="backbtn">
         <!-- Header -->
+        <?php if($args['single']): ?>
+            <div class="ast-container ml-auto mr-auto">
+        <?php endif; ?>
         <div class="choose-design-template-header mt-20">
             <div class="back-to-product">
                 <a href="<?php echo esc_url( get_the_permalink( $_GET['pid'] ) ); ?>" class="back-to-template-gallery-btn color-white" style="padding:15px 30px;">
@@ -34,6 +40,9 @@
                 </a>
             </div>
         </div><!-- /Header -->
+        <?php if($args['single']): ?>
+        </div>
+    <?php endif; ?>
 </section>
 <style>
     .youarebuying {

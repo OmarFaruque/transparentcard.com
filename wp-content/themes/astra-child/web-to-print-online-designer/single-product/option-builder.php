@@ -20,15 +20,20 @@ if( $nbd_product_option ){
     $dimension_unit = nbdesigner_get_option( 'nbdesigner_dimensions_unit', 'cm' );
 }
 
+$fromgallary = false;
 if( isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View'){
     if( isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'catalog'){
         $nbd_qv_type == '1';
     }else{
-        $in_design_editor = true;
+        $in_design_editor = isset($_REQUEST['source']) ? false : true;
     }
     if( $nbd_qv_type == '2'){
         $display_type       = 1;
         $sublist_position   = 'b';
+    }
+    if(isset($_REQUEST['source']) && $_REQUEST['source'] == 'gallery' ){
+        $in_design_editor = false;
+        $fromgallary = true;
     }
 }
 global $in_nbau_mode_2;
@@ -1523,11 +1528,6 @@ tr:not(.disabled) .nbo-delivery-date-selector:hover {
     margin-bottom: 0px!important;
 }
 
-@media only screen and (min-width: 481px) {
-    div.quick-view div.quick-view-image{
-        position: fixed;
-    }
-}
 
 @media (max-width: 3200px) and (min-width: 1500px) {
 .nbd-xlabel-value-inner .heading-5
@@ -2449,14 +2449,13 @@ span.nbo-delivery-total.ng-binding.ng-scope {
         flex-wrap: nowrap !important;
         }
     }
-@media (max-width: 767px) and (min-width: 320px){
+    @media (max-width: 767px) and (min-width: 320px){
         .nbd-option-wrapper .nbd-xlabel-wrap,
         main.shop-main .single-product-wrap .cart{
             margin-right: 0;
         }
-        
     }
- @media (max-width: 767px) and (min-width: 320px){
+    @media (max-width: 767px) and (min-width: 320px){
         .nbd-field-xlabel-wrap:not(.nbo_artwork_action_in_child) .nbd-xlabel-wrapper.vc_row-fluid.count_3{
             padding-bottom: 28px;
         }
@@ -2481,7 +2480,7 @@ span.nbo-delivery-total.ng-binding.ng-scope {
             height: 70px;
         } */
     }
- @media (max-width: 767px) and (min-width: 320px){
+    @media (max-width: 767px) and (min-width: 320px){
         .nbo-detail-popup-wrap .main-popup {
             width: calc(100% - 30px);;
         }
@@ -2560,16 +2559,94 @@ a {
     background-color: #1b9c85;
 }
 
+
+
+
+
+.woocommerce.quick-view ul li:before,
+.woocommerce-product-details__short-description ul li:before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background-image: url(<?php echo esc_url( get_stylesheet_directory_uri(  ) . '/assets/img/li-icon.svg'); ?>);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+.woocommerce.quick-view ul,
+.woocommerce-product-details__short-description ul {
+    list-style: none;
+}
+
+.woocommerce.quick-view ul li,
+.woocommerce-product-details__short-description ul li {
+    margin: 12px 0px;
+    padding-left: 20px;
+    position: relative;
+}
+.nbd-popup.popup-nbo-options .main-popup{
+    background-color:#d9d9d9;
+}
+.nbd-popup.popup-nbo-options .nbd-option-field {
+    background-color: white;
+}
+.quick-view-image.transparent-popup-details {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+@media only screen and (min-width:480px) {
+    .quick-view-image.transparent-popup-details .singleitem:first-child > div{
+        background-color:white;
+        height:100%;
+        padding:20px 30px;
+        position:relative;
+    }
+    .quick-view-image.transparent-popup-details .singleitem:first-child{
+        flex:2;
+        position:relative;
+    }
+    .quick-view-image.transparent-popup-details .singleitem:last-child{
+        flex:3;
+        flex-grow:3;
+    }
+
+
+    .woocommerce.quick-view .nbo-delivery {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        box-sizing: border-box;
+    }
+    .nbd-popup.popup-nbo-options .head h2:first-child,
+    .nbd-popup.popup-nbo-options div.quick-view div.quick-view-image
+    {
+        width:56% !important;
+    }
+    .nbd-popup.popup-nbo-options .head h2:last-child,
+    .nbd-popup.popup-nbo-options .footer a:last-child{
+        min-width: 42% !important;
+    }
+    .nbd-popup.popup-nbo-options div.quick-view div.quick-view-content{
+        width:42% !important;
+    }
+}
+
+
+
 </style>
 
-<div class="nbd-option-wrapper" <?php //if(!$in_quick_view) echo 'ng-app="nboApp"'; ?> id="<?php echo $appid; ?>">
+<div class="nbd-option-wrapper"  id="<?php echo $appid; ?>">
     <div ng-controller="optionCtrl" ng-form="nboForm" id="nbo-ctrl-<?php echo $appid; ?>" ng-cloak>
         <div class="nbo-fields-wrapper">
             <?php do_action( 'nbo_before_fields' ); ?>
     <?php if( $display_type == 2 ): ?>
         <table class="nbd-tb-options">
             <tbody>
-<?php endif; 
+    <?php endif; 
 $html_field         = '';
 $has_nbpb           = false;
 $has_delivery       = false;
@@ -2595,8 +2672,6 @@ if( $options['display_type'] == 2 ){
 }
 $options['matrix_type'] = $matrix_type;
 foreach( $options["fields"] as $key => $field ){
-
-    
 
     if( $options['display_type'] == 2 ){
         $class = ( ( $matrix_type == 1 && !in_array( $key, $pm_field_indexes ) ) || ( $matrix_type == 2 && !in_array( $field['id'], $pm_field_indexes ) ) ) ? '' : 'nbo-hidden';
@@ -2811,12 +2886,13 @@ if( $cart_item_key != ''){ ?>
 } ?>
 
             
-            <div ng-if="fields.length" class="nbo-clear-option-wrap">
+            <div ng-if="fields.length" class="nbo-clear-option-wrap om6">
                 <?php if( $in_design_editor && $nbd_qv_type == '2') : ?>
-                <a ng-class="printingOptionsAvailable ? '' : 'nbd-disabled'"  class="nbd-button nbo-apply" ng-click="applyOptions(); applyTransparentSettings();">{{settings.task2 == '' ? "<?php _e('Apply options','web-to-print-online-designer'); ?>" : "<?php _e('Start design','web-to-print-online-designer'); ?>" }}</a>
+                    <a ng-class="printingOptionsAvailable ? '' : 'nbd-disabled'"  class="nbd-button nbo-apply om1" ng-click="applyOptions(); applyTransparentSettings();">{{settings.task2 == '' ? "<?php _e('Apply options','web-to-print-online-designer'); ?>" : "<?php _e('Start design','web-to-print-online-designer'); ?>" }}</a>
                 <?php endif; ?>
+                
                 <?php if( $num_visible_field > 0 ): ?>
-                <a class="button nbd-button" ng-click="reset_options()"><?php _e('Delete selection', 'web-to-print-online-designer'); ?></a>
+                    <a class="button nbd-button resetSelectionbutton" ng-click="reset_options()"><?php _e('Delete selection', 'web-to-print-online-designer'); ?></a>
                 <?php endif; ?>
             </div>
             <input type="hidden" value="<?php echo $product_id; ?>" name="nbo-add-to-cart"/>
@@ -2830,7 +2906,9 @@ if( $cart_item_key != ''){ ?>
             <?php endif; ?>
         </div>
         <div class="nbo-summary-wrapper">
-            <?php if( nbdesigner_get_option('nbdesigner_hide_summary_options') != 'yes' && $options['display_type'] != 3 && $num_visible_field > 0): ?>
+
+
+            <?php if( nbdesigner_get_option('nbdesigner_hide_summary_options') != 'yes' && $options['display_type'] != 3 && $num_visible_field > 0 && !(isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View') ): ?>
             <?php $float_summary = nbdesigner_get_option('nbdesigner_float_summary_options', 'no'); ?>
             <!-- <div ng-if="valid_form" class="nbo-collapse nbo-table-summary-wrap <?php //echo $style_class; ?> <?php //if( !wp_is_mobile() && !(isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View') && !$in_quick_view && $float_summary == 'yes' ) echo 'nbo-float-summary'; ?>" <?php //if( isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View' && $nbd_qv_type == '2') echo 'nbd-perfect-scroll'; ?>> -->
             <div ng-if="valid_form" class="nbo-collapse nbo-table-summary-wrap <?php echo $style_class; ?> <?php if( !(isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View') && !$in_quick_view && $float_summary == 'yes' ) echo 'nbo-float-summary'; ?>" <?php if( isset($_REQUEST['wc-api']) && $_REQUEST['wc-api'] == 'NBO_Quick_View' && $nbd_qv_type == '2') echo 'nbd-perfect-scroll'; ?>>
@@ -3142,10 +3220,10 @@ if( $cart_item_key != ''){ ?>
 
 
     // get url
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let transparent_product_id = urlParams.get('product_id');
-    let reference = urlParams.get('reference');
+    let TemqueryString = window.location.search;
+    let temurlParams = new URLSearchParams(TemqueryString);
+    let transparent_product_id = temurlParams.get('product_id');
+    let reference = temurlParams.get('reference');
 
     
     
@@ -3257,6 +3335,7 @@ if( $cart_item_key != ''){ ?>
             }
             scope.check_valid(false, false, true);
             scope.update_app(); 
+            
             <?php if($show_quantity_option && !$disable_quantity_input): ?>
                 if( angular.isDefined(updateQty) ){
                     scope.quantity = scope.validate_int( jQuery('input[name="quantity"]').val());
@@ -3272,6 +3351,7 @@ if( $cart_item_key != ''){ ?>
                 jQuery('input[name="quantity"]').trigger( 'change.nbo' );
             });
     <?php if( $in_design_editor ) : ?>
+    
     var nboApp = nbdApp;
     <?php elseif( $in_nbau_mode_2 ): ?>
     var nboApp = nbuApp;
@@ -3369,6 +3449,7 @@ if( $cart_item_key != ''){ ?>
     };
 
     nboApp.controller('optionCtrl', ['$scope', '$timeout', function($scope, $timeout){
+        $scope.printingOptionsAvailable = true;
         $scope.product_id = <?php echo $product_id; ?>;
         $scope.options = nbOption.options;
         $scope.bulk_fields = nbOption.bulk_fields;
@@ -3436,6 +3517,7 @@ if( $cart_item_key != ''){ ?>
                     
 
                     var origin_field = $scope.get_field(field_id);
+
                     
                     
                     
@@ -3583,7 +3665,6 @@ if( $cart_item_key != ''){ ?>
                                 
                                 var action = selected_option.action;
                                 if( !( action == 'u' || action == 'c' ) ){
-                                    
                                     jQuery('#triggerDesign, #startDesign, #startUpload, #useTemplate').hide();
                                     if( jQuery('.nbd-force-ignore-design').length == 0 ){
                                         jQuery('form.cart').append('<input type="hidden" value="1" name="nbd-force-ignore-design" class="nbd-force-ignore-design" />');
@@ -3673,6 +3754,11 @@ if( $cart_item_key != ''){ ?>
                     });
                     total_check = total_check && check_bulk_quantity;
                 }*/
+
+                <?php if($fromgallary): ?>
+                    jQuery(document.body).find('.single_add_to_cart_button').addClass('nbop-hidden');
+                    jQuery(document.body).find('.single_add_to_cart_button').hide();
+                <?php endif; ?>
                 
                 if( total_check ){
                     
@@ -4153,7 +4239,7 @@ if( $cart_item_key != ''){ ?>
                         $scope.set_product_image_attr(product_image, 'sizes', option_data.image_sizes, 0);
                         $scope.set_product_image_attr(product_image, 'data-zoom-image', option_data.image_title, 0);
                         $scope.set_product_image_attr(product_image, 'data-image', option_data.image_link, 0);
-                        jQuery(document.body).find('.wcgs-photo').css('background-image', `url("${option_data.image_link}")`);
+                        jQuery(document.body).find('.wcgs-photo').css('background-image', 'url("'+option_data.image_link+'")');
                         // $scope.set_product_image_attr(product_image, 'alt', option_data.image_alt, 0);
                         // $scope.set_product_image_attr(product_image, 'data-src', option_data.full_src, 0); 
                         // $scope.set_product_image_attr(product_image, 'data-large_image', option_data.full_src, 0);
@@ -4249,10 +4335,7 @@ if( $cart_item_key != ''){ ?>
                 $scope.set_product_image_attr(product_image, 'data-large_image', option.full_src, 0);
                 $scope.set_product_image_attr(product_image, 'data-large_image_width', option.full_src_w, 0);
                 $scope.set_product_image_attr(product_image, 'data-large_image_height', option.full_src_h, 0);
-                $scope.set_product_image_attr(product_image, 'data-zoom-image', option.image_link, 0);
-
-                console.log('update product iamge')
-                
+                $scope.set_product_image_attr(product_image, 'data-zoom-image', option.image_link, 0);                
 
                 $scope.set_product_image_attr(product_image, 'alt', option.alt, 0);
                 $scope.set_product_image_attr(product_image_wrap, 'data-thumb', option.image_link, 1);
@@ -7922,40 +8005,39 @@ if( $cart_item_key != ''){ ?>
                     window.location.replace(url.href);  
                 }
             });
-        }
- 
+        } 
 
         // Save data to localstorage
         jQuery(document.body).on('click', 'a#useTemplate', function(e){
             e.preventDefault();
             store_turnaround_matrix_to_db();
-            // var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
+            var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
         });
 
 
         // get url
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const transparent_source = urlParams.get('source');
+        let TemqueryString = window.location.search;
+        let temurlParams = new URLSearchParams(TemqueryString);
+        let transparent_source = temurlParams.get('source');
         
         if(transparent_source == 'single-product'){
             jQuery(document.body).find('.nbd-popup.popup-nbo-options').removeClass('nb-show');
         }
         
         setTimeout(function(){
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const transparent_source = urlParams.get('source');
+            let TemqueryString = window.location.search;
+            const temurlParams = new URLSearchParams(TemqueryString);
+            const transparent_source = temurlParams.get('source');
 
             var $scope = angular.element(document.getElementById(nbOption.crtlId)).scope();
             $scope.loadedPrintingOptions = false;
 
             //Options 
 
-            if(urlParams.has('options')){
-                let options = urlParams.get('options');
-                let turnaroundposition = urlParams.get('turnaroundposition');
+            if(temurlParams.has('options')){
+                let options = temurlParams.get('options');
+                let turnaroundposition = temurlParams.get('turnaroundposition');
                 if(turnaroundposition){
                     turnaroundposition = turnaroundposition.split('-');
                     let targettd = parseInt(turnaroundposition[1]) + 2;
@@ -7993,6 +8075,39 @@ if( $cart_item_key != ''){ ?>
                 if($scope.$root.$$phase !== "$apply" && $scope.$root.$$phase !== "$digest") $scope.$apply(); 
             }
         }, 1000);
+
+
+        // set height for nbd-popup
+        
+        setTimeout(() => {
+            if (!/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                var popupnbd = jQuery(document.body).find('.nbd-popup.popup-nbo-options #nbo-options-wrap');
+                var height = popupnbd.height();
+                var leftwidth = jQuery(document.body).find('.nbd-popup.popup-nbo-options .quick-view-image.transparent-popup-details').width();
+                leftwidth = leftwidth - 60;
+                console.log('leftwidth: ', leftwidth);
+
+                var leftHeight = jQuery(document.body).find('.nbd-popup.popup-nbo-options .quick-view-image.transparent-popup-details').height();  
+                var quickviewbtn = jQuery(document.body).find('a.quick-view-detail-button.button').height();
+                var threehalf = (height / 3) - 50;
+                var twoQtHeight = ((threehalf * 2) - quickviewbtn) - 2;
+
+                console.log('twohalf: ', twoQtHeight)
+                jQuery(popupnbd).find('.quick-view, .quick-view-content, .transparent-popup-details').height(`${height}px`);
+                jQuery(popupnbd).find('.quick-view-image.transparent-popup-details .singleitem:first-child > div').height(`${threehalf}px`);
+                // jQuery(popupnbd).find('.quick-view-image.transparent-popup-details .singleitem:first-child').height(`${threehalf}px`);
+
+                jQuery(document.body).find('.woocommerce.quick-view .nbo-delivery').width(`${leftwidth}px`);
+                jQuery(document.body).find('.woocommerce.quick-view .nbo-delivery').height(`${twoQtHeight}px`);
+                popupnbd.perfectScrollbar('destroy');    
+                jQuery(popupnbd).find('.quick-view .quick-view-content, .scrollable, .woocommerce.quick-view .nbo-delivery').perfectScrollbar({
+                    suppressScrollX: true, // Ensure horizontal scroll is disabled
+                });
+                jQuery('a.resetSelectionbutton').prependTo('.nbd-popup.popup-nbo-options .footer');
+                jQuery('<h2><?php _e("Product Details", 'transparentcard'); ?></h2>').prependTo('.nbd-popup.popup-nbo-options .head');
+            }
+        }, 1000);
+        // jQuery(popupnbd).addClass('testClassO');
 
     });
     

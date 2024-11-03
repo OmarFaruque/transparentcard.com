@@ -170,9 +170,6 @@ var duplicate_cart_item = function($item_key = false, $item_source_folder = '', 
             alert('Form submission failed: ' + textStatus);
         }
     });
-
-
-
 }
 
 
@@ -260,7 +257,6 @@ function removeURLParameter(param) {
     window.location.replace(url.toString());
 
 }
-
 
 jQuery(document.body).on('click', '.back-to-left a, a.back-to-template-gallery-btn', function () {
     removeURLParameter();

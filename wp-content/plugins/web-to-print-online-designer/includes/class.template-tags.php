@@ -313,6 +313,10 @@ if(!class_exists('NBD_Template_Tag')) {
         public function gallery_sidebar_tag_list(){
             $filter_term_ids    = isset( $_GET['tag'] ) ? wc_clean( $_GET['tag'] ) : '';
             $filter_tags        = $filter_term_ids != '' ? explode(',', $filter_term_ids) : array();
+
+
+
+            
             $filter_colors_str  = isset( $_GET['color'] ) ? wc_clean( $_GET['color'] ) : '';
             $filter_colors      = $filter_colors_str != '' ? explode(',', $filter_colors_str) : array();
             $template_tags      = get_terms( 'template_tag', 'hide_empty=0' );

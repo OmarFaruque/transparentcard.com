@@ -43,7 +43,7 @@ class Nbdesigner_Pagination {
         return str_replace('{p}', $page, $this->_config['link_full']);
     }
 
-    function html() {
+    function html(){
         $p = '';
         if ($this->_config['total_record'] > $this->_config['limit']) {
             $p = '<span class="pagination-links">';

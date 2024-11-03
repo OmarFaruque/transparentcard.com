@@ -42,11 +42,19 @@ if( count( $templates ) ):  ?>
         $gallery_type = 1;
 
         
+        $tag_id = 0;
         if(isset($args['tag']) && $args['tag'] != ''){
             $tag_id = $args['tag'];
         }else{
             $tags = explode(',', $temp['tags']);
-            $tag_id = $tags[0];
+            foreach($tags as $st){
+                $st = (int)$st;
+                if (term_exists($st, 'template_tag')) {
+                    $term = get_term($st, 'template_tag');  
+                    $tag_id = $term->term_id;       
+                    break;
+                }
+            }
         }
 
         $term = get_term($tag_id, 'template_tag');

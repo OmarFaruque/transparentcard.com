@@ -16,8 +16,8 @@
             <div class="main-body" id="nbo-options-wrap">
             </div>
         </div>
-        <div class="footer" >
-            <span ng-if="!printingOptionsAvailable" class="nbd-invalid-form"><?php esc_html_e('Please choose options before apply to start design!', 'web-to-print-online-designer'); ?></span><a ng-class="printingOptionsAvailable ? '' : 'nbd-disabled'" class="nbd-button nbo-apply" ng-click="applyOptions()">{{settings.task2 == '' ? "<?php esc_html_e('Apply options','web-to-print-online-designer'); ?>" : "<?php esc_html_e('Start design','web-to-print-online-designer'); ?>" }}</a>
+        <div class="footer om3" >
+            <span ng-if="!printingOptionsAvailable" class="nbd-invalid-form om3"><?php esc_html_e('Please choose options before apply to start design!', 'web-to-print-online-designer'); ?></span><a ng-class="printingOptionsAvailable ? '' : 'nbd-disabled'" class="nbd-button nbo-apply" ng-click="applyOptions()">{{settings.task2 == '' ? "<?php esc_html_e('Apply options','web-to-print-online-designer'); ?>" : "<?php esc_html_e('Start design','web-to-print-online-designer'); ?>" }}</a>
         </div>
     </div>
 </div>

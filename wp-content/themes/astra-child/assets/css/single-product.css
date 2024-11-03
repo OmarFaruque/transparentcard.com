@@ -179,26 +179,6 @@ table.nbo-summary-table tfoot tr:last-child td:last-child{
 .nbo-style-1 .nbo-summary-title{
 	margin-bottom: 0px!important;
 }
-.woocommerce-product-details__short-description ul {
-    list-style: none;
-}
-
-.woocommerce-product-details__short-description ul li {
-    margin: 12px 0px;
-    padding-left: 20px;
-    position: relative;
-}
-.woocommerce-product-details__short-description ul li:before {
-    content: '';
-    width: 15px;
-    height: 15px;
-    background-image: url(../img/li-icon.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: absolute;
-    left: 0;
-    top: 5px;
-}
 
 
 

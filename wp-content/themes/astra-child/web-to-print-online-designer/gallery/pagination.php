@@ -1,8 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 if( $total > $limit ): 
-    require_once NBDESIGNER_PLUGIN_DIR . 'includes/class.nbdesigner.pagination.php';
-    $paging = new Nbdesigner_Pagination();
+    $paging = new COOL_Pagination();
     $config = array(
         'current_page'  => isset( $page ) ? $page : 1, 
         'total_record'  => $total,

@@ -17,10 +17,80 @@ class COOL_Backend extends COOL_Inods{
         add_action( 'customize_register' , array(__CLASS__, 'transparentcard_register_additional_options') );
 
         
-       
     }
 
     
+
+
+    /**
+     * Remove Inodes while remove order from backend
+     * 
+     * @param string $order_id
+     * 
+     * @return remove related inodes
+     */
+    public static function transparentcard_delete_order_related_files($order_id){
+        
+        if ( get_post_type( $order_id ) === 'shop_order' ) {
+            $order = wc_get_order( $order_id );
+
+            // Get all order items
+            $items = $order->get_items();
+
+            foreach ( $items as $item_id => $item ) {
+                // For NBD Design 
+                $meta_data = $item->get_meta('_nbd', true);
+                if($meta_data){
+                    $dir = NBDESIGNER_CUSTOMER_DIR . '/' . $meta_data;
+                    $order_dir = NBDESIGNER_CUSTOMER_DIR . '/' . $order_id . '_' . $meta_data;
+                    $old_dir = NBDESIGNER_CUSTOMER_DIR . '/' . $meta_data . '_old';
+
+                    if(is_dir($dir)) rrmdir($dir);
+                    if(is_dir($order_dir)) rrmdir($order_dir);
+                    if(is_dir($old_dir)) rrmdir($old_dir);
+                }
+
+                // Remove order related upload directory
+                $nbu_meta_data = $item->get_meta('_nbu', true);
+                if($nbu_meta_data){
+                    $dir = NBDESIGNER_UPLOAD_DIR . '/' . $nbu_meta_data;
+                    $prev_dir = NBDESIGNER_UPLOAD_DIR . '/' . $nbu_meta_data . '_preview';
+                    if(is_dir($dir)) rrmdir($dir);
+                    if(is_dir($prev_dir)) rrmdir($prev_dir);
+                }
+
+                // For Other Images
+                $cus_meta_data = '';
+                if($item->get_meta('Other images in your design', true))
+                    $cus_meta_data .= $item->get_meta('Other images in your design', true);
+
+                if($item->get_meta('Uploaded Files', true))
+                    $cus_meta_data .= $item->get_meta('Uploaded Files', true);
+
+                if($item->get_meta('Images for use in Design', true))
+                    $cus_meta_data .= $item->get_meta('Images for use in Design', true);
+
+                if($item->get_meta('Uploaded Logo', true))
+                    $cus_meta_data .= $item->get_meta('Uploaded Logo', true);
+
+                if(!empty($cus_meta_data)){
+                    if ($cus_meta_data !== strip_tags($cus_meta_data)) {
+                        preg_match_all('/<a\s+[^>]*href=["\']([^"\']+)["\'][^>]*>/i', $cus_meta_data, $matches);
+                        $hrefs = $matches[1];
+
+                        foreach ($hrefs as $href) {
+                            $getDir = explode('/', $href);
+                            $dirName = $getDir[count($getDir) - 2];
+                            $dir = NBDESIGNER_UPLOAD_DIR . '/' . $dirName;
+                            if(is_dir($dir))
+                                rrmdir($dir);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 
     /**
@@ -54,10 +124,9 @@ class COOL_Backend extends COOL_Inods{
             'choices' => array(  
                  'default' => __( 'Default', 'transparentcard' ),
                  'dropdown' => __( 'Dropdown', 'transparentcard' )
-             )
+                )
               ) 
             );
-
     }
 
 

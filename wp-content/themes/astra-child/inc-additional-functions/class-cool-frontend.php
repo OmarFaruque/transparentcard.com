@@ -117,22 +117,99 @@ class COOL_Frontend extends My_Design_Endpoint{
 
         add_action('woocommerce_before_calculate_totals', array($this, 'transparentcard_set_price_in_cart'), 15, 1);
 
-        
+        // add_action('template_redirect', array($this, 'transparent_search_redirect')); temp off
+
+
+
+        add_action('wp_footer', array($this, 'transparentcard__elementor_search_action'));
       
+
+
 
 
         add_action( 'wp_head', function(){
 
+            // $metaOptions = get_option( 'testO', array() );
+            // $metaOptions = get_option( 'testP', array() );
 
-            // echo 'test option <br/><pre>';
-            // print_r(get_option( 'testO', array()));
+            // global $woocommerce;
+    
+            
+
+            parse_str($_SERVER['QUERY_STRING'], $queryParams);
+
+            // Print the URL and query parameters
+            // echo "Query Parameters: <br/><pre>";
+            // print_r($queryParams);
             // echo '</pre>';
+
+
+
+            // $post = get_page_by_path( 'custom-business-cards', OBJECT, 'product');
+
+            // $testOptions = get_option( 'testomar', '' );
+            // $emails = WC()->mailer()->get_emails();
+            // echo 'mial list array <br/><pre>';
+            // print_r($metaOptions);
+            // echo '</pre>';
+            // send_verification_email(64);
+
+
+
 
 
             
         } );
     }
 
+
+
+    public function transparent_search_redirect($query){
+        if ( is_search() && !empty(get_search_query()) ) {
+            // Redirect search results based on page type
+            if (!is_front_page() && is_home() ) {
+                // For blog page searches
+                wp_redirect(home_url('/?s=' . urlencode(get_query_var('s'))));
+            } else {
+                $template_gallery_url   = add_query_arg( array('s' => urlencode(get_query_var('s'))), getUrlPageNBD( 'gallery' ) );
+                // For other searches
+                wp_redirect( $template_gallery_url );
+            }
+            exit;
+        }
+    }
+
+
+
+    /**
+     * Change elementor search form acton based on different pages
+     * 
+     */
+    public function transparentcard__elementor_search_action(){
+        
+        // Only enqueue this script if Elementor is active
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var searchForm = document.querySelector('form.elementor-search-form');
+
+                    if (searchForm) {
+                        // Check if it's the blog page
+                        <?php if ( !is_front_page() && is_home() ) : ?>
+                            var customSearchURL = '<?php echo get_home_url( ); ?>'; // Search only blog posts
+                        <?php else : ?>
+                            var customSearchURL = '<?php echo getUrlPageNBD('gallery'); ?>'; // Search custom post type
+                            var searchInput = searchForm.querySelector('input[name="s"]'); // Adjust the name or selector if needed
+                            searchInput.setAttribute('name', 'ds'); // Replace 'new_search_name' with your desired name
+                        <?php endif; ?>
+
+                        searchForm.action = customSearchURL;
+                        
+                    }
+                });
+            </script>
+            <?php
+    }
 
 
     /**
@@ -217,12 +294,15 @@ class COOL_Frontend extends My_Design_Endpoint{
      * @return object
      */
     public function transparentcard_set_price_in_cart($cart){
-
+       
     
         foreach ($cart->get_cart() as $k => $cart_item) {
             $forAdditionalFeaturePrice = false;
+            $nbu_session        = WC()->session->get( $k . '_nbu' );
 
+            
             if(isset($cart_item['nbo_cus_meta'])) $forAdditionalFeaturePrice = true;
+            // if(isset($cart_item['nbd_item_meta_ds']['nbu'])) $forAdditionalFeaturePrice = false;
             if($forAdditionalFeaturePrice ){
 
                 $source = $cart_item['form_source'] ?? '';
@@ -239,6 +319,9 @@ class COOL_Frontend extends My_Design_Endpoint{
                     $delivery_index = explode('-', $delivery_index);
                     $delivery_index = $delivery_index[1];
                 }
+                if($nbu_session && empty($source)){
+
+                }
     
                 $product_id = $cart_item['product_id'];
 
@@ -246,13 +329,27 @@ class COOL_Frontend extends My_Design_Endpoint{
                 
                 $qtybreakIndex = searchKeyValueInMultidimensionalArray($price_metrix, 'qty', $quantity);
 
+                
+
 
 
                 $totalPrice = $price_metrix[$qtybreakIndex][$delivery_index]['total_cart_price'];
-                $totalPrice = preg_replace('/[^0-9.,]/', '', $totalPrice);
+                $totalPrice = preg_replace('/[^0-9.,]/', '', str_replace(',', '', $totalPrice));
                 $totalPrice = (float) $totalPrice;
 
                 $unitPrice = $totalPrice / $quantity;
+
+                update_option( 'testO', 
+                    array(
+                        'qtybrekindex' => $qtybreakIndex, 
+                        'unitprice'  => $unitPrice, 
+                        // 'cart_item' => $cart_item, 
+                        'url' => $parsed_url, 
+                        'deliveryIndex' => $delivery_index, 
+                        'source' => $source, 
+                        'nbu_session' => $nbu_session
+                    ) 
+                );
 
                 $cart_item['data']->set_price($unitPrice);
             }
@@ -426,7 +523,7 @@ class COOL_Frontend extends My_Design_Endpoint{
             foreach($values['nbo_additional_meta'] as $s => $singleAdditional){
                 if(in_array($s, array('service_total', 'pid') ) ) continue;
 
-                $s = match (expression) {
+                $s = match ($s) {
                      'company_name'=> __('Person / Company Name', 'transparentcard'),
                      default => $s
                 };
@@ -507,6 +604,8 @@ class COOL_Frontend extends My_Design_Endpoint{
      * @param init
      */
     public function transparentcard_add_cart_item_data($cart_item_data, $product_id, $variation_id){
+        update_option( 'testP', array('posts' => $_POST) );
+
         if ( isset($_POST['custom_upload_nonce']) && wp_verify_nonce($_POST['custom_upload_nonce'], 'custom_upload_action') ) {
             $product_id = intval($_POST['product_id']);
 
@@ -540,6 +639,7 @@ class COOL_Frontend extends My_Design_Endpoint{
 
 
             $cart_item_data['nbo_cus_meta'] = $nbo_meta;
+            $cart_item_data['form_source'] = $_POST['_wp_http_referer'] ?? '';
 
         }
 
@@ -1618,6 +1718,11 @@ class COOL_Frontend extends My_Design_Endpoint{
      */
     public function gallery_tag_filter(){
         $term_ids       = isset( $_GET['tag'] ) ? wc_clean( $_GET['tag'] ) : '';
+        if (is_tax('template_tag')) {
+            $term = get_queried_object(); // Get the current term object
+            $term_ids = $term->term_id; // Get the term ID
+        }
+
         $colors         = isset( $_GET['color'] ) ? wc_clean( $_GET['color'] ) : '';
         $sizes          = isset( $_GET['size'] ) ? wc_clean( $_GET['size'] ) : '';
         $corners        = isset( $_GET['corners'] ) ? wc_clean( $_GET['corners'] ) : '';
@@ -1728,7 +1833,6 @@ class COOL_Frontend extends My_Design_Endpoint{
             return;
         }
 
-        
 
         if(isset( $_GET['action']) && $_GET['action'] == 'hire-a-designer'){
             ob_start();
@@ -1747,8 +1851,11 @@ class COOL_Frontend extends My_Design_Endpoint{
             nbdesigner_get_template( 'gallery/submit-files.php', array() );
             return ob_get_clean();
         }
-        // $mydesign = new My_Design_Endpoint;
+
+        // Search paramater 
         
+
+        // $mydesign = new My_Design_Endpoint;
         $page                   = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; 
         $per_row                = intval( apply_filters( 'nbd_gallery_designs_per_row', 3 ) );
         $row                    = apply_filters( 'nbd_gallery_designs_row', 5 );
@@ -1767,6 +1874,13 @@ class COOL_Frontend extends My_Design_Endpoint{
 
         $search                 = isset( $_GET['search'] ) ? wc_clean( $_GET['search'] ) : '';
         $search_type            = isset( $_GET['search_type'] ) ? wc_clean( $_GET['search_type'] ) : '';
+
+        if(isset($_GET['ds']) && !empty($_GET['ds'])){
+            $search             = $_GET['ds'];
+            $search_type        = 'design';
+        }
+
+
         $url                    = getUrlPageNBD('gallery');
         if($pid) $url = add_query_arg(array('pid' => $pid), $url);
         if($cat) $url = add_query_arg(array('cat' => $cat), $url);
@@ -1814,9 +1928,14 @@ class COOL_Frontend extends My_Design_Endpoint{
             'designers'             => $this->get_designers(),
             'total'                 => ( $pid != 0 || ( isset( $atts['pid'] ) && $atts['pid'] != 0 ) ) ? $this->count_total_template( $pid, false, $cat ) : $this->count_total_template( false, false, $cat )
         ), $atts);
+
+                
+
+
+
         if( $atts['per_row'] > 6 ) $atts['per_row'] = 6;
-        $atts['templates']  = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], false, false, $cat, $tag, $color, '', $search, $search_type, false, $size, $corners, $orientations );
-        $atts['total']      = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], true, false, $cat, $tag, $color, '', $search, $search_type, true, $size, $corners, $orientations );
+        $atts['templates']  = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], false, false, $cat, $tag, $color, '', $search, $search_type, false, $size, $corners, $orientations);
+        $atts['total']      = $this->nbdesigner_get_templates_by_page( $page, absint($atts['row'] ), absint($atts['per_row'] ), $atts['pid'], true, false, $cat, $tag, $color, '', $search, $search_type, true, $size, $corners, $orientations);
 
         ob_start();
 
@@ -1827,6 +1946,7 @@ class COOL_Frontend extends My_Design_Endpoint{
     }
 
 
+
     /**
      * Get gallary templages 
      * @param $page number
@@ -1835,16 +1955,25 @@ class COOL_Frontend extends My_Design_Endpoint{
      * 
      * @return query data
      */
-    public static function nbdesigner_get_templates_by_page( $page = 1, $row = 5, $per_row = 3, $pid = false, $get_all = false, $user_id = false, $cat = false, $tag = '', $color = '', $type = '', $search = '', $search_type = '', $return_total = false, $size = '', $corner = '', $orientation = '' ){
+    public static function nbdesigner_get_templates_by_page( $page = 1, $row = 5, $per_row = 3, $pid = false, $get_all = false, $user_id = false, $cat = false, $tag = '', $color = '', $type = '', $search = '', $search_type = '', $return_total = false, $size = '', $corner = '', $orientation = ''){
         $listTemplates = array();
         global $wpdb;
         $limit  = $row * $per_row;
         $offset = $limit * ( $page - 1 );
         $sql    = "SELECT p.ID, p.post_title, t.id AS tid, t.name, t.folder, t.product_id, t.variation_id, t.user_id, t.thumbnail, t.type, t.tags FROM {$wpdb->prefix}nbdesigner_templates AS t";
         $sql   .= " LEFT JOIN {$wpdb->prefix}posts AS p ON t.product_id = p.ID";
+
+
+        if( $search != '' ){
+            if( $search_type == 'design' ){
+                $sql .= $wpdb->prepare(" LEFT JOIN wp_term_taxonomy tt ON FIND_IN_SET(tt.term_taxonomy_id, t.tags) > 0 LEFT JOIN wp_terms tm ON tt.term_id = tm.term_id AND tm.name LIKE %s AND FIND_IN_SET(tm.term_id, t.tags) > 0", '%'.$search.'%');
+            }
+        }
+
+
         $sql   .= " WHERE t.publish = 1 AND p.post_status = 'publish' AND publish = 1";
 
-        if( $tag != '' ){
+        if( $tag != '' && $search == '' ){
             $tag_arr = explode( ',', $tag );
             if( count( $tag_arr ) ){
                 $sql .= " AND ( ";
@@ -1931,7 +2060,10 @@ class COOL_Frontend extends My_Design_Endpoint{
         }
 
         if( $pid ){
-            $sql .= " AND t.product_id = ".$pid;
+            $post = get_post($pid);
+            if($post && $post->post_name != 'custom-business-cards'){
+                $sql .= " AND t.product_id = ".$pid;
+            }
         }else if( $cat ) {
             $products  = self::get_all_product_design_in_category( $cat );
             if( is_array( $products ) && count( $products ) ){
@@ -1987,7 +2119,8 @@ class COOL_Frontend extends My_Design_Endpoint{
                     }
                 }
             }else{
-                $sql .= " AND t.name LIKE '%" . $search . "%' ";
+                // $sql .= " AND t.name LIKE '%" . $search . "%' ";
+                $sql .= " AND tt.taxonomy = 'template_tag' AND FIND_IN_SET(tm.term_id, t.tags) > 0";
             }
         }
 
@@ -2012,6 +2145,7 @@ class COOL_Frontend extends My_Design_Endpoint{
         }
 
         
+        update_option( 'testomar', array('sql' => $sql, 'search' => $search, 'search_type' => $search_type, 'TAG' => $tag) );
 
         $posts = $wpdb->get_results( $sql, 'ARRAY_A' );
         if( $return_total ) return count( $posts );
@@ -2694,6 +2828,47 @@ class COOL_Frontend extends My_Design_Endpoint{
             wp_deregister_script('nbd_live_chat');
         }
 
+        if(is_tax('template_tag')){
+            if (wp_script_is('nbdesigner', 'enqueued')) {
+                wp_deregister_script('nbdesigner');
+            }
+
+            $depend_arr         = array( 'jquery', 'jquery-blockui', 'wp-util' );
+            $show_favicon_badge = nbdesigner_get_option( 'nbdesigner_enable_favicon_badge', 'no' );
+            if( $show_favicon_badge == 'yes' ){
+                $depend_arr[]   = 'nbd_favico';
+            }
+            $depends            = apply_filters( 'nbd_depend_js', $depend_arr );
+
+            wp_register_script( 'nbdesigner', get_stylesheet_directory_uri() . '/assets/js/nbdesigner.js', $depends, NBDESIGNER_VERSION );
+            
+            parse_str($_SERVER['QUERY_STRING'], $queryParams);
+            $template_gallery_url   = add_query_arg( $queryParams, getUrlPageNBD( 'gallery' ) );
+            
+            $args = apply_filters( 'nbd_js_object', array(
+                'url'                   => admin_url( 'admin-ajax.php' ),
+                'sid'                   => session_id(),
+                'nonce'                 => wp_create_nonce('save-design'),
+                'nonce_get'             => wp_create_nonce('nbdesigner-get-data'),
+                'cart_url'              => esc_url( wc_get_cart_url() ),
+                'hide_cart_button'      => nbdesigner_get_option( 'nbdesigner_hide_button_cart_in_detail_page', 'no' ),
+                'auto_add_cart'         => nbdesigner_get_option( 'nbdesigner_auto_add_cart_in_detail_page', 'no' ),
+                'page_design_tool'      => nbdesigner_get_option( 'nbdesigner_page_design_tool', 1 ),
+                'show_favicon_badge'    => $show_favicon_badge,
+                'confirm_delete_design' => esc_html__( 'Are you sure you want to delete this design?', 'web-to-print-online-designer' ),
+                'delete_success'        => esc_html__( 'Delete successfully!', 'web-to-print-online-designer' ),
+                'create_design_url'     => getUrlPageNBD( 'create' ),
+                'gallery_url'           => getUrlPageNBD( 'gallery' ),
+                'edit_option_mode'      => ( isset( $_GET['nbo_cart_item_key'] ) && $_GET['nbo_cart_item_key'] != '' && isset( $_GET['task'] ) && $_GET['task'] == 'edit' ) ? 1 : 0,
+                'is_mobile'             => wp_is_mobile() ? 1 : 0, 
+                'gallary_url_with_param' => $template_gallery_url
+            ) );
+            wp_localize_script( 'nbdesigner', 'nbds_frontend', $args );
+        }
+
+
+
+    
         // REgister live chat js again.
         $depend_arr = array( 'jquery', 'angularjs', 'firebase-app', 'firebase-auth', 'firebase-database', 'nbd-perfect_scrollbar' );
         wp_register_script( 'nbd_live_chat-cus', get_stylesheet_directory_uri() . '/assets/js/live-chat.js', $depend_arr, NBDESIGNER_VERSION );

@@ -615,3 +615,30 @@ div.main-body div.quick-view div.quick-view-image a.button:hover {
     background-color: #164d4d;
     color: #ecfe8c;
 }
+@media only screen and (min-width:480px) {
+    div.main-body div.quick-view .quick-view-image.transparent-popup-details .singleitem:first-child a.button{
+        background-color: transparent;
+        color: #164d4d;
+        transition: all 0.4s;
+        display: inline;
+        position: absolute;
+        bottom: -8%;
+        border-radius: 5px;
+        border: 1px solid;
+    }
+    .nbd-popup.popup-nbo-options .footer a:first-child{
+        min-width:unset;
+    }
+    .nbd-popup.popup-nbo-options .head h2 {
+        display: inline-block;
+        margin-bottom: 9px;
+        margin-top: 9px;
+        font-weight: 400;
+    }
+    .nbd-popup.popup-nbo-options .head h2:last-child {
+        padding: 0 20px;
+    }
+    .nbd-popup.popup-nbo-options hr{
+        display:none;
+    }
+}

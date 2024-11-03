@@ -28,9 +28,83 @@ final class COLFinal_Instance{
         add_action('vc_before_init', array(__CLASS__, 'load_vc_elements'));
         
         add_filter( 'register_taxonomy_template_tag', array($this, 'transparentcard_tag_url_rewrite'), 50, 1 );
+
+        add_action('init', array($this, 'transparentcard_add_pending_verification_role'));
+
+        add_action('init','COOL_User::transparentcard_handle_email_verification');
+
+        add_action( 'woocommerce_before_delete_order', 'COOL_Backend::transparentcard_delete_order_related_files', 10, 1 );
+        add_action( 'before_delete_post', 'COOL_Backend::transparentcard_delete_order_related_files', 10, 1 );
+        add_action( 'wp_trash_post', 'COOL_Backend::transparentcard_delete_order_related_files', 10, 1 );
+
+        add_filter( 'woocommerce_email_classes', array($this, 'transparentcard_woo_email_class_registration') );
+        add_action( 'init', array($this, 'transparentcard_create_validation_success_page') );
         
-       
-     
+    }
+
+
+
+    /**
+     * Create a validation success page if not exists. 
+     */
+    public function transparentcard_create_validation_success_page(){
+      // Define the page title and slug
+      $page_title = 'Email Verified Successfully';
+      $page_slug  = 'email-verified-successfully';
+
+      // Check if the page already exists by the slug
+      $page_check = get_page_by_path( $page_slug );
+
+      // If the page does not exist, create it
+      if ( ! $page_check ) {
+          // Prepare the page data
+          $page_data = array(
+              'post_title'   => $page_title,
+              'post_name'    => $page_slug,
+              'post_content' => 'This is the content of the Email Verified Successfully.',
+              'post_status'  => 'publish',
+              'post_type'    => 'page',
+              'post_author'  => 1, // Change this to the ID of the author if needed
+          );
+
+          // Insert the page into the database
+          $page_id = wp_insert_post( $page_data );
+
+          if ( ! is_wp_error( $page_id ) ) {
+              echo 'Page created successfully with ID: ' . $page_id;
+          } else {
+              echo 'Failed to create the page. Error: ' . $page_id->get_error_message();
+          }
+      }
+    }
+
+
+    
+    /**
+     * Registration email class for additional emails 
+     * @param object $email_classes
+     */
+    public function transparentcard_woo_email_class_registration($email_classes){
+      //  Include the email class if not already included
+      if ( ! isset( $email_classes['COOL_Validationemail'] ) ) {
+          $classes_dir = get_stylesheet_directory() . '/inc-additional-functions/';
+          include_once $classes_dir . 'class-cool-validationemail.php'; // Adjust the path to your file
+          $email_classes['COOL_Validationemail'] = new COOL_Validationemail();
+
+           // Log registered emails to debug
+          error_log(print_r($email_classes, true));
+      }
+  
+      return $email_classes;
+    }
+
+    /**
+     * Add additional user role for varification purpose 
+    */
+    public function transparentcard_add_pending_verification_role(){
+      add_role('pending_verification', __('Pending Verification'), array(
+          'read' => true,
+      ));
     }
 
 

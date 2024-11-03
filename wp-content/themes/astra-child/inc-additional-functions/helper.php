@@ -439,3 +439,48 @@ function searchKeyValueInMultidimensionalArray($array, $searchKey, $searchValue)
     }
     return false; // No match found
 }
+
+
+
+/**
+ * Send verification email to new created email 
+ */
+function send_verification_email( $customer_id ) {
+    $user = get_userdata( $customer_id );
+    $email = $user->user_email;
+
+    
+    // Generate a unique verification token
+    $verification_code = md5(uniqid($customer_id, true));
+    
+    // Save the token as user meta
+    update_user_meta($customer_id, 'email_verification_code', $verification_code);
+
+    // Create the verification URL
+    $verification_url = add_query_arg(array(
+        'verify_email' => 'true',
+        'user_id' => $customer_id,
+        'token' => $verification_code
+    ), home_url());
+
+    // Email content
+    // $subject = 'Email Verification';
+
+
+    // $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    WC()->mailer()->get_emails()['COOL_Validationemail']->trigger( $customer_id, $verification_url );
+
+    // Load WooCommerce mailer
+    // $mailer = WC()->mailer();
+
+    // Debug logging
+    // error_log('Sending email to: ' . $email);
+    // error_log('Verification URL: ' . $verification_url);
+    
+    // Send the email
+    // Send email
+    // $mailer->send( $email, $subject, $message, $headers );
+}
+
+

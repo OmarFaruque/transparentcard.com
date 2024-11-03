@@ -1,12 +1,14 @@
-<?php if (!defined('ABSPATH'))
-    exit; // Exit if accessed directly  ?>
-
+<?php if (!defined('ABSPATH')) exit; // Exit if accessed directly ?>
 
 <?php
-    // echo 'args <br/><pre>';
-    // print_r($args);
-    // echo '</pre>';
+    if(isset($_GET['pslug'])){
+        $post = get_page_by_path( $_GET['pslug'], OBJECT, 'product');
+        if($post) $pid = $post->ID;
+    }
+
 ?>
+ 
+<link type="text/css" href="<?php echo NBDESIGNER_PLUGIN_URL .'assets/css/modern-additional.css'; ?>" rel="stylesheet" media="all">
 
 
 <style>
@@ -18,6 +20,48 @@
         padding: 15px 0;
         max-height: 300px;
         overflow: auto;
+    }
+    .popup-nbo-options .main-popup {
+        width: 80% !important;
+        height: 90%;
+        box-sizing: border-box;
+    }
+
+    .nbd-popup .main-popup {
+        pointer-events: all;
+        background-color: #fff;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 0 42px rgba(0,0,0,.15);
+        box-shadow: 0 0 42px rgba(0,0,0,.15);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 20px;
+        text-align: left;
+        width: 525px;
+        -webkit-transition: all .6s;
+        transition: all .6s;
+        position: relative;
+    }
+    div.quick-view div.quick-view-image img {
+        display: block;
+        margin: 0 0 20px;
+        border: 1px solid #eee;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        padding: 8px;
+        background: #fff;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+    div.quick-view div.quick-view-image {
+        margin: 0;
+        width: 38% !important;
+        float: left;
+        box-sizing: border-box;
     }
 
     .nbd-sidebar h3.ui-state-active {
@@ -187,7 +231,44 @@
         .youarebuying{
             margin-bottom: 0 !important;
         }
-    }   
+    } 
+    .nbd-popup.popup-nbo-options {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.6);
+        z-index: 99;
+        opacity: 1;
+        visibility: visible;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        overflow:hidden;
+    }  
+    div#nbo-options-wrap {
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+    .popup-nbo-options .body {
+        height: calc(100% - 130px);
+    }
+    .popup-nbo-options .footer .nbd-button{
+        float: right;
+        margin-top: 11px;
+    }
+
+    
 
 </style>
 
@@ -195,8 +276,14 @@
 
 
 <?php if (isset($_GET['source']) && $_GET['source'] == 'single-product'): ?>
-    <?php nbdesigner_get_template('gallery/header.php', array('tag' => $args['tag'])); ?>
+
+
+
+    <?php nbdesigner_get_template('gallery/header.php', array('tag' => $args['tag'], 'single' => is_tax('template_tag'))); ?>
     <div id="transparentDesignOptions">
+        <?php if(is_tax('template_tag')): ?>
+            <div class="ast-container ml-auto mr-auto">
+        <?php endif; ?>
         <div class="single-design-option-wrapper">
             <div class="single-design-option">
                 <div class="inner-wrapper">
@@ -214,7 +301,7 @@
                         <a href="#nbd_design_con" class="choosetemplate">
                             <?php _e('Select Design', 'transparentcard'); ?>
                         </a>
-                        <span><?php echo sprintf(__('From %s0.00', 'transparentcard'), get_woocommerce_currency_symbol()); ?></span>
+                        <!-- <span><?php //echo sprintf(__('From %s0.00', 'transparentcard'), get_woocommerce_currency_symbol()); ?></span> -->
                     </div>
                 </div>
             </div>
@@ -246,7 +333,7 @@
                 <div class="inner-wrapper">
                     <div class="desc">
                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/Ana_design.svg'); ?>"
-                            alt="<?php echo __('Custom Design', 'transparentcard'); ?>">
+                            alt="<?php echo __('Custom Design', 'transparentcard'); ?>" />
                         <p class="single-design-option-title">
                             <?php _e('Seeking Custom Design?', 'transparentcard'); ?>
                         </p>
@@ -284,6 +371,9 @@
                 </div>
             </div>
         </div>
+        <?php if( is_tax('template_tag') ): ?>
+            </div>
+        <?php endif; ?>
     </div>
 
 <?php endif; ?>
@@ -307,65 +397,9 @@ if ($pid || $args['tag']):
 endif;
 
 ?>
-<?php if (!isset($_GET['source'])): ?>
-    <section id="header-title" class="header-fileupload fullscreen"
-        style="background-color:#003F3F; color:#ECFF8C; margin-top:-30px; margin-bottom:50px;">
-        <div class="innersect ast-container ml-auto mr-auto">
-            <div class="d-flex align-item-center justify-content-center">
-                <h3 class="text-center text-uppercase" style="color:#ECFF8C; padding:50px 0;">
-                    <?php echo esc_attr( $title ); ?>
-                </h3>
-            </div>
-        </div>
-    </section>
-    <style>
-        .info-section{
-            text-align: center;
-            margin-bottom: 30px;
-            max-width: 800px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            display: table;
-        }
-        .info-section P{
-            margin: 0;
-            font-size: 16px;
-            line-height: 26px;
-            font-weight: 400;
-        }
-        .info-section span{
-            font-size: 16px;
-            font-style: italic;
-            display: inline-block;
-            padding: 10px 0;
-            font-weight: 500;
-        }
-    </style>
-    <section class="info-section">
-        <?php 
-        $term_description = term_description($args['tag'], 'template_tag');  
-        if(!empty($term_description)){
-
-            $allowed_tags = array(
-                'p'      => array(), // Allow <p> without any attributes
-                'strong' => array(), // Allow <strong> without any attributes
-                'h2' => array(), 
-                'h3' => array(),
-                'a'      => array(   // Allow <a> with 'href' attribute
-                    'href' => array()
-                ),
-            );
-            // Escape content and allow specific HTML
-            echo wp_kses($term_description, $allowed_tags);
-            
-        }else{
-            echo sprintf(__('<p>Fast-track your business and select the best business cards by category and style that defines your brand. You can edit the prebuilt templates to the heart’s content. If you are a design expert yourself, feel free to use the exclusive design tool.</p>
-            <span>Do you need more ideas? You can easily contact us to request designs from our experts.</span>
-            <p>From textured business cards to gold and silver imprints and embossed effects, many distinct features can be added to your designs.</p>', 'transparentcard'));
-        } ?>
-    </section>
-<?php endif; ?>
+<?php if (!isset($_GET['source'])):
+        nbdesigner_get_template('gallery/default-header.php', array( 'title' => $title, 'tag' => $args['tag'] ));
+endif; ?>
 
 
 
@@ -407,11 +441,31 @@ endif;
 </div>
 
 
+<?php 
+ if(isset($_GET['pslug'])){
+    /**
+     * Popup for product options 
+     */
+    include_once('popup/printing-options.php');
 
-
-
+    $link_get_options   = add_query_arg(
+        urlencode_deep( array(
+            'wc-api'  => 'NBO_Quick_View',
+            'source' => 'gallery',
+            'product' => $pid
+        ) ),
+        home_url( '/' )
+    );
+}
+   
+    
+?>
 
 <script>
+
+    var nboApp = angular.module('nboApp', []);
+
+
     var is_nbd_gallery = 1;
     let clear_quarayZ_param = function (e) {
         e.preventDefault();
@@ -466,5 +520,22 @@ endif;
     });
 
 
+
+
+    <?php if(isset($_GET['pslug'])){ ?>
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?php echo $link_get_options; ?>', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var container = jQuery('#nbo-options-wrap');
+                    container.append(xhr.responseText);
+                }
+            }
+        };
+        xhr.send();
+    <?php } ?>
 
 </script>
